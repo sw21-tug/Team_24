@@ -1,5 +1,6 @@
 package at.tugraz.ist.guessingwords
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -22,5 +23,17 @@ class MainActivity : AppCompatActivity() {
            Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
        }
 
+
+        btn_customWords.setOnClickListener {
+            Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, CustomWordsActivity::class.java)
+            startActivity(intent)
+
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
     }
 }
