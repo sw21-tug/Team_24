@@ -13,22 +13,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btn_startGame = findViewById<Button>(R.id.btn_startGame)
-        val btn_customWords = findViewById(R.id.btn_customWords) as Button
+        val btn_customWords = findViewById<Button>(R.id.btn_customWords)
 
-       btn_startGame.setOnClickListener {
+        btn_startGame.setOnClickListener {
             Toast.makeText(this@MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
-       }
-
-       btn_customWords.setOnClickListener {
-           Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
-       }
-
+            val intent = Intent(this, StartGameActivity::class.java)
+            startActivity(intent)
+        }
 
         btn_customWords.setOnClickListener {
             Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, CustomWordsActivity::class.java)
             startActivity(intent)
-
         }
     }
 
