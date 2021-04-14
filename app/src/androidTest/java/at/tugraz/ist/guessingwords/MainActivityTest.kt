@@ -19,6 +19,9 @@ class MainActivityTest {
 
         onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
         onView(withId(R.id.btn_startGame)).perform(click())
+        onView(withId(R.id.btn_back_SG)).check(matches(isClickable()))
+        onView(withId(R.id.btn_back_SG)).perform(click())
+        onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
 
     }
 
