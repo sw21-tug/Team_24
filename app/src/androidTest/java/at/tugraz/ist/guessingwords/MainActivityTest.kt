@@ -19,6 +19,7 @@ class MainActivityTest {
 
         onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
         onView(withId(R.id.btn_startGame)).perform(click())
+
     }
 
     @Test
@@ -27,5 +28,8 @@ class MainActivityTest {
 
         onView(withId(R.id.btn_customWords)).check(matches(isClickable()))
         onView(withId(R.id.btn_customWords)).perform(click())
+        onView(withId(R.id.btn_back_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_back_CW)).perform(click())
+        onView(withId(R.id.btn_customWords)).check(matches(isClickable()))
     }
 }
