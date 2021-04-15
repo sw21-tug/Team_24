@@ -40,12 +40,11 @@ class DatabaseTest {
 
     @Test
     fun elementInsertedIntoDatabaseIsReturned() {
-        val word = Word(1, "anything")
+        val word = Word("anything")
 
         db.wordDao().insertWord(word)
 
         val allWords = db.wordDao().getAll()
         assertTrue(allWords.contains(word))
     }
-
 }
