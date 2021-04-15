@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import at.tugraz.ist.guessingwords.data.database.GWDatabase
+import at.tugraz.ist.guessingwords.data.entity.Word
 import junit.framework.Assert.assertTrue
 import org.junit.After
 import org.junit.Before
@@ -35,6 +36,16 @@ class DatabaseTest {
         val allWords = db.wordDao().getAll()
 
         assertTrue(allWords.isEmpty())
+    }
+
+    @Test
+    fun elementInsertedIntoDatabaseIsReturned() {
+        val word = Word(1, "anything")
+
+        db.wordDao().insertWord(word)
+
+        val allWords = db.wordDao().getAll()
+        assertTrue(allWords.contains(word))
     }
 
 }

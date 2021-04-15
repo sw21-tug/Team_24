@@ -7,4 +7,6 @@ import at.tugraz.ist.guessingwords.data.entity.Word
 interface WordDao {
     @Query("SELECT * FROM words")
     fun getAll(): List<Word>
+
+    fun insertWord(word : Word) : Long
 }
