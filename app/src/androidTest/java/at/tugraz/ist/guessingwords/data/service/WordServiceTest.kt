@@ -37,4 +37,17 @@ class WordServiceTest {
         service.getAllWords(cb)
         cb.finished.block()
     }
+
+    @Test(timeout = 3000)
+    fun callbackOnInsertWordIsCalled(){
+        val word = Word("don't try this at home, kids")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+    }
 }

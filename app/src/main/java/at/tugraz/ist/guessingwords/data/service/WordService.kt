@@ -13,4 +13,8 @@ class WordService(private val context : Context) {
             callback.whenReady(allWords)
         }
     }
+
+    fun insertOrUpdateExistingWord(word: Word, callback: Callback<Long>) {
+
+    }
 }
