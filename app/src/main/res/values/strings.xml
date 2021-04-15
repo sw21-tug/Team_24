@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Guessing Words</string>
+    <string name="edit_word">Enter a word</string>
+    <string name="btn_save">Save</string>
 </resources>
