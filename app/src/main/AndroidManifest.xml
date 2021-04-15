@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CustomWordsActivity"/>
+        <activity android:name=".StartGameActivity"/>
     </application>
 
 </manifest>

@@ -10,9 +10,9 @@ class CustomWordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_words)
 
-        val btn_back = findViewById(R.id.btn_back_CW) as Button
-        val btn_save = findViewById(R.id.btn_save_word) as Button
-        val text_field = findViewById(R.id.editText_customWords) as EditText
+        val btn_back = findViewById<Button>(R.id.btn_back_CW)
+        val btn_save = findViewById(R.id.btn_save_word)
+        val text_field = findViewById(R.id.editText_customWords)
 
         btn_back.setOnClickListener {
             finish()
