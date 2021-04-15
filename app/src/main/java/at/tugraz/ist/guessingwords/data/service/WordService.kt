@@ -17,15 +17,15 @@ class WordService(private val context : Context) {
     }
 
     fun insertOrUpdateExistingWord(word: Word, callback: Callback<Long>) {
-        thread {
-            val db = GWDatabase.getInstance(context)
-            if(word.uid == 0L){
+        if(word.uid == 0L){
+            thread {
+                val db = GWDatabase.getInstance(context)
                 val returnID = db.wordDao().insertWord(word)
                 callback.whenReady(returnID)
             }
-            else{
-                throw NotImplementedError("Updating not implemented yet")
-            }
+        }
+        else{
+            throw NotImplementedError("Updating not implemented yet")
         }
     }
 }
