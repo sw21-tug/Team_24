@@ -47,4 +47,18 @@ class DatabaseTest {
         val allWords = db.wordDao().getAll()
         assertTrue(allWords.contains(word))
     }
+
+    @Test
+    fun databaseInsertReturnsCreatedPrimaryKey(){
+        val word = Word("a word")
+
+        val rv1 = db.wordDao().insertWord(word)
+        val rv2 = db.wordDao().insertWord(word)
+
+        assertTrue(rv1 != rv2)
+
+        val allUids = db.wordDao().getAll().map { word.uid }
+        assertTrue(allUids.contains(rv1))
+        assertTrue(allUids.contains(rv2))
+    }
 }
