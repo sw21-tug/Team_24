@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CustomWordsActivity">
 
-
     <fragment
         android:id="@+id/custom_words_fragment"
         android:name="at.tugraz.ist.guessingwords.ui.custom_words.CustomWordsFragment"
