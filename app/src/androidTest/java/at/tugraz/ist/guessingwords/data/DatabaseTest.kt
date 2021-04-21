@@ -82,4 +82,15 @@ class DatabaseTest {
         assertTrue(allWords.contains(word))
         assertTrue(allWords[0].uid == ruid)
     }
+
+    @Test
+    fun deleteExistingWordFromDataBaseResultsInEmptyDB() {
+        val  word = Word("picture")
+        val ruid = db.wordDao().insertWord(word)
+
+        db.wordDao().deleteWord(word)
+
+        val allWords = db.wordDao().getAll()
+        assertTrue(allWords.isEmpty())
+    }
 }

@@ -17,4 +17,7 @@ interface WordDao {
 
     @Update
     fun updateWord(word: Word)
+
+
+    fun deleteWord(word: Word)
 }
