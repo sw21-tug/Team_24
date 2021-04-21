@@ -41,7 +41,11 @@ class WordService(private val context : Context) {
         }
     }
 
-    fun getWordById(id: Long) {
-
+    fun getWordById(id: Long, callback: Callback<Word>) {
+        thread {
+            val db = GWDatabase.getInstance(context)
+            val word = db.wordDao().getWordById(id)
+            callback.whenReady(word)
+        }
     }
 }

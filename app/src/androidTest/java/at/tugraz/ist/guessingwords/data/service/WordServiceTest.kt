@@ -122,7 +122,7 @@ class WordServiceTest {
                 finished.open()
             }
         }
-        service.getWordById(cb.uid)
+        service.getWordById(cb.uid, cbGet)
         cbGet.finished.block()
         assert(cbGet.retWord != null)
         assert(cbGet.retWord == word)
