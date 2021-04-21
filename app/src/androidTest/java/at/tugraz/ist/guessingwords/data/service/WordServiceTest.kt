@@ -50,4 +50,24 @@ class WordServiceTest {
         service.insertOrUpdateExistingWord(word, cb)
         cb.finished.block()
     }
+
+    @Test(timeout = 3000)
+    fun callbackOnUpdateWordIsCalled(){
+        var word = Word("new Word")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            var uid: Long = 0
+            override fun whenReady(data: Long?) {
+                uid = data!!
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+        assert(cb.uid != 0L)
+        word = Word(cb.uid, "pencil")
+        cb.finished.close()
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+    }
 }
