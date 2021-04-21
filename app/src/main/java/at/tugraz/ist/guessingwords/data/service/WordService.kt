@@ -32,4 +32,8 @@ class WordService(private val context : Context) {
             }
         }
     }
+
+    fun deleteWord(word: Word, callback: Callback<Boolean>) {
+
+    }
 }

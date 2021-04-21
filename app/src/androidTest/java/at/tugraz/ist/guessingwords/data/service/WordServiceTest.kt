@@ -70,4 +70,31 @@ class WordServiceTest {
         service.insertOrUpdateExistingWord(word, cb)
         cb.finished.block()
     }
+
+    @Test(timeout = 3000)
+    fun callbackOnDeleteWordIsCalled(){
+        val wordText = "new Word"
+        var word = Word(wordText)
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            var uid: Long = 0
+            override fun whenReady(data: Long?) {
+                uid = data!!
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+        assert(cb.uid != 0L)
+        word = Word(cb.uid, wordText)
+
+        val cbDelete = object:Callback<Boolean>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Boolean?) {
+                finished.open()
+            }
+        }
+        service.deleteWord(word, cbDelete)
+        cbDelete.finished.block()
+    }
 }
