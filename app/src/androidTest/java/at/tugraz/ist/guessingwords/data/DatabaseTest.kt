@@ -101,7 +101,7 @@ class DatabaseTest {
         val word = Word("hello")
         val ruid = db.wordDao().insertWord(word)
 
-        val newWord = db.wordDao().getWordByUid(ruid)
+        val newWord = db.wordDao().getWordById(ruid)
 
         assert(word == newWord)
         assert(ruid == newWord.uid)
