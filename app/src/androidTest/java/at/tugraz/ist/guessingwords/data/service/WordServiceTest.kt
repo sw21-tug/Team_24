@@ -50,4 +50,82 @@ class WordServiceTest {
         service.insertOrUpdateExistingWord(word, cb)
         cb.finished.block()
     }
+
+    @Test(timeout = 3000)
+    fun callbackOnUpdateWordIsCalled(){
+        var word = Word("new Word")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            var uid: Long = 0
+            override fun whenReady(data: Long?) {
+                uid = data!!
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+        assert(cb.uid != 0L)
+        word = Word(cb.uid, "pencil")
+        cb.finished.close()
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+    }
+
+    @Test(timeout = 3000)
+    fun callbackOnDeleteWordIsCalled(){
+        val wordText = "new Word"
+        var word = Word(wordText)
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            var uid: Long = 0
+            override fun whenReady(data: Long?) {
+                uid = data!!
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+        assert(cb.uid != 0L)
+        word = Word(cb.uid, wordText)
+
+        val cbDelete = object:Callback<Boolean>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Boolean?) {
+                finished.open()
+            }
+        }
+        service.deleteWord(word, cbDelete)
+        cbDelete.finished.block()
+    }
+
+    @Test(timeout = 3000)
+    fun callbackOnGetWordByIdReturnsCorrectWord(){
+        val wordText = "new Word"
+        var word = Word(wordText)
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            var uid: Long = 0
+            override fun whenReady(data: Long?) {
+                uid = data!!
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+        assert(cb.uid != 0L)
+
+        val cbGet = object:Callback<Word>{
+            val finished = ConditionVariable()
+            var retWord: Word? = null
+            override fun whenReady(data: Word?) {
+                retWord = data
+                finished.open()
+            }
+        }
+        service.getWordById(cb.uid, cbGet)
+        cbGet.finished.block()
+        assert(cbGet.retWord != null)
+        assert(cbGet.retWord == word)
+        assert(cbGet.retWord!!.uid == cb.uid)
+    }
 }
