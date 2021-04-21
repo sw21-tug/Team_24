@@ -85,9 +85,11 @@ class DatabaseTest {
 
     @Test
     fun deleteExistingWordFromDataBaseResultsInEmptyDB() {
-        val  word = Word("picture")
+        val wordText = "picture"
+        var word = Word(wordText)
         val ruid = db.wordDao().insertWord(word)
 
+        word = Word(ruid, wordText)
         db.wordDao().deleteWord(word)
 
         val allWords = db.wordDao().getAll()
