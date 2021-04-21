@@ -66,4 +66,20 @@ class DatabaseTest {
         assertTrue(allUids.contains(rv1))
         assertTrue(allUids.contains(rv2))
     }
+
+    @Test
+    fun databaseUpdateOverridesExistingWordTextOnSameUid() {
+        var wordText = "bicycle"
+        var word = Word(wordText)
+        val ruid = db.wordDao().insertWord(word)
+
+        wordText = "mobile phone"
+        word = Word(ruid, wordText)
+        db.wordDao().updateWord(word)
+
+        val allWords = db.wordDao().getAll()
+        assertTrue(allWords.count() == 1)
+        assertTrue(allWords.contains(word))
+        assertTrue(allWords[0].uid == ruid)
+    }
 }
