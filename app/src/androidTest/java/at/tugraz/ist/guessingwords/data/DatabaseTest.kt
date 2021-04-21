@@ -95,4 +95,15 @@ class DatabaseTest {
         val allWords = db.wordDao().getAll()
         assertTrue(allWords.isEmpty())
     }
+
+    @Test
+    fun returnWordByUidFromDatabaseWorks() {
+        val word = Word("hello")
+        val ruid = db.wordDao().insertWord(word)
+
+        val newWord = db.wordDao().getWordByUid(ruid)
+
+        assert(word == newWord)
+        assert(ruid == newWord.uid)
+    }
 }

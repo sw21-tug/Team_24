@@ -9,6 +9,8 @@ interface WordDao {
     @Query("SELECT * FROM words")
     fun getAll(): List<Word>
 
+    fun getWordByUid(uid: Long): Word
+
     @Insert
     fun insertWord(word: Word): Long
 
