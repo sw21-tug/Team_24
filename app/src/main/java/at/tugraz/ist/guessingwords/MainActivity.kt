@@ -16,13 +16,13 @@ class MainActivity : AppCompatActivity() {
         val btn_customWords = findViewById<Button>(R.id.btn_customWords)
 
         btn_startGame.setOnClickListener {
-            Toast.makeText(this@MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, StartGameActivity::class.java)
             startActivity(intent)
         }
 
         btn_customWords.setOnClickListener {
-            Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, CustomWordsActivity::class.java)
             startActivity(intent)
         }
@@ -30,6 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
     }
 }
