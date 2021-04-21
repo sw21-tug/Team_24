@@ -34,6 +34,10 @@ class WordService(private val context : Context) {
     }
 
     fun deleteWord(word: Word, callback: Callback<Boolean>) {
-
+        thread {
+            val db = GWDatabase.getInstance(context)
+            db.wordDao().deleteWord(word)
+            callback.whenReady(true)
+        }
     }
 }
