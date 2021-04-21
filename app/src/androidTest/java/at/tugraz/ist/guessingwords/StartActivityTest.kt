@@ -22,4 +22,12 @@ class StartActivityTest {
         onView(withId(R.id.btn_back_GP)).check(matches(isClickable()))
         onView(withId(R.id.btn_back_GP)).perform(click())
     }
+
+    @Test
+    fun skipButton(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(withId(R.id.btn_skipWord)).check(matches(isClickable()))
+        onView(withId(R.id.btn_skipWord)).perform(click())
+    }
 }
