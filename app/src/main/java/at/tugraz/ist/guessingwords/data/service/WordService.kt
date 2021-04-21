@@ -24,8 +24,12 @@ class WordService(private val context : Context) {
                 callback.whenReady(returnID)
             }
         }
-        else{
-            throw NotImplementedError("Updating not implemented yet")
+        else {
+            thread {
+                val db = GWDatabase.getInstance(context)
+                db.wordDao().updateWord(word)
+                callback.whenReady(word.uid)
+            }
         }
     }
 }
