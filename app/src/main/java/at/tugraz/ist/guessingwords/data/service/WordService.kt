@@ -40,4 +40,8 @@ class WordService(private val context : Context) {
             callback.whenReady(true)
         }
     }
+
+    fun getWordById(id: Long) {
+
+    }
 }
