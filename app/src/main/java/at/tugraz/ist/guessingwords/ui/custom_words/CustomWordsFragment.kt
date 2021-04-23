@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.tugraz.ist.guessingwords.R
+import at.tugraz.ist.guessingwords.data.service.WordService
 
 class CustomWordsFragment : Fragment() {
 
     private lateinit var customWordsViewModel: CustomWordsViewModel
     private lateinit var root: View
+
+    lateinit var customWordService: WordService
 
     override fun onCreateView(
         inflater: LayoutInflater,
