@@ -17,7 +17,6 @@ import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
 import at.tugraz.ist.guessingwords.ui.custom_words.adapters.CustomWordsAdapter
-import java.util.*
 
 class CustomWordsFragment : Fragment() {
 
@@ -36,21 +35,18 @@ class CustomWordsFragment : Fragment() {
         customWordsViewModel = ViewModelProvider(this, customWordsFactory).get(CustomWordsViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_custom_words, container, false)
 
+        customWordService = WordService(activity!!)
+        initsetUp()
         initSaveCustomWord()
-        //TODO getAllWordsFrom Database when entering Fragment!!!
-        //TODO Problem: that when DB is empty the app chrashes
-        displayCustomWordsList(customWords)
 
         return root
     }
 
     private fun initSaveCustomWord(){
-        customWordService = WordService(activity!!)
         val btn_save = root.findViewById<Button>(R.id.btn_save_word)
         val text_field = root.findViewById<EditText>(R.id.editText_customWords)
 
         btn_save.setOnClickListener{
-//            Toast.makeText(activity, "You clicked save", Toast.LENGTH_SHORT).show()
             var addText = text_field.text.toString()
             //Todo Typechecking
 
@@ -71,6 +67,31 @@ class CustomWordsFragment : Fragment() {
         }
     }
 
+    private fun initsetUp() {
+        customWordService.getAllWords(object: Callback<List<Word>> {
+            override fun whenReady(data: List<Word>?) {
+                if (data != null){
+                    for (word in data) {
+                        customWords.add(word)
+                    }
+                }
+                updateView(customWords)
+            }
+        })
+    }
+
+    fun updateView (customWords: MutableList<Word>) {
+        activity!!.runOnUiThread {
+            displayCustomWordsList(customWords)
+        }
+    }
+
+    private fun displayCustomWordsList(customWords: MutableList<Word>) {
+        val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
+
+        lv_custom_words.adapter = CustomWordsAdapter(context!!, customWords)
+    }
+
     private fun checkIfUserInputIsValid(string: String) : Boolean {
         var valid = true
 
@@ -88,19 +109,6 @@ class CustomWordsFragment : Fragment() {
         stringTmp = stringTmp.trimStart().trimEnd().toUpperCase()
 
         return stringTmp
-    }
-
-    fun updateView (customWords: MutableList<Word>) {
-        activity!!.runOnUiThread {
-//            Toast.makeText(activity, "Saved Word to Custom Words List!", Toast.LENGTH_SHORT).show()
-            displayCustomWordsList(customWords)
-        }
-    }
-
-    private fun displayCustomWordsList(customWords: MutableList<Word>) {
-        val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
-
-        lv_custom_words.adapter = CustomWordsAdapter(context!!, customWords)
     }
 
     private fun closeKeyBoard() {
