@@ -24,7 +24,7 @@ class CustomWordsActivityTest {
     @Test
     fun addNewCustomWords() {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        val input = "Testing Custom Words!"
+        var input = "Testing Custom Words!"
 
         onView(withId(R.id.btn_customWords)).check(matches(isClickable()))
         onView(withId(R.id.btn_customWords)).perform(click())
@@ -33,6 +33,7 @@ class CustomWordsActivityTest {
         onView(withId(R.id.btn_save_word)).perform(click())
 
         //Todo Test if stuff is actually displayed and if input is deleted from input field and so on
+        input = input.toUpperCase()
         onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
 
         onView(withId(R.id.btn_back_CW)).check(matches(isClickable()))
