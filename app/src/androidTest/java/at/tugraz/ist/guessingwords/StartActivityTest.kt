@@ -27,6 +27,8 @@ class StartActivityTest {
     fun skipButton(){
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
+        onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
+        onView(withId(R.id.btn_startGame)).perform(click())
         onView(withId(R.id.btn_skipWord)).check(matches(isClickable()))
         onView(withId(R.id.btn_skipWord)).perform(click())
     }
@@ -35,6 +37,8 @@ class StartActivityTest {
     fun correctButton(){
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
+        onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
+        onView(withId(R.id.btn_startGame)).perform(click())
         onView(withId(R.id.btn_correctWord)).check(matches(isClickable()))
         onView(withId(R.id.btn_correctWord)).perform(click())
     }
