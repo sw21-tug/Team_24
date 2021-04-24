@@ -6,7 +6,7 @@ import at.tugraz.ist.guessingwords.data.entity.Word
 import java.lang.Exception
 import kotlin.concurrent.thread
 
-class WordService(private val context : Context) {
+open class WordService(private val context : Context) {
 
     fun getAllWords(callback: Callback<List<Word>>) {
         thread {
@@ -16,7 +16,7 @@ class WordService(private val context : Context) {
         }
     }
 
-    fun insertOrUpdateExistingWord(word: Word, callback: Callback<Long>) {
+    open fun insertOrUpdateExistingWord(word: Word, callback: Callback<Long>) {
         if(word.uid == 0L){
             thread {
                 val db = GWDatabase.getInstance(context)
@@ -24,8 +24,28 @@ class WordService(private val context : Context) {
                 callback.whenReady(returnID)
             }
         }
-        else{
-            throw NotImplementedError("Updating not implemented yet")
+        else {
+            thread {
+                val db = GWDatabase.getInstance(context)
+                db.wordDao().updateWord(word)
+                callback.whenReady(word.uid)
+            }
+        }
+    }
+
+    open fun deleteWord(word: Word, callback: Callback<Boolean>) {
+        thread {
+            val db = GWDatabase.getInstance(context)
+            db.wordDao().deleteWord(word)
+            callback.whenReady(true)
+        }
+    }
+
+    fun getWordById(id: Long, callback: Callback<Word>) {
+        thread {
+            val db = GWDatabase.getInstance(context)
+            val word = db.wordDao().getWordById(id)
+            callback.whenReady(word)
         }
     }
 }
