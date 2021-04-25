@@ -9,7 +9,7 @@ class StartGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_game)
 
-        val btn_back = findViewById<Button>(R.id.btn_back_SG)
+        val btn_back = findViewById<Button>(R.id.btn_back_GP)
 
         btn_back.setOnClickListener {
             finish()
