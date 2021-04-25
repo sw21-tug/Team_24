@@ -41,6 +41,6 @@ class MainActivityTest {
     fun aboutPageLink() {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
-        onView(withText("about_page")).perform(click())
+        onView(withText("About")).perform(click())
     }
 }
