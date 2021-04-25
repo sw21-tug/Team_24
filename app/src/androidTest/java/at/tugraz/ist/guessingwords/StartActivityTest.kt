@@ -51,4 +51,12 @@ class StartActivityTest {
         onView(withId(R.id.txt_fieldWord)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun timerFieldDisplayed() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
+        onView(withId(R.id.btn_startGame)).perform(click())
+        onView(withId(R.id.txt_fieldTimer)).check(matches(isDisplayed()))
+    }
 }
