@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.tugraz.ist.guessingwords.R
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
+import at.tugraz.ist.guessingwords.ui.custom_words.adapters.CustomWordsAdapter
 
 class CustomWordsFragment : Fragment() {
 
@@ -22,6 +21,7 @@ class CustomWordsFragment : Fragment() {
     private lateinit var root: View
 
     lateinit var customWordService: WordService
+    private var customWords: MutableList<Word> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,28 +32,79 @@ class CustomWordsFragment : Fragment() {
         customWordsViewModel = ViewModelProvider(this, customWordsFactory).get(CustomWordsViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_custom_words, container, false)
 
-        initSaveCustomWord()
+        customWordService = WordService(activity!!)
+        initSetUp()
+        initSaveCustomWordButton()
+
         return root
     }
 
-    fun initSaveCustomWord(){
-        customWordService = WordService(activity!!)
+    private fun initSaveCustomWordButton(){
         val btn_save = root.findViewById<Button>(R.id.btn_save_word)
         val text_field = root.findViewById<EditText>(R.id.editText_customWords)
 
         btn_save.setOnClickListener{
-            Toast.makeText(activity, "You clicked save", Toast.LENGTH_SHORT).show()
             var addText = text_field.text.toString()
-            var newWord = Word(addText)
 
-            customWordService.insertOrUpdateExistingWord(newWord, object: Callback<Long>{
-                override fun whenReady(data: Long?) {
-                    newWord = Word(data!!, addText)
-                    // TODO add word to view
-                }
-            })
+            if (checkIfUserInputIsValid(addText)) {
+                addText = prepareUserInputToSaveInDB(addText)
+                var newWord = Word(addText)
+
+                customWordService.insertOrUpdateExistingWord(newWord, object: Callback<Long>{
+                    override fun whenReady(data: Long?) {
+                        newWord = Word(data!!, addText)
+                        customWords.add(newWord)
+                        updateView(customWords)
+                    }
+                })
+            }
             closeKeyBoard()
         }
+    }
+
+    private fun initSetUp() {
+        customWordService.getAllWords(object: Callback<List<Word>> {
+            override fun whenReady(data: List<Word>?) {
+                if (data != null){
+                    customWords.addAll(data)
+                }
+                updateView(customWords)
+            }
+        })
+    }
+
+    fun updateView (customWords: MutableList<Word>) {
+        activity!!.runOnUiThread {
+            displayCustomWordsList(customWords)
+        }
+    }
+
+    private fun displayCustomWordsList(customWords: MutableList<Word>) {
+        val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
+
+        lv_custom_words.adapter = CustomWordsAdapter(context!!, customWords)
+
+        val countWords = customWords.size.toString() + " Words"
+        root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
+    }
+
+    private fun checkIfUserInputIsValid(string: String) : Boolean {
+        var valid = true
+
+        if (string.isBlank()) {
+            valid = false
+            Toast.makeText(activity, "Please enter a word you would like to save!", Toast.LENGTH_SHORT).show()
+        }
+        root.findViewById<EditText>(R.id.editText_customWords).setText("")
+        return valid
+    }
+
+    private fun prepareUserInputToSaveInDB(string: String) : String {
+        var stringTmp = string
+
+        stringTmp = stringTmp.trimStart().trimEnd()
+
+        return stringTmp
     }
 
     private fun closeKeyBoard() {
