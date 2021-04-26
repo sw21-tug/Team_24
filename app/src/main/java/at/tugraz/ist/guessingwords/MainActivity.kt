@@ -3,6 +3,8 @@ package at.tugraz.ist.guessingwords
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.Button
 import android.widget.Toast
 
@@ -32,4 +34,12 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 //        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.context_menu, menu)
+        return true
+    }
+
+
 }
