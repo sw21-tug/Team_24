@@ -33,13 +33,13 @@ class CustomWordsFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_custom_words, container, false)
 
         customWordService = WordService(activity!!)
-        initsetUp()
-        initSaveCustomWord()
+        initSetUp()
+        initSaveCustomWordButton()
 
         return root
     }
 
-    private fun initSaveCustomWord(){
+    private fun initSaveCustomWordButton(){
         val btn_save = root.findViewById<Button>(R.id.btn_save_word)
         val text_field = root.findViewById<EditText>(R.id.editText_customWords)
 
@@ -62,7 +62,7 @@ class CustomWordsFragment : Fragment() {
         }
     }
 
-    private fun initsetUp() {
+    private fun initSetUp() {
         customWordService.getAllWords(object: Callback<List<Word>> {
             override fun whenReady(data: List<Word>?) {
                 if (data != null){
@@ -76,9 +76,6 @@ class CustomWordsFragment : Fragment() {
     fun updateView (customWords: MutableList<Word>) {
         activity!!.runOnUiThread {
             displayCustomWordsList(customWords)
-
-            val countWords = customWords.size.toString() + " Words"
-            root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
         }
     }
 
@@ -86,6 +83,9 @@ class CustomWordsFragment : Fragment() {
         val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
 
         lv_custom_words.adapter = CustomWordsAdapter(context!!, customWords)
+
+        val countWords = customWords.size.toString() + " Words"
+        root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
     }
 
     private fun checkIfUserInputIsValid(string: String) : Boolean {
@@ -102,7 +102,7 @@ class CustomWordsFragment : Fragment() {
     private fun prepareUserInputToSaveInDB(string: String) : String {
         var stringTmp = string
 
-        stringTmp = stringTmp.trimStart().trimEnd().toUpperCase()
+        stringTmp = stringTmp.trimStart().trimEnd()
 
         return stringTmp
     }
