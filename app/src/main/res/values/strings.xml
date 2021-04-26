@@ -4,4 +4,6 @@
     <string name="loading">Loading ...</string>
     <string name="edit_word">Enter a word</string>
     <string name="btn_save">Save</string>
+    <string name="customWordsTitle"><u>My Custom Words:</u></string>
+    <string name="placeholder">...</string>
 </resources>

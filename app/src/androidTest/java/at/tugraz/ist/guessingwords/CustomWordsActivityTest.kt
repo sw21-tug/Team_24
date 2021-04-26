@@ -43,7 +43,7 @@ class CustomWordsActivityTest {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         var input = "Testing Custom Words!"
 
-        onView(withId(R.id.btn_customWords)).check(matches(isClickable()))
+        onView(withId(R.id.btn_customWords)).check(matches(isDisplayed()))
         onView(withId(R.id.btn_customWords)).perform(click())
         onView(withId(R.id.editText_customWords)).perform(typeText(input))
         onView(withId(R.id.btn_save_word)).check(matches(isClickable()))

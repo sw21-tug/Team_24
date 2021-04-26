@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.tugraz.ist.guessingwords.R
@@ -48,7 +45,6 @@ class CustomWordsFragment : Fragment() {
 
         btn_save.setOnClickListener{
             var addText = text_field.text.toString()
-            //Todo Typechecking
 
             if (checkIfUserInputIsValid(addText)) {
                 addText = prepareUserInputToSaveInDB(addText)
@@ -57,7 +53,6 @@ class CustomWordsFragment : Fragment() {
                 customWordService.insertOrUpdateExistingWord(newWord, object: Callback<Long>{
                     override fun whenReady(data: Long?) {
                         newWord = Word(data!!, addText)
-                        // TODO add word to view
                         customWords.add(newWord)
                         updateView(customWords)
                     }
@@ -71,9 +66,7 @@ class CustomWordsFragment : Fragment() {
         customWordService.getAllWords(object: Callback<List<Word>> {
             override fun whenReady(data: List<Word>?) {
                 if (data != null){
-                    for (word in data) {
-                        customWords.add(word)
-                    }
+                    customWords.addAll(data)
                 }
                 updateView(customWords)
             }
@@ -83,6 +76,9 @@ class CustomWordsFragment : Fragment() {
     fun updateView (customWords: MutableList<Word>) {
         activity!!.runOnUiThread {
             displayCustomWordsList(customWords)
+
+            val countWords = customWords.size.toString() + " Words"
+            root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
         }
     }
 
