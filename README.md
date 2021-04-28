@@ -24,5 +24,6 @@ The App stores the custom words and handles the game logic.
 
 ## Features 
 
-GW-001-A Initial Application Setup
-GW-003-A A local database
+- GW-001 Basic App with loading screen
+- GW-002 Main Screen with button transitions
+- GW-003 Enter and store custom words
