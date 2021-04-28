@@ -5,6 +5,7 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.room.Room
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -71,5 +72,15 @@ class CustomWordsActivityTest {
         onView(withId(R.id.btn_save_word)).perform(click())
 
         verify(wordServiceMock, times(1)).insertOrUpdateExistingWord(any(), any())
+    }
+
+    @Test
+    fun checkIfEditOrDeleteButtonIsDisplayedAfterLongClick() {
+        val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
+        val input = "Testing Custom Words!"
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
+        onView(withId(R.id.li_customWord_text)).perform(ViewActions.longClick())
+        onView(withId(R.id.btn_edit_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_delete_CW)).check(matches(isClickable()))
     }
 }
