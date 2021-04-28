@@ -6,4 +6,5 @@
     <string name="btn_save">Save</string>
     <string name="customWordsTitle"><u>My Custom Words:</u></string>
     <string name="placeholder">...</string>
+    <string name="change_lang">Languages</string>
 </resources>

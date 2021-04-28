@@ -45,4 +45,13 @@ class MainActivityTest {
         Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
         onView(withText("About")).perform(click())
     }
+
+    @Test
+    fun changeLanguage() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
+        onView(withText(R.string.change_lang)).perform(click())
+
+        onView(withId(R.id.btn_customWords)).check(matches(withText("Пользовательские слова")))
+    }
 }
