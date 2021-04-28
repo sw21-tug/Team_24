@@ -8,40 +8,25 @@
 
 
     <Button
-        android:id="@+id/btn_back_GP"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:text="Back"
-        app:layout_constraintTop_toBottomOf="@id/btn_skipWord"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <Button
         android:id="@+id/btn_skipWord"
         android:layout_width="144dp"
         android:layout_height="125dp"
-        android:layout_marginBottom="116dp"
         android:text="Skip"
-        app:layout_constraintBottom_toBottomOf="@id/btn_back_GP"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btn_correctWord"
-        app:layout_constraintTop_toBottomOf="@id/txt_fieldWord"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintTop_toBottomOf="@id/txt_fieldWord" />
 
     <Button
         android:id="@+id/btn_correctWord"
         android:layout_width="144dp"
         android:layout_height="125dp"
         android:text="Correct"
-        app:layout_constraintBottom_toBottomOf="@id/btn_back_GP"
         app:layout_constraintHorizontal_bias="0.823"
         app:layout_constraintLeft_toRightOf="@id/btn_skipWord"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_fieldWord"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintBaseline_toBaselineOf="@id/btn_skipWord" />
 
     <TextView
         android:id="@+id/txt_fieldWord"
