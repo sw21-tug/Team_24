@@ -9,7 +9,10 @@ class AboutPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_page)
 
-       
+        val btn_back = findViewById<Button>(R.id.btn_back_AP)
 
+        btn_back.setOnClickListener {
+            finish()
+        }
     }
 }
