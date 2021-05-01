@@ -75,12 +75,12 @@ class GamePrototypeFragment : Fragment() {
         btn_skip = root.findViewById(R.id.btn_skipWord)
 
         fieldTimer.text = ""
-        fieldWord.text = getString(R.string.loading)
-        fieldWordCounter.text = ""
+        fieldWord.text = requireActivity().getString(R.string.loading)
+        fieldWordCounter.text = requireActivity().getString(R.string.correct_words, score)
 
         btn_correct.setOnClickListener {
             score += 1
-            fieldWordCounter.text = getString(R.string.correct_words, score)
+            fieldWordCounter.text = requireActivity().getString(R.string.correct_words, score)
             displayNextWord()
         }
         btn_skip.setOnClickListener {
@@ -92,11 +92,11 @@ class GamePrototypeFragment : Fragment() {
         timer = object : CountDownTimer(91000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 val seconds = millisUntilFinished / 1000
-                fieldTimer.text = getString(R.string.time_display, seconds)
+                fieldTimer.text = activity?.getString(R.string.time_display, seconds)
             }
 
             override fun onFinish() {
-                fieldTimer.text = getString(R.string.time_finish)
+                fieldTimer.text = activity?.getString(R.string.time_finish)
             }
         }
         wordService!!.getAllWords(object : Callback<List<Word>> {
