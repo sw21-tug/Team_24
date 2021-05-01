@@ -1,10 +1,23 @@
 package at.tugraz.ist.guessingwords.logic
 
 import at.tugraz.ist.guessingwords.data.entity.Word
+import java.lang.IllegalArgumentException
 
-class Game(wordPool: List<Word>) {
+class Game(val wordPool: List<Word>)
+{
 
-    fun getWord(): Word {
-        return Word("") // to implement
+    private lateinit var current_word:Word
+    init
+    {
+        if(wordPool.isEmpty())
+        {
+            throw IllegalArgumentException("wordpool can not be empty")
+        }
+        current_word = wordPool.random()
+    }
+
+    fun getWord(): Word
+    {
+        return current_word
     }
 }
