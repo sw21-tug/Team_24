@@ -1,6 +1,7 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
 import androidx.core.os.bundleOf
+import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.ViewAssertion
@@ -33,8 +34,23 @@ class GamePrototypeFragmentTest {
         scenario.onFragment { fragment ->
             text = fragment.getString(R.string.loading)
             fragment.wordService = wordServiceMock
+            fragment.initFields()
         }
 
         Espresso.onView(ViewMatchers.withId(R.id.txt_fieldWord)).check(ViewAssertions.matches(ViewMatchers.withText(text)))
+    }
+
+    @Test
+    fun expectCallToWordServiceToGetAllWords()
+    {
+        val wordServiceMock = mock<WordService>()
+
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        scenario.onFragment { fragment ->
+            fragment.wordService = wordServiceMock
+            fragment.initGame()
+        }
+        verify(wordServiceMock, times(1)).getAllWords(any())
     }
 }

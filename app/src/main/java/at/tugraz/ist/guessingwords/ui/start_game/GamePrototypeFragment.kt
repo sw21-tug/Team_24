@@ -40,8 +40,9 @@ class GamePrototypeFragment : Fragment() {
         return root
     }
 
-    private fun initFields()
+    fun initFields()
     {
+
         fieldTimer = root.findViewById(R.id.txt_fieldTimer)
         fieldWord = root.findViewById(R.id.txt_fieldWord)
         fieldWordCounter = root.findViewById(R.id.txt_fieldWordCounter)
@@ -51,5 +52,10 @@ class GamePrototypeFragment : Fragment() {
         fieldTimer.text = ""
         fieldWord.text = getString(R.string.loading)
         fieldWordCounter.text = ""
+    }
+
+    fun initGame()
+    {
+
     }
 }
