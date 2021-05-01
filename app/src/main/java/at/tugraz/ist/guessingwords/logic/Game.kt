@@ -20,4 +20,9 @@ class Game(val wordPool: List<Word>)
     {
         return current_word
     }
+
+    fun next()
+    {
+
+    }
 }

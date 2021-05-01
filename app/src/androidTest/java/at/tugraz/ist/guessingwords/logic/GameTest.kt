@@ -17,4 +17,20 @@ class GameTest {
 
         assert(words.contains(word))
     }
+
+    @Test
+    fun testChangeToDifferentWordonNextCall()
+    {
+        val words = listOf<Word>(Word("hallo"), Word("welt"))
+        val game = Game(words)
+
+        val word_1 = game.getWord()
+        game.next()
+
+        val word_2 = game.getWord()
+
+        assert(word_1 != word_2)
+
+    }
+
 }
