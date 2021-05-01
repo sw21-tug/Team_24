@@ -20,11 +20,13 @@ class GamePrototypeFragment : Fragment() {
     private lateinit var startGameViewModel: StartGameViewModel
     private lateinit var root: View
 
+    var maxTimeMillis: Long = 90999 // 91 seconds
+
     lateinit var wordService: WordService
 
-    private var game: Game? = null
-    private var timer: CountDownTimer? = null
-    private var score: Int = 0
+    var game: Game? = null
+    var timer: CountDownTimer? = null
+    var score: Int = 0
 
     private lateinit var fieldTimer: TextView
     private lateinit var fieldWord: TextView
@@ -74,46 +76,68 @@ class GamePrototypeFragment : Fragment() {
         btn_correct = root.findViewById(R.id.btn_correctWord)
         btn_skip = root.findViewById(R.id.btn_skipWord)
 
-        fieldTimer.text = ""
+        displayTimer(maxTimeMillis / 1000)
         fieldWord.text = requireActivity().getString(R.string.loading)
-        fieldWordCounter.text = requireActivity().getString(R.string.correct_words, score)
+        displayWordCounter()
 
         btn_correct.setOnClickListener {
             score += 1
-            fieldWordCounter.text = requireActivity().getString(R.string.correct_words, score)
-            displayNextWord()
+            displayWordCounter()
+            nextWord()
         }
         btn_skip.setOnClickListener {
-            displayNextWord()
+            nextWord()
         }
     }
 
     fun initGame() {
-        timer = object : CountDownTimer(91000, 500) {
+        timer = object : CountDownTimer(maxTimeMillis, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                val seconds = millisUntilFinished / 1000
-                fieldTimer.text = activity?.getString(R.string.time_display, seconds)
+                val seconds: Long = millisUntilFinished / 1000
+                displayTimer(seconds)
             }
 
             override fun onFinish() {
-                fieldTimer.text = activity?.getString(R.string.time_finish)
+                displayTimer(0)
             }
         }
-        wordService!!.getAllWords(object : Callback<List<Word>> {
+        wordService.getAllWords(object : Callback<List<Word>> {
             override fun whenReady(data: List<Word>?) {
                 if (data != null && data.isNotEmpty()) {
                     game = Game(data)
                 } else {
                     game = Game(staticWordList)
                 }
-                fieldWord.text = game?.getWord()?.text
+                displayWord()
                 timer?.start()
             }
         })
     }
 
-    fun displayNextWord() {
+    fun nextWord() {
         game?.next()
-        fieldWord.text = game?.getWord()?.text
+        displayWord()
+    }
+
+    fun displayWord() {
+        activity?.runOnUiThread {
+            fieldWord.text = game?.getWord()?.text
+        }
+    }
+
+    fun displayTimer(seconds: Long) {
+        activity?.runOnUiThread {
+            if (seconds > 0) {
+                fieldTimer.text = requireActivity().getString(R.string.time_display, seconds)
+            } else {
+                fieldTimer.text = requireActivity().getString(R.string.time_finish)
+            }
+        }
+    }
+
+    fun displayWordCounter() {
+        activity?.runOnUiThread {
+            fieldWordCounter.text = requireActivity().getString(R.string.correct_words, score)
+        }
     }
 }
