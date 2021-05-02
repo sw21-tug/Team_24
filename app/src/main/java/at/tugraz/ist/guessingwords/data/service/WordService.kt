@@ -8,7 +8,7 @@ import kotlin.concurrent.thread
 
 open class WordService(private val context : Context) {
 
-    fun getAllWords(callback: Callback<List<Word>>) {
+    open fun getAllWords(callback: Callback<List<Word>>) {
         thread {
             val db = GWDatabase.getInstance(context)
             val allWords = db.wordDao().getAll()
@@ -41,7 +41,7 @@ open class WordService(private val context : Context) {
         }
     }
 
-    fun getWordById(id: Long, callback: Callback<Word>) {
+    open fun getWordById(id: Long, callback: Callback<Word>) {
         thread {
             val db = GWDatabase.getInstance(context)
             val word = db.wordDao().getWordById(id)

@@ -6,4 +6,7 @@
     <string name="btn_save">Save</string>
     <string name="customWordsTitle"><u>My Custom Words:</u></string>
     <string name="placeholder">...</string>
+    <string name="time_display">%1$d seconds left</string>
+    <string name="time_finish">Finished!</string>
+    <string name="correct_words">%1$d correct</string>
 </resources>

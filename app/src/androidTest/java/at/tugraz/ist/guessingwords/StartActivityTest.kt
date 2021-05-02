@@ -18,8 +18,7 @@ class StartActivityTest {
 
         onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
         onView(withId(R.id.btn_startGame)).perform(click())
-        onView(withId(R.id.btn_back_GP)).check(matches(isClickable()))
-        onView(withId(R.id.btn_back_GP)).perform(click())
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
     }
 
     @Test
