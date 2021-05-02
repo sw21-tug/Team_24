@@ -1,9 +1,11 @@
 package at.tugraz.ist.guessingwords
 
+import android.widget.ListView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.room.Room
 import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
@@ -22,6 +24,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.anything
 import org.junit.After
 import org.junit.Before
 import java.io.IOException
@@ -84,5 +87,22 @@ class CustomWordsActivityTest {
         onView(withId(R.id.li_customWord_text)).perform(ViewActions.longClick())
         onView(withId(R.id.btn_edit_CW)).check(matches(isClickable()))
         onView(withId(R.id.btn_delete_CW)).check(matches(isClickable()))
+    }
+
+    @Test
+    fun checkIfWordsIsNotDisplayedAnymoreAfterClickingTheDeleteButton () {
+        val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
+        val input = "Testing Custom Words!"
+
+        onView(withId(R.id.editText_customWords)).perform(typeText(input))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
+        onView(withId(R.id.li_customWord_text)).perform(ViewActions.longClick())
+        onView(withId(R.id.btn_delete_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_delete_CW)).perform(click())
+        if (onView(withId(R.id.lst_custom_words)) != null) {
+            assert(false)
+        }
     }
 }
