@@ -52,8 +52,6 @@ class CustomWordsActivityTest {
 
         //Todo Test if stuff is actually displayed and if input is deleted from input field and so on
         onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
-        onView(withId(R.id.btn_back_CW)).check(matches(isClickable()))
-        onView(withId(R.id.btn_back_CW)).perform(click())
     }
 
 
@@ -78,6 +76,10 @@ class CustomWordsActivityTest {
     fun checkIfEditOrDeleteButtonIsDisplayedAfterLongClick() {
         val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
         val input = "Testing Custom Words!"
+
+        onView(withId(R.id.editText_customWords)).perform(typeText(input))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
         onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
         onView(withId(R.id.li_customWord_text)).perform(ViewActions.longClick())
         onView(withId(R.id.btn_edit_CW)).check(matches(isClickable()))

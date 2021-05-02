@@ -2,6 +2,7 @@ package at.tugraz.ist.guessingwords
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 
 
@@ -10,10 +11,20 @@ class CustomWordsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_words)
 
-        val btn_back = findViewById<Button>(R.id.btn_back_CW)
+        customizeActionBar()
+    }
 
-        btn_back.setOnClickListener {
-            finish()
+    private fun customizeActionBar() {
+        supportActionBar?.title = "Customize Words"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
         }
+        return true
     }
 }
