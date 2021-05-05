@@ -93,15 +93,31 @@ class CustomWordsFragment : Fragment() {
 
             btn_edit_CW.setVisibility(View.VISIBLE)
             btn_delete_CW.setVisibility(View.VISIBLE)
+
+            btn_delete_CW.setOnClickListener() {
+                val word = lv_custom_words.adapter.getItem(position) as Word
+                Toast.makeText(activity, word.toString(), Toast.LENGTH_SHORT).show()
+
+                customWordService.deleteWord(word, object : Callback<Boolean> {
+                    override fun whenReady(data: Boolean?) {
+                        customWords.remove(word)
+                        updateView(customWords)
+                    }
+                })
+            }
             true
+
         }
     }
 
     private fun displayCustomWordsList(customWords: MutableList<Word>) {
+        val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
         if (customWords.isNotEmpty()) {
-            val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
-
+            lv_custom_words.visibility = View.VISIBLE
             lv_custom_words.adapter = CustomWordsAdapter(requireContext(), customWords)
+        } else {
+            Toast.makeText(activity, "${customWords}", Toast.LENGTH_SHORT).show()
+            lv_custom_words.visibility = View.GONE
         }
 
         val countWords = customWords.size.toString() + " Words"
