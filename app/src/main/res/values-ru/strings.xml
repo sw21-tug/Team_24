@@ -26,5 +26,6 @@
     <string name="btn_change_lang">Изменить</string>
     <string name="gameplay">Геймплей</string>
     <string name="words_counter_list">" Слова"</string>
+    <string name="text_aboutPageText"> </string>
 
 </resources>

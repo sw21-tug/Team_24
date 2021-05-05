@@ -24,6 +24,7 @@
     <string name="btn_change_lang">Change</string>
     <string name="gameplay">Gameplay</string>
     <string name="words_counter_list">" Words"</string>
+    <string name="text_aboutPageText">" "</string>
 
 
     <!-- doesn't need to be translated (dev purposes) -->
