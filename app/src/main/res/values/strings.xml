@@ -24,7 +24,25 @@
     <string name="btn_change_lang">Change</string>
     <string name="gameplay">Gameplay</string>
     <string name="words_counter_list">" Words"</string>
-    <string name="text_aboutPageText">" "</string>
+    <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
+        Agile Development, Mobile Applications or Software Technology.\n</br><br>The goal is to develop the App in a Scrum Team.\n\n</br>
+
+        <br><br><b><u>Our Team</u></b>\n\n</br></br>
+
+        <br><br><b>Product Owner:</b> Irena Ruprecht\n\n</br></br>
+
+        <br><br><b>Scrum Master:</b> Alexandru Agape\n\n</br></br>
+
+        <br><b>Developers:\n</b></br>
+        <br>Hosam Badr\n</br>
+        <br>Adnan Karamehić\n</br>
+        <br>Khalid Nasralla\n</br>
+        <br>Amil Salihi\n</br>
+        <br>Katharina Steinacher\n</br>
+        <br>Alexandra Taupe\n</br>
+        <br>David Trišić\n</br>
+        <br>Felix Wallner\n</br>
+Egirin Gega</string>
 
 
     <!-- doesn't need to be translated (dev purposes) -->
