@@ -21,7 +21,7 @@
         android:id="@+id/btn_startGame"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:text="Start Game"
+        android:text="@string/start_game"
         app:layout_constraintTop_toBottomOf="@id/img_logo"
         app:layout_constraintBottom_toTopOf="@id/btn_customWords"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,11 +32,12 @@
         android:id="@+id/btn_customWords"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:text="Custom Words"
+        android:text="@string/custom_words"
         app:layout_constraintTop_toBottomOf="@id/btn_startGame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

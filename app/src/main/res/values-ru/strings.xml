@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Отгадывание слов</string>
+    <string name="splash_screen">Брызгозащитный экран</string>
+    <string name="loading">Загрузка ...</string>
+    <string name="edit_word">Введите слово</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="customWordsTitle"><u>Мои пользовательские слова:</u></string>
+    <string name="placeholder">...</string>
+    <string name="time_display">Осталось %1$d секунд</string>
+    <string name="time_finish">Готово!</string>
+    <string name="correct_words">%1$d правильно</string>
+    <string name="start_game">Начать игру</string>
+    <string name="custom_words">Нестандартные слова</string>
+    <string name="back_AP">Назад</string>
+    <string name="back_CW">Назад</string>
+    <string name="btn_skip_word">Скип</string>
+    <string name="btn_correct">Правильно</string>
+    <string name="back_SG">Назад</string>
+    <string name="lang_dialog_title">Изменить язык</string>
+    <string name="about_link">О сайте</string>
+    <string name="language_link">Язык</string>
+    <string name="english">English</string>
+    <string name="russian">Русский</string>
+    <string name="btn_change_lang">Изменить</string>
+    <string name="gameplay">Геймплей</string>
+    <string name="words_counter_list">" Слова"</string>
+
+</resources>

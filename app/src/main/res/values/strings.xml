@@ -9,9 +9,28 @@
     <string name="time_display">%1$d seconds left</string>
     <string name="time_finish">Finished!</string>
     <string name="correct_words">%1$d correct</string>
-    <string name="placeholder_word">Word</string>
-    <string name="placeholder_timer">Timer</string>
-    <string name="placeholder_word_counter">Word Counter</string>
-    <string name="skip">Skip</string>
-    <string name="correct">Correct</string>
+    <string name="start_game">Start Game</string>
+    <string name="custom_words">Custom Words</string>
+    <string name="back_AP">Back</string>
+    <string name="back_CW">Back</string>
+    <string name="btn_skip_word">Skip</string>
+    <string name="btn_correct">Correct</string>
+    <string name="back_SG">Back</string>
+    <string name="lang_dialog_title">Change Language</string>
+    <string name="about_link">About</string>
+    <string name="language_link">Language</string>
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+    <string name="btn_change_lang">Change</string>
+    <string name="gameplay">Gameplay</string>
+    <string name="words_counter_list">" Words"</string>
+
+
+    <!-- doesn't need to be translated (dev purposes) -->
+    <string name="placeholder_word" translatable="false">Word</string>
+    <string name="placeholder_timer" translatable="false">Timer</string>
+    <string name="placeholder_word_counter" translatable="false">Word Counter</string>
+
+
+
 </resources>

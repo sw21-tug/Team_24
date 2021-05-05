@@ -84,7 +84,7 @@ class CustomWordsFragment : Fragment() {
 
         lv_custom_words.adapter = CustomWordsAdapter(context!!, customWords)
 
-        val countWords = customWords.size.toString() + " Words"
+        val countWords = customWords.size.toString() + getString(R.string.words_counter_list)
         root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
     }
 

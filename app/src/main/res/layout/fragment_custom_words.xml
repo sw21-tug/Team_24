@@ -84,7 +84,7 @@
         android:id="@+id/btn_back_CW"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:text="Back"
+        android:text="@string/back_CW"
         app:layout_constraintTop_toBottomOf="@id/lst_custom_words"
 
         app:layout_constraintLeft_toLeftOf="parent"

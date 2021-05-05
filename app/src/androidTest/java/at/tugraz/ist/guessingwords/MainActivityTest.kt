@@ -45,4 +45,15 @@ class MainActivityTest {
         Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
         onView(withText("About")).perform(click())
     }
+
+    @Test
+    fun translateTest() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
+        onView(withText("Language")).perform(click())
+        onView(withId(R.id.lang_russian)).check(matches(isClickable()))
+        onView(withId(R.id.lang_russian)).perform(click())
+        onView(withId(R.id.btn_language_change)).perform(click())
+        onView(withId(R.id.btn_customWords)).check(matches(withText("Нестандартные слова")))
+    }
 }
