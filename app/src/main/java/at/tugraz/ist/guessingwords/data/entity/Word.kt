@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Word(
     @PrimaryKey(autoGenerate = true)
     val uid : Long,
-    val text : String,
+    var text : String,
 ) {
     constructor(text: String) : this(0, text)
 

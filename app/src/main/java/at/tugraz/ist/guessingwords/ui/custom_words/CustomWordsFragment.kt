@@ -94,6 +94,29 @@ class CustomWordsFragment : Fragment() {
             btn_edit_CW.setVisibility(View.VISIBLE)
             btn_delete_CW.setVisibility(View.VISIBLE)
 
+            btn_edit_CW.setOnClickListener(){
+                val word = lv_custom_words.adapter.getItem(position) as Word
+                root.findViewById<EditText>(R.id.editText_customWords).setText(word.text)
+
+                val saveBtnUpdate = root.findViewById<Button>(R.id.btn_save_word)
+
+                saveBtnUpdate.setOnClickListener(){
+
+                    val updatedInput = root.findViewById<EditText>(R.id.editText_customWords).text.toString()
+                    if (checkIfUserInputIsValid(updatedInput)) {
+                        val updatedWord = Word(word.uid, updatedInput)
+                        customWordService.insertOrUpdateExistingWord(updatedWord, object: Callback<Long>{
+                            override fun whenReady(data: Long?) {
+                                customWords?.find{it.uid == word.uid}?.text = updatedInput
+                                updateView(customWords)
+                            }
+                        })
+                    }
+                    closeKeyBoard()
+                    initSaveCustomWordButton()
+                }
+            }
+
             btn_delete_CW.setOnClickListener() {
                 val word = lv_custom_words.adapter.getItem(position) as Word
                 Toast.makeText(activity, word.toString(), Toast.LENGTH_SHORT).show()
