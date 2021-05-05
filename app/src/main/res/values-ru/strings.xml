@@ -26,5 +26,24 @@
     <string name="btn_change_lang">Изменить</string>
     <string name="gameplay">Геймплей</string>
     <string name="words_counter_list">" Слова"</string>
+    <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
+Гибкая разработка, мобильные приложения или программные технологии.\nЦель - разработать приложение в Scrum-команде.\n\n<br /><br />
+
+        <b><u>Наша команда</u></b>\n\n<br /><br />
+
+<b>Владелец продукта:</b> Irena Ruprecht\n\n<br /><br />
+
+<b>Скрам-мастер:</b> Alexandru Agape\n\n<br /><br />
+
+        <b>Разработчики:</b>\n<br />
+Hosam Badr\n<br />
+Adnan Karamehić\n<br />
+Khalid Nasralla\n<br />
+Amil Salihi\n<br />
+Katharina Steinacher\n<br />
+Alexandra Taupe\n<br />
+David Trišić\n<br />
+Felix Wallner\n<br />
+Egirin Gega</string>
 
 </resources>
