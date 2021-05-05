@@ -20,7 +20,15 @@ class AboutPageActivityTest {
 
         Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
         onView(withText("About")).perform(click())
-        onView(withId(R.id.btn_back_AP)).check(matches(isClickable()))
-        onView(withId(R.id.btn_back_AP)).perform(click())
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
     }
+
+//    @Test
+//    fun wordFieldEmpty() {
+//        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+//
+//        Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
+//        onView(withText("About")).perform(click())
+//        onView(withId(R.id.text_aboutPageText)).check(matches(isDisplayed()))
+//    }
 }
