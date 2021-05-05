@@ -9,4 +9,9 @@
     <string name="time_display">%1$d seconds left</string>
     <string name="time_finish">Finished!</string>
     <string name="correct_words">%1$d correct</string>
+    <string name="placeholder_word">Word</string>
+    <string name="placeholder_timer">Timer</string>
+    <string name="placeholder_word_counter">Word Counter</string>
+    <string name="skip">Skip</string>
+    <string name="correct">Correct</string>
 </resources>
