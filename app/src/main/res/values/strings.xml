@@ -22,4 +22,15 @@
     <string name="english">English</string>
     <string name="russian">Russian</string>
     <string name="btn_change_lang">Change</string>
+    <string name="gameplay">Gameplay</string>
+    <string name="words_counter_list">" Words"</string>
+
+
+    <!-- doesn't need to be translated (dev purposes) -->
+    <string name="placeholder_word" translatable="false">Word</string>
+    <string name="placeholder_timer" translatable="false">Timer</string>
+    <string name="placeholder_word_counter" translatable="false">Word Counter</string>
+
+
+
 </resources>

@@ -7,62 +7,62 @@
     tools:context=".StartGameActivity">
 
 
-    <Button
-        android:id="@+id/btn_skipWord"
-        android:layout_width="144dp"
-        android:layout_height="125dp"
-        android:text="@string/btn_skip_word"
-        app:layout_constraintHorizontal_bias="0.142"
+    <TextView
+        android:id="@+id/txt_fieldTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_timer"
+        android:textSize="@dimen/textSize_timer"
+        android:paddingBottom="@dimen/paddingTopBottom_towardsWord"
+        app:layout_constraintBottom_toTopOf="@id/txt_fieldWordCounter"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_correctWord"
-        app:layout_constraintTop_toBottomOf="@id/txt_fieldWord" />
-
-    <Button
-        android:id="@+id/btn_correctWord"
-        android:layout_width="144dp"
-        android:layout_height="125dp"
-        android:text="@string/btn_correct"
-        app:layout_constraintHorizontal_bias="0.823"
-        app:layout_constraintLeft_toRightOf="@id/btn_skipWord"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_fieldWord"
-        app:layout_constraintBaseline_toBaselineOf="@id/btn_skipWord" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/txt_fieldWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Word"
-        android:textSize="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/placeholder_word"
+        android:textSize="@dimen/textSize_word"
+        app:layout_constraintBottom_toTopOf="@id/txt_fieldWordCounter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.450"/>
+        app:layout_constraintTop_toBottomOf="@id/txt_fieldTimer"
+        />
 
     <TextView
         android:id="@+id/txt_fieldWordCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Word Counter"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@id/txt_fieldWord"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_fieldTimer"
-        app:layout_constraintVertical_bias="0.647" />
-
-    <TextView
-        android:id="@+id/txt_fieldTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timer"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@id/txt_fieldWordCounter"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:text="@string/placeholder_word_counter"
+        android:textSize="@dimen/textSize_word_Counter"
+        android:paddingTop="@dimen/paddingTopBottom_towardsWord"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintVertical_bias="0.6"/>
 
+    <Button
+        android:id="@+id/btn_skipWord"
+        android:layout_width="@dimen/fixedWidth_SkipCorrectButton"
+        android:layout_height="@dimen/fixedHeight_SkipCorrectButton"
+        android:text="@string/btn_skip_word"
+        android:layout_marginRight="@dimen/marginRight_SkipButton"
+        android:layout_marginEnd="@dimen/marginRight_SkipButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_correctWord"
+        app:layout_constraintTop_toBottomOf="@id/txt_fieldWordCounter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.85"/>
+
+    <Button
+        android:id="@+id/btn_correctWord"
+        android:layout_width="@dimen/fixedWidth_SkipCorrectButton"
+        android:layout_height="@dimen/fixedHeight_SkipCorrectButton"
+        android:text="@string/btn_correct"
+        app:layout_constraintLeft_toRightOf="@id/btn_skipWord"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/btn_skipWord" />
 </androidx.constraintlayout.widget.ConstraintLayout>

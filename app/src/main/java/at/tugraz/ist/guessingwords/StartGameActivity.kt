@@ -14,7 +14,7 @@ class StartGameActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = "Gameplay"
+        supportActionBar?.title = getString(R.string.gameplay)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
