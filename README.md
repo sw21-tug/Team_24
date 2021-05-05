@@ -15,6 +15,7 @@ MA/ST/AD Project SS21 Android App Guessing Words
     - Alexandra Taupe
     - David Trišić
     - Felix Wallner
+    - Egirin Gega
     
 ## Vision
 Guessing Words is a local multiplayer party word guessing game with custom words (and phrases). 
