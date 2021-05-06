@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    android:id="@+id/btn_context_menu"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/link_about_page"
+        android:title="@string/about_link"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/btn_change_language"
+        android:title="@string/language_link"
+        app:showAsAction="never" />
+</menu>
