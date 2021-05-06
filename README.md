@@ -42,5 +42,10 @@ The App stores the custom words and handles the game logic.
     - GW-004-C Update and delete entries in DB
 - GW-005 Game Prototype
     - GW-005-A Add game view buttons
+    - GW-005-B Basic game logic
+ - GW-006 All stored words are used in the game
 - GW-013 Context menu with button
     - GW-013-A Create a context menu
+    - GW-013-B Create new "About" Activity and link it to the about button
+- GW-014 Switch language from English to Russian and vice versa via a button in the context menu
+- GW-015 Fill "About" Activity with appropriate text
