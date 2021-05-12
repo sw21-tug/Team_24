@@ -82,7 +82,6 @@ class CustomWordsFragment : Fragment() {
 
 
         lv_custom_words.setOnItemLongClickListener {parent, view, position, id ->
-            Toast.makeText(activity, "LONG CLICK TEST", Toast.LENGTH_SHORT).show()
             val btn_edit_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_edit_CW)
             val btn_delete_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_delete_CW)
 
@@ -129,7 +128,6 @@ class CustomWordsFragment : Fragment() {
 
             btn_delete_CW.setOnClickListener() {
                 val word = lv_custom_words.adapter.getItem(position) as Word
-                Toast.makeText(activity, word.toString(), Toast.LENGTH_SHORT).show()
 
                 customWordService.deleteWord(word, object : Callback<Boolean> {
                     override fun whenReady(data: Boolean?) {
@@ -157,11 +155,10 @@ class CustomWordsFragment : Fragment() {
             lv_custom_words.visibility = View.VISIBLE
             lv_custom_words.adapter = CustomWordsAdapter(requireContext(), customWords)
         } else {
-            Toast.makeText(activity, "${customWords}", Toast.LENGTH_SHORT).show()
             lv_custom_words.visibility = View.GONE
         }
 
-        val countWords = customWords.size.toString() + " Words"
+        val countWords = customWords.size.toString() + getString(R.string.words_counter_list)
         root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
     }
 
@@ -170,7 +167,7 @@ class CustomWordsFragment : Fragment() {
 
         if (string.isBlank()) {
             valid = false
-            Toast.makeText(activity, "Please enter a word you would like to save!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.addWordErrorMessage, Toast.LENGTH_SHORT).show()
         }
         root.findViewById<EditText>(R.id.editText_customWords).setText("")
         return valid

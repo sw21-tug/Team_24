@@ -11,24 +11,30 @@
 
     <dimen name="marginStart_btn_delete_li">5dp</dimen>
     <dimen name="marginEnd_btn_delete_li">10dp</dimen>
+    <dimen name="marginRight_SkipButton">30dp</dimen>
 
-
-
-    <!--    Paddings:-->
+<!--    Paddings:-->
     <dimen name="paddingTop_CW_editText">20dp</dimen>
     <dimen name="paddingBottom_lbl_CW_list">5dp</dimen>
+
+    <dimen name="paddingTopBottom_towardsWord">10dp</dimen>
 
 
 <!--    Fixed Heights:-->
     <dimen name="fixedHeight_CW_list">500dp</dimen>
 
+    <dimen name="fixedHeight_SkipCorrectButton">125dp</dimen>
+
 
 <!--    Fixed Widths:-->
+    <dimen name="fixedWidth_SkipCorrectButton">144dp</dimen>
 
 
 <!--    Text Size:    -->
     <dimen name="textSize_lbl_CW_list">18sp</dimen>
     <dimen name="textSize_btn_edit_delete_li">10sp</dimen>
 
-
+    <dimen name="textSize_word_Counter">18sp</dimen>
+    <dimen name="textSize_word">40sp</dimen>
+    <dimen name="textSize_timer">20sp</dimen>
 </resources>
