@@ -1,12 +1,14 @@
 package at.tugraz.ist.guessingwords
 
+import android.widget.ListView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.room.Room
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -20,10 +22,8 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
-import org.hamcrest.CoreMatchers.allOf
-import org.junit.After
 import org.junit.Before
-import java.io.IOException
+import org.w3c.dom.Text
 
 @RunWith(AndroidJUnit4::class)
 class CustomWordsActivityTest {
@@ -49,10 +49,7 @@ class CustomWordsActivityTest {
         onView(withId(R.id.btn_save_word)).check(matches(isClickable()))
         onView(withId(R.id.btn_save_word)).perform(click())
 
-        //Todo Test if stuff is actually displayed and if input is deleted from input field and so on
         onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
-        onView(withId(R.id.btn_back_CW)).check(matches(isClickable()))
-        onView(withId(R.id.btn_back_CW)).perform(click())
     }
 
 
@@ -71,5 +68,83 @@ class CustomWordsActivityTest {
         onView(withId(R.id.btn_save_word)).perform(click())
 
         verify(wordServiceMock, times(1)).insertOrUpdateExistingWord(any(), any())
+    }
+
+    @Test
+    fun checkIfEditOrDeleteButtonIsDisplayedAfterLongClick() {
+        val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
+        val input = "Testing Custom Words!"
+
+        onView(withId(R.id.editText_customWords)).perform(typeText(input))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
+        onView(withId(R.id.li_customWord_text)).perform(ViewActions.longClick())
+        onView(withId(R.id.btn_edit_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_delete_CW)).check(matches(isClickable()))
+    }
+
+    @Test
+    fun checkIfWordsIsNotDisplayedAnymoreAfterClickingTheDeleteButton () {
+        val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
+        val input = "Testing Custom Words!"
+
+        onView(withId(R.id.editText_customWords)).perform(typeText(input))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
+        onView(withId(R.id.li_customWord_text)).perform(ViewActions.longClick())
+
+        onView(withId(R.id.btn_delete_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_delete_CW)).perform(click())
+
+        onView(withId(R.id.lst_custom_words)).check(matches(withEffectiveVisibility(Visibility.GONE)))
+    }
+
+    @Test
+    fun checkIfEditWordActuallyChangedTheTextOfTheWord () {
+        val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
+        val input = "Testing Custom Words!"
+        val updatedInput = "Updating Custom Words!"
+
+        onView(withId(R.id.editText_customWords)).perform(typeText(input))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
+        onView(withId(R.id.li_customWord_text)).perform(longClick())
+
+        onView(withId(R.id.btn_edit_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_edit_CW)).perform(click())
+
+        onView(withId(R.id.editText_customWords)).check(matches(withText(input)))
+        onView(withId(R.id.editText_customWords)).perform(clearText()).perform(typeText(updatedInput))
+
+        onView(withId(R.id.btn_save_word)).check(matches(isClickable()))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(updatedInput)))
+    }
+
+    @Test
+    fun checkIfCancelButtonAfterEditCustomWordButtonIsDisplayed() {
+        val activityScenario = ActivityScenario.launch(CustomWordsActivity::class.java)
+        val input = "Testing Custom Words!"
+
+        onView(withId(R.id.editText_customWords)).perform(typeText(input))
+        onView(withId(R.id.btn_save_word)).perform(click())
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
+        onView(withId(R.id.li_customWord_text)).perform(longClick())
+
+        onView(withId(R.id.btn_edit_CW)).check(matches(isClickable()))
+        onView(withId(R.id.btn_edit_CW)).perform(click())
+
+        onView(withId(R.id.btn_cancel_word)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withId(R.id.btn_cancel_word)).check(matches(isClickable()))
+        onView(withId(R.id.btn_cancel_word)).perform(click())
+
+        onView(withId(R.id.btn_cancel_word)).check(matches(withEffectiveVisibility(Visibility.GONE)))
+
+        onView(withId(R.id.li_customWord_text)).check(matches(withText(input)))
     }
 }

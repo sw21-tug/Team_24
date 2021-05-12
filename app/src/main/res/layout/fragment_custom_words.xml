@@ -30,8 +30,20 @@
         android:layout_marginRight="@dimen/marginAll_save_CW_button"
         android:text="@string/btn_save"
         app:layout_constraintStart_toEndOf="@id/editText_customWords"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel_word"
         app:layout_constraintBaseline_toBaselineOf="@id/editText_customWords"/>
+
+    <Button
+        android:id="@+id/btn_cancel_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_cancel"
+        app:layout_constraintStart_toEndOf="@id/btn_save_word"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/editText_customWords"
+        android:layout_marginEnd="@dimen/marginAll_save_CW_button"
+        android:layout_marginRight="@dimen/marginAll_save_CW_button"
+        android:visibility="gone"/>
 
     <include
         layout="@layout/lbl_custom_words_list"
@@ -49,47 +61,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <!--   CHECK THE FADING STUFF AGAIN -->
-    <ListView
+        <ListView
         android:id="@+id/lst_custom_words"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:paddingBottom="50dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:fadeScrollbars="false"
+        android:layout_height="@dimen/fixedHeight_CW_list"
         android:layout_marginLeft="@dimen/marginStart_lbl_CW_list"
         android:layout_marginRight="@dimen/marginStart_lbl_CW_list"
         app:layout_constraintTop_toBottomOf="@id/editText_customWords"
-        app:layout_constraintBottom_toTopOf="@id/btn_back_CW"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-<!--        USE THIS LIST VIEW WHEN THE BACK BUTTON IS REMOVED -->
-<!--        <ListView-->
-<!--        android:id="@+id/lst_custom_words"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/fixedHeight_CW_list"-->
-<!--        android:scrollbarAlwaysDrawVerticalTrack="true"-->
-<!--        android:fadeScrollbars="false"-->
-<!--        android:layout_marginLeft="@dimen/marginStart_CW_list"-->
-<!--        android:layout_marginRight="@dimen/marginStart_CW_list"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/editText_customWords"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        />-->
-
-<!-- Remove Back Button once we have the general Back Button in the Top Task Bar -->
-    <Button
-        android:id="@+id/btn_back_CW"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:text="@string/back_CW"
-        app:layout_constraintTop_toBottomOf="@id/lst_custom_words"
-
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_gravity="bottom"/>
+        android:visibility="visible"
+        />
+
 
 
 

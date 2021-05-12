@@ -12,7 +12,7 @@ import at.tugraz.ist.guessingwords.data.entity.Word
 class CustomWordsAdapter(val context: Context, val customWords: List<Word>) : BaseAdapter() {
 
     private val inflater: LayoutInflater = context.getSystemService(
-        Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
@@ -51,4 +51,11 @@ class CustomWordsAdapter(val context: Context, val customWords: List<Word>) : Ba
         lateinit var tvCustomWordText : TextView
     }
 
+    override fun getViewTypeCount(): Int {
+        return count
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }

@@ -13,20 +13,15 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
-    /* Not working at the moment due to refactoring
     @Test
     fun startGameButton() {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
         onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
         onView(withId(R.id.btn_startGame)).perform(click())
-        onView(withId(R.id.btn_back_SG)).check(matches(isClickable()))
-        onView(withId(R.id.btn_back_SG)).perform(click())
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
         onView(withId(R.id.btn_startGame)).check(matches(isClickable()))
-
     }
-
-     */
 
     @Test
     fun customWordsButton() {
@@ -34,8 +29,7 @@ class MainActivityTest {
 
         onView(withId(R.id.btn_customWords)).check(matches(isClickable()))
         onView(withId(R.id.btn_customWords)).perform(click())
-        onView(withId(R.id.btn_back_CW)).check(matches(isClickable()))
-        onView(withId(R.id.btn_back_CW)).perform(click())
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
         onView(withId(R.id.btn_customWords)).check(matches(isClickable()))
     }
 

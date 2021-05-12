@@ -6,6 +6,9 @@
     <string name="loading">Загрузка ...</string>
     <string name="edit_word">Введите слово</string>
     <string name="btn_save">Сохранить</string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="btn_edit_li">Изменить</string>
+    <string name="btn_delete_li">Удалить</string>
     <string name="customWordsTitle"><u>Мои пользовательские слова:</u></string>
     <string name="placeholder">...</string>
     <string name="time_display">Осталось %1$d секунд</string>
@@ -45,5 +48,8 @@ Alexandra Taupe\n<br />
 David Trišić\n<br />
 Felix Wallner\n<br />
 Egirin Gega</string>
+
+    <string name="actionBar_customize_words">Настроить слова</string>
+    <string name="addWordErrorMessage">"Пожалуйста, введите слово, которое вы хотите сохранить!"</string>
 
 </resources>
