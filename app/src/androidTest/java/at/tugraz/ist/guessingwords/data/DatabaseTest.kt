@@ -46,7 +46,8 @@ class DatabaseTest {
         db.wordDao().insertWord(word)
 
         val allWords = db.wordDao().getAll()
-        assertTrue(allWords.contains(word))
+        assertTrue(allWords.map { w -> w.text }.contains(word.text))
+        assert(allWords[0].uid != 0L)
     }
 
     @Test
@@ -103,7 +104,8 @@ class DatabaseTest {
 
         val newWord = db.wordDao().getWordById(ruid)
 
-        assert(word == newWord)
+        assert(ruid != 0L)
+        assert(word.text == newWord.text)
         assert(ruid == newWord.uid)
     }
 }

@@ -3,7 +3,6 @@ package at.tugraz.ist.guessingwords
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
 
 
 class CustomWordsActivity : AppCompatActivity() {
@@ -15,7 +14,7 @@ class CustomWordsActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = "Customize Words"
+        supportActionBar?.setTitle(R.string.actionBar_customize_words)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

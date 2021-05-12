@@ -9,4 +9,11 @@
     <string name="time_display">%1$d seconds left</string>
     <string name="time_finish">Finished!</string>
     <string name="correct_words">%1$d correct</string>
+
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_edit_li">Edit</string>
+    <string name="btn_delete_li">Delete</string>
+
+    <string name="actionBar_customize_words">Customize Words</string>
+
 </resources>

@@ -9,8 +9,12 @@
 
     <dimen name="marginTopBottom_CW_li">7dp</dimen>
 
+    <dimen name="marginStart_btn_delete_li">5dp</dimen>
+    <dimen name="marginEnd_btn_delete_li">10dp</dimen>
 
-<!--    Paddings:-->
+
+
+    <!--    Paddings:-->
     <dimen name="paddingTop_CW_editText">20dp</dimen>
     <dimen name="paddingBottom_lbl_CW_list">5dp</dimen>
 
@@ -24,6 +28,7 @@
 
 <!--    Text Size:    -->
     <dimen name="textSize_lbl_CW_list">18sp</dimen>
+    <dimen name="textSize_btn_edit_delete_li">10sp</dimen>
 
 
 </resources>

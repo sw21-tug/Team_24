@@ -77,28 +77,28 @@ class CustomWordsFragment : Fragment() {
         })
     }
 
-    fun updateView (customWords: MutableList<Word>) {
-        requireActivity().runOnUiThread {
-            displayCustomWordsList(customWords)
-        }
-    }
-
     private fun initEditOrDeleteWord()  {
         val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
+
 
         lv_custom_words.setOnItemLongClickListener {parent, view, position, id ->
             Toast.makeText(activity, "LONG CLICK TEST", Toast.LENGTH_SHORT).show()
             val btn_edit_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_edit_CW)
             val btn_delete_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_delete_CW)
 
-            btn_edit_CW.setVisibility(View.VISIBLE)
-            btn_delete_CW.setVisibility(View.VISIBLE)
+            btn_edit_CW.visibility = View.VISIBLE
+            btn_delete_CW.visibility = View.VISIBLE
 
             btn_edit_CW.setOnClickListener(){
                 val word = lv_custom_words.adapter.getItem(position) as Word
                 root.findViewById<EditText>(R.id.editText_customWords).setText(word.text)
 
                 val saveBtnUpdate = root.findViewById<Button>(R.id.btn_save_word)
+                val cancelBtnUpdate = root.findViewById<Button>(R.id.btn_cancel_word)
+                cancelBtnUpdate.visibility = View.VISIBLE
+
+                btn_edit_CW.visibility = View.GONE
+                btn_delete_CW.visibility = View.GONE
 
                 saveBtnUpdate.setOnClickListener(){
 
@@ -107,12 +107,22 @@ class CustomWordsFragment : Fragment() {
                         val updatedWord = Word(word.uid, updatedInput)
                         customWordService.insertOrUpdateExistingWord(updatedWord, object: Callback<Long>{
                             override fun whenReady(data: Long?) {
-                                customWords?.find{it.uid == word.uid}?.text = updatedInput
+                                val index = customWords.indexOf(word)
+                                customWords[index] = updatedWord
                                 updateView(customWords)
                             }
                         })
                     }
+
                     closeKeyBoard()
+                    cancelBtnUpdate.visibility = View.GONE
+                    initSaveCustomWordButton()
+                }
+
+                cancelBtnUpdate.setOnClickListener(){
+                    root.findViewById<EditText>(R.id.editText_customWords).setText("")
+                    closeKeyBoard()
+                    cancelBtnUpdate.visibility = View.GONE
                     initSaveCustomWordButton()
                 }
             }
@@ -125,11 +135,19 @@ class CustomWordsFragment : Fragment() {
                     override fun whenReady(data: Boolean?) {
                         customWords.remove(word)
                         updateView(customWords)
+
                     }
                 })
+                (lv_custom_words.adapter as CustomWordsAdapter).notifyDataSetChanged()
             }
-            true
 
+            true
+        }
+    }
+
+    fun updateView (customWords: MutableList<Word>) {
+        requireActivity().runOnUiThread {
+            displayCustomWordsList(customWords)
         }
     }
 
