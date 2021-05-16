@@ -27,7 +27,9 @@
     <string name="btn_change_lang">Change</string>
     <string name="gameplay">Gameplay</string>
     <string name="words_counter_list">" Words"</string>
+    <string name="Multiplayer">Multiplayer</string>
     <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
+
         Agile Development, Mobile Applications or Software Technology.\n</br><br>The goal is to develop the App in a Scrum Team.\n\n</br>
 
         <br><br><b><u>Our Team</u></b>\n\n</br></br>
@@ -54,7 +56,6 @@ Egirin Gega</string>
     <string name="placeholder_word" translatable="false">Word</string>
     <string name="placeholder_timer" translatable="false">Timer</string>
     <string name="placeholder_word_counter" translatable="false">Word Counter</string>
-
 
 
 
