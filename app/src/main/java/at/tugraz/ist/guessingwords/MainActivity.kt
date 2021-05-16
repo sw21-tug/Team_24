@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_multiplayer.setOnClickListener {
             Toast.makeText(this@MainActivity, "You Clicked: Multiplayer!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, StartGameActivity::class.java) // THIS IS TEMPORARY!
+            val intent = Intent(this, MultiplayerActivity::class.java)
             startActivity(intent)
         }
 

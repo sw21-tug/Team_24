@@ -18,7 +18,5 @@ class MultiplayerActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
         Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.editText_multiplayer)).perform(ViewActions.typeText(input))
-
-        //Espresso.onView(ViewMatchers.withId(R.id.li_customWord_text)).check(ViewAssertions.matches(ViewMatchers.withText(input)))
     }
 }
