@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btn_startGame = findViewById<Button>(R.id.btn_startGame)
+        val btn_multiplayer = findViewById<Button>(R.id.btn_multiplayer)
         val btn_customWords = findViewById<Button>(R.id.btn_customWords)
 
         btn_startGame.setOnClickListener {

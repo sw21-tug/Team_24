@@ -39,5 +39,10 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
+    <Button
+        android:id="@+id/btn_multiplayer"
+        android:layout_height="50dp"
+        android:layout_width="170dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
