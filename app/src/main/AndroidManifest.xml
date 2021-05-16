@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GuessingWords">
-
+        <activity android:name=".MultiplayerActivity"></activity>
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,9 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".CustomWordsActivity"/>
-        <activity android:name=".StartGameActivity"/>
-        <activity android:name=".AboutPageActivity"/>
+        <activity android:name=".CustomWordsActivity" />
+        <activity android:name=".StartGameActivity" />
+        <activity android:name=".AboutPageActivity" />
     </application>
 
 </manifest>
