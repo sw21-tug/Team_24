@@ -32,6 +32,8 @@
     <string name="Multiplayer">мультиплеер</string>
     <string name="edittext_multiplayer_value" />
     <string name="host">хозяин</string>
+    <string name="join">Присоединиться</string>
+
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
 
 
