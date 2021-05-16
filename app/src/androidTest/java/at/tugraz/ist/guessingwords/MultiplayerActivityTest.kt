@@ -28,4 +28,13 @@ class MultiplayerActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.btn_host)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
     }
+
+    @Test
+    fun joinButtonTest(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.btn_join)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+    }
 }
