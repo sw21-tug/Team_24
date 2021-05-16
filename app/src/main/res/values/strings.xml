@@ -57,6 +57,7 @@ Egirin Gega</string>
     <string name="placeholder_timer" translatable="false">Timer</string>
     <string name="placeholder_word_counter" translatable="false">Word Counter</string>
     <string name="edittext_multiplayer_value" />
+    <string name="host">Host</string>
 
 
 </resources>

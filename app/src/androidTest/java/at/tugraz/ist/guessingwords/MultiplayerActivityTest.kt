@@ -19,4 +19,13 @@ class MultiplayerActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.editText_multiplayer)).perform(ViewActions.typeText(input))
     }
+
+    @Test
+    fun hostButtonTest(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.btn_host)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+    }
 }
