@@ -31,6 +31,7 @@
     <string name="edittext_multiplayer_value" />
     <string name="host">Host</string>
     <string name="join">Join</string>
+    <string name="ready">Ready</string>
 
     <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
 
