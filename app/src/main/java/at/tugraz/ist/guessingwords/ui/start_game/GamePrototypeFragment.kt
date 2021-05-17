@@ -131,7 +131,12 @@ class GamePrototypeFragment : Fragment() {
                 fieldTimer.text = requireActivity().getString(R.string.time_display, seconds)
             } else {
                 fieldTimer.text = requireActivity().getString(R.string.time_finish)
-            }
+                //val fragment_manager = supportFragmentManager
+                //val transact = manager.beginTransaction()
+
+                }
+
+
         }
     }
 
