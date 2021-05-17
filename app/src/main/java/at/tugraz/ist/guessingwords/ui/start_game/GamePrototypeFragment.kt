@@ -1,5 +1,6 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import at.tugraz.ist.guessingwords.AboutPageActivity
 import at.tugraz.ist.guessingwords.R
+import at.tugraz.ist.guessingwords.StartGameActivity
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
@@ -135,8 +138,6 @@ class GamePrototypeFragment : Fragment() {
                 //val transact = manager.beginTransaction()
 
                 }
-
-
         }
     }
 
