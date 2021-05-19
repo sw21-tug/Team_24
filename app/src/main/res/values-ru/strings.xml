@@ -35,6 +35,7 @@
     <string name="join">Присоединиться</string>
     <string name="ready">готовы</string>
     <string name="text_join_screen_message">Ваш пул слов был отправлен на хост</string>
+    <string name="hint_username">Введите имя пользователя</string>
 
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
 

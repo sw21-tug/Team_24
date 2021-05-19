@@ -8,8 +8,10 @@
 
     <EditText
         android:id="@+id/editText_multiplayer"
-        android:layout_width="0dp"
+        android:layout_width="fill_parent"
+        android:hint="@string/hint_username"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
