@@ -21,4 +21,15 @@ class HostActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.btn_host)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.btn_ready)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
     }
+
+    @Test
+    fun hostBackButtontest(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.btn_host)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_host)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withContentDescription(R.string.abc_action_bar_up_description)).perform(ViewActions.click())
+    }
 }
