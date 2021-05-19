@@ -27,6 +27,7 @@
         <activity android:name=".CustomWordsActivity"/>
         <activity android:name=".StartGameActivity"/>
         <activity android:name=".AboutPageActivity"/>
+        <activity android:name=".NextRoundScreenActivity"/>
     </application>
 
 </manifest>
