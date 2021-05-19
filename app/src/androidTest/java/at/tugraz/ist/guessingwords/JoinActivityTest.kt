@@ -19,4 +19,15 @@ class JoinActivityTest {
         Espresso.onView(ViewMatchers.withId(R.id.btn_join)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.text_wordsSentMessage)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
+
+    @Test
+    fun joinBackButtontest(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.btn_join)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_join)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withContentDescription(R.string.abc_action_bar_up_description)).perform(ViewActions.click())
+    }
 }
