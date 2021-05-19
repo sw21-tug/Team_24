@@ -20,4 +20,7 @@ interface WordDao {
 
     @Delete
     fun deleteWord(word: Word)
+
+    @Insert
+    fun mergeWordsIntoDB(wordList: List<Word>)
 }
