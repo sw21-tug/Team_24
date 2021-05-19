@@ -128,4 +128,41 @@ class WordServiceTest {
         assert(cbGet.retWord!!.text == word.text)
         assert(cbGet.retWord!!.uid == cb.uid)
     }
+    //    @Test(timeout = 3000)
+//    fun checkIfNewMultiplayedWordPoolWorks() {
+//        val cb = object:Callback<List<Word>>{
+//            val finished = ConditionVariable()
+//            override fun whenReady(data: List<Word>?) {
+//                finished.open()
+//            }
+//        }
+//        service.createNewMultiplayerWordPool(cb)
+//        service.getAllWords(cb)
+//        cb.finished.block()
+//    }
+
+    @Test(timeout = 3000)
+    fun checkIfNewMultiplayerWordPoolWorksAndCheckForWordsEntered() {
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        val cbAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var retListOfWords: List<Word>? = null
+            override fun whenReady(data: List<Word>?) {
+                retListOfWords = data
+                finished.open()
+            }
+        }
+        val wordList = listOf(Word("test1"), Word("test2"), Word("test3"))
+        service.createNewMultiplayerWordPool(wordList, cb)
+        cb.finished.block()
+        service.getAllWords(cbAll)
+        assert(cbAll.retListOfWords == null)
+        cbAll.finished.block()
+    }
+
 }
