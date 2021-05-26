@@ -49,3 +49,5 @@ The App stores the custom words and handles the game logic.
     - GW-013-B Create new "About" Activity and link it to the about button
 - GW-014 Switch language from English to Russian and vice versa via a button in the context menu
 - GW-015 Fill "About" Activity with appropriate text
+- GW-016 Next Round Screen
+- GW-017 The Multiplayer Userinterface
