@@ -11,6 +11,7 @@ import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -129,7 +130,7 @@ class GamePrototypeFragmentTest {
     }
 
     @Test
-    fun expectFinishedMessageAfterTimerReachesZero()
+    fun expectNextRoundActivityAfterTimerReachesZero()
     {
         val wordServiceMock = mock<WordService>()
         val argCapt: KArgumentCaptor<Callback<List<Word>>> = argumentCaptor()
@@ -149,8 +150,44 @@ class GamePrototypeFragmentTest {
         verify(wordServiceMock).getAllWords(argCapt.capture())
         argCapt.firstValue.whenReady(null)
 
-        onView(ViewMatchers.withId(R.id.txt_fieldTimer))
-                .check(ViewAssertions.matches(ViewMatchers.withText(text)))
+        onView(ViewMatchers.withId(R.id.btn_nextRound))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun expectToReturnToGameAfterNextRound()
+    {
+        val wordServiceMock = mock<WordService>()
+        val argCapt: KArgumentCaptor<Callback<List<Word>>> = argumentCaptor()
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        var text = ""
+
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_finish)
+            fragment.wordService = wordServiceMock
+            fragment.maxTimeMillis = 0
+            // run initGame again (first time was on launchFragment)
+            // this time with the mocked service so whenReady can be called to start the timer
+            fragment.initGame()
+        }
+
+        verify(wordServiceMock).getAllWords(argCapt.capture())
+        argCapt.firstValue.whenReady(null)
+
+        onView(ViewMatchers.withId(R.id.btn_nextRound))
+            .perform(click())
+
+        onView(ViewMatchers.withId(R.id.btn_skipWord)).check(
+            ViewAssertions.matches(
+                ViewMatchers.isDisplayed()
+            )
+        )
+        onView(ViewMatchers.withId(R.id.btn_correctWord)).check(
+            ViewAssertions.matches(
+                ViewMatchers.isDisplayed()
+            )
+        )
     }
 
     @Test
