@@ -21,6 +21,6 @@ interface WordDao {
     @Delete
     fun deleteWord(word: Word)
 
-    @Insert
-    fun mergeWordsIntoDB(wordList: List<Word>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun mergeWordsIntoDB(wordList: List<Word>): List<Long>
 }
