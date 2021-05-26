@@ -29,8 +29,7 @@ class GamePrototypeFragment : Fragment() {
     private lateinit var startGameViewModel: StartGameViewModel
     private lateinit var root: View
 
-    //TODO: Just for debugging
-    var maxTimeMillis: Long = 10000//90999 // 91 seconds
+    var maxTimeMillis: Long = 90999 // 91 seconds
 
     lateinit var wordService: WordService
 
