@@ -1,6 +1,7 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,14 +33,22 @@ class NextScreenFragment : Fragment() {
 
         fieldCorrectGuesses = root.findViewById(R.id.text_correctGuesses)
         fieldSkippedWords = root.findViewById(R.id.text_skippedWords)
-        btn_nextRound = root.findViewById(R.id.btn_nextRound)
+        btn_nextRound = root.findViewById<Button>(R.id.btn_nextRound)
 
-        //fieldCorrectGuesses.text = requireActivity().getString(R.string.correct_guesses, score)
-        //fieldSkippedWords.text = requireActivity().getString(R.string.skipped_words, skipped)
-        /*btn_nextRound.setOnClickListener {
 
-        }*/
+        val score = activity!!.intent.getIntExtra("Score", 0)
+        val skipped = activity!!.intent.getIntExtra("Skipped", 0)
+
+
+        fieldCorrectGuesses.text = requireActivity().getString(R.string.correct_guesses, score)
+        fieldSkippedWords.text = requireActivity().getString(R.string.skipped_words, skipped)
+
+        btn_nextRound.setOnClickListener {
+            val intent = Intent(context, StartGameActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }
+
 }

@@ -92,11 +92,9 @@ class GamePrototypeFragment : Fragment() {
         displayWordCounter()
 
         btn_correct.setOnClickListener {
-            /*score += 1
+            score += 1
             displayWordCounter()
-            nextWord()*/
-            //TODO: Just for debugging!
-            nextRoundScreen()
+            nextWord()
         }
         btn_skip.setOnClickListener {
             skipped += 1
@@ -159,6 +157,8 @@ class GamePrototypeFragment : Fragment() {
     fun nextRoundScreen() {
 
         val intent = Intent(context, NextRoundScreenActivity::class.java)
+        intent.putExtra("Score", score)
+        intent.putExtra("Skipped", skipped)
         startActivity(intent)
 
     }

@@ -16,9 +16,8 @@ import at.tugraz.ist.guessingwords.ui.start_game.NextScreenViewModel
 class NextRoundScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_next_round_screen)
+        setContentView(R.layout.activity_next_round)
 
-        //customizeActionBar()
     }
 
 }
