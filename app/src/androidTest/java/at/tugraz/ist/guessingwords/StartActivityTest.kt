@@ -67,22 +67,4 @@ class StartActivityTest {
         onView(withId(R.id.btn_startGame)).perform(click())
         onView(withId(R.id.txt_fieldWordCounter)).check(matches(isDisplayed()))
     }
-
-    @Test
-    fun nextRoundScreenDisplayed() {
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        //if (fieldTimer.text = requireActivity().getString(R.string.time_finish))
-        onView(withId(R.id.text_skippedWords)).check(matches(isDisplayed()))
-        onView(withId(R.id.text_correctGuesses)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun nextRoundButtonDisplayed() {
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        onView(withId(R.id.btn_nextRound)).check(matches(isClickable()))
-        onView(withId(R.id.btn_nextRound)).perform(click())
-        onView(withId(R.id.text_startGame)).check(matches(isDisplayed()))
-    }
 }
