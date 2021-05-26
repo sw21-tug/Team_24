@@ -1,6 +1,7 @@
 package at.tugraz.ist.guessingwords.data.service
 
 import android.os.ConditionVariable
+import android.util.Log
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -9,6 +10,7 @@ import at.tugraz.ist.guessingwords.data.entity.Word
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.math.log
 
 @RunWith(AndroidJUnit4::class)
 class WordServiceTest {
@@ -128,41 +130,59 @@ class WordServiceTest {
         assert(cbGet.retWord!!.text == word.text)
         assert(cbGet.retWord!!.uid == cb.uid)
     }
-    //    @Test(timeout = 3000)
-//    fun checkIfNewMultiplayedWordPoolWorks() {
-//        val cb = object:Callback<List<Word>>{
-//            val finished = ConditionVariable()
-//            override fun whenReady(data: List<Word>?) {
-//                finished.open()
-//            }
-//        }
-//        service.createNewMultiplayerWordPool(cb)
-//        service.getAllWords(cb)
-//        cb.finished.block()
-//    }
 
     @Test(timeout = 3000)
     fun checkIfNewMultiplayerWordPoolWorksAndCheckForWordsEntered() {
+
+        val word = Word("test1")
         val cb = object:Callback<Long>{
             val finished = ConditionVariable()
             override fun whenReady(data: Long?) {
                 finished.open()
             }
         }
-        val cbAll = object:Callback<List<Word>>{
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+
+        // In memory Instance create
+        val cbInMemory = object:Callback<List<Long>>{
             val finished = ConditionVariable()
-            var retListOfWords: List<Word>? = null
-            override fun whenReady(data: List<Word>?) {
-                retListOfWords = data
+            var resWordIds = listOf<Long>()
+            override fun whenReady(data: List<Long>?) {
+                resWordIds = data!!
+                finished.open()
+            }
+        }
+        service.createNewMultiplayerWordPool(cbInMemory)
+        cbInMemory.finished.block()
+        //Merge Some words
+
+        val cbMerge = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            var resWordIds = listOf<Long>()
+            override fun whenReady(data: List<Long>?) {
+                resWordIds = data!!
                 finished.open()
             }
         }
         val wordList = listOf(Word("test1"), Word("test2"), Word("test3"))
-        service.createNewMultiplayerWordPool(wordList, cb)
-        cb.finished.block()
-        service.getAllWords(cbAll)
-        assert(cbAll.retListOfWords == null)
-        cbAll.finished.block()
+        service.mergeIntoDatabase(wordList, cbMerge)
+        cbMerge.finished.block()
+
+        // get all Words test
+        val cbGetAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var resWords = listOf<Word>()
+            override fun whenReady(data: List<Word>?) {
+                resWords = data!!
+                finished.open()
+            }
+        }
+        service.getAllWords(cbGetAll)
+        cbGetAll.finished.block()
+        Log.d(null, "eg_ ${cbGetAll.resWords}")
+        assert(cbGetAll.resWords.count() >= 3)
+        service.removeMultiplayerWordPool()
     }
 
 }

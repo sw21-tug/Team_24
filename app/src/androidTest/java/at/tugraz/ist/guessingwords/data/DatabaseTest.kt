@@ -116,6 +116,6 @@ class DatabaseTest {
         db.wordDao().mergeWordsIntoDB(wordList)
         val allWords = db.wordDao().getAll()
         Log.d("DBTest", allWords.count().toString())
-        assert(allWords.count() > 0)
+        assert(allWords.count() >= 3)
     }
 }
