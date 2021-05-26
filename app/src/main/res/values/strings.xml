@@ -30,7 +30,16 @@
     <string name="btn_change_lang">Change</string>
     <string name="gameplay">Gameplay</string>
     <string name="words_counter_list">" Words"</string>
+    <string name="Multiplayer">Multiplayer</string>
+    <string name="edittext_multiplayer_value" />
+    <string name="host">Host</string>
+    <string name="join">Join</string>
+    <string name="ready">Ready</string>
+    <string name="text_join_screen_message">Your Word Pool has been sent to the host</string>
+    <string name="hint_username">Enter your username</string>
+
     <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
+
         Agile Development, Mobile Applications or Software Technology.\n</br><br>The goal is to develop the App in a Scrum Team.\n\n</br>
 
         <br><br><b><u>Our Team</u></b>\n\n</br></br>
