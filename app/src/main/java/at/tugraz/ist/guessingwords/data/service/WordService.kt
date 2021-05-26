@@ -62,7 +62,16 @@ open class WordService(private val context : Context) {
     open fun mergeIntoDatabase(merging: List<Word>, callback: Callback<List<Long>>) {
         thread {
             val db = GWDatabase.getInMemoryInstance(context)
-            val mergedIds = db.wordDao().mergeWordsIntoDB(merging)
+            val localWords = GWDatabase.getInstance(context).wordDao().getAll()
+            var sWords = merging.map { x -> x.text }.toMutableList();
+            var sLocalWords = localWords.map { x -> x.text }
+            sWords.forEach { word ->
+                if (sLocalWords.contains(word)){
+                    sWords.removeAt(sWords.indexOf(word))
+                }
+            }
+            val newMerging = sWords.map { x -> Word(x) }
+            val mergedIds = db.wordDao().mergeWordsIntoDB(newMerging)
             callback.whenReady(mergedIds)
         }
     }
