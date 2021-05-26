@@ -18,6 +18,9 @@
     <string name="back_CW">Back</string>
     <string name="btn_skip_word">Skip</string>
     <string name="btn_correct">Correct</string>
+    <string name="correct_guesses">%1$d correct guesses</string>
+    <string name="skipped_words">%1$d skipped words</string>
+    <string name="next_round">NEXT ROUND</string>
     <string name="back_SG">Back</string>
     <string name="lang_dialog_title">Change Language</string>
     <string name="about_link">About</string>
@@ -54,8 +57,6 @@ Egirin Gega</string>
     <string name="placeholder_word" translatable="false">Word</string>
     <string name="placeholder_timer" translatable="false">Timer</string>
     <string name="placeholder_word_counter" translatable="false">Word Counter</string>
-
-
 
 
 </resources>

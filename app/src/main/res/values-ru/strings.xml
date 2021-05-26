@@ -29,6 +29,9 @@
     <string name="btn_change_lang">Изменить</string>
     <string name="gameplay">Геймплей</string>
     <string name="words_counter_list">" Слова"</string>
+    <string name="correct_guesses">%1$d Правильные предположения</string>
+    <string name="skipped_words">%1$d Пропущенные слова</string>
+    <string name="next_round">Следующий раунд</string>
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
 Гибкая разработка, мобильные приложения или программные технологии.\nЦель - разработать приложение в Scrum-команде.\n\n<br /><br />
 
