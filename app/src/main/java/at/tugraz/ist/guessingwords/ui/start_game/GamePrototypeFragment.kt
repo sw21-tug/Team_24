@@ -29,7 +29,8 @@ class GamePrototypeFragment : Fragment() {
     private lateinit var startGameViewModel: StartGameViewModel
     private lateinit var root: View
 
-    var maxTimeMillis: Long = 90999 // 91 seconds
+    //TODO: Just for debugging
+    var maxTimeMillis: Long = 10000//90999 // 91 seconds
 
     lateinit var wordService: WordService
 
@@ -159,6 +160,7 @@ class GamePrototypeFragment : Fragment() {
         val intent = Intent(context, NextRoundScreenActivity::class.java)
         intent.putExtra("Score", score)
         intent.putExtra("Skipped", skipped)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
 
     }
