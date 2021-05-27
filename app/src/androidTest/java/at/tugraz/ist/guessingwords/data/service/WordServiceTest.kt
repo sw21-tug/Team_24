@@ -130,7 +130,6 @@ class WordServiceTest {
         assert(cbGet.retWord!!.text == word.text)
         assert(cbGet.retWord!!.uid == cb.uid)
     }
-
     @Test(timeout = 3000)
     fun checkIfNewMultiplayerWordPoolWorksAndCheckForWordsEntered() {
 
@@ -185,4 +184,55 @@ class WordServiceTest {
         service.removeMultiplayerWordPool()
     }
 
+    @Test(timeout = 3000)
+    fun checkForDuplicatesAfterMerge(){
+        val word = Word("test1")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+
+        // In memory Instance create
+        val cbInMemory = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: List<Long>?) {
+                finished.open()
+            }
+        }
+        service.createNewMultiplayerWordPool(cbInMemory)
+        cbInMemory.finished.block()
+        //Merge Some words
+
+        val cbMerge = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: List<Long>?) {
+                finished.open()
+            }
+        }
+        val wordList = listOf(Word("test2"), Word("test1"), Word("test3"))
+        service.mergeIntoDatabase(wordList, cbMerge)
+        cbMerge.finished.block()
+
+        // get all Words test
+        val cbGetAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var resWords = listOf<Word>()
+            override fun whenReady(data: List<Word>?) {
+                resWords = data!!
+                finished.open()
+            }
+        }
+        service.getAllWords(cbGetAll)
+        cbGetAll.finished.block()
+        cbGetAll.resWords.forEach { word ->
+            if (cbGetAll.resWords.count{ x -> x.text == word.text } > 1){
+                assert(false)
+            }
+        }
+        assert(true)
+    }
 }
