@@ -70,13 +70,14 @@ open class WordService(private val context : Context) {
      * @param merging
      * @param callback
      */
+    @OptIn(ExperimentalStdlibApi::class)
     open fun mergeIntoDatabase(merging: List<Word>, callback: Callback<List<Long>>) {
         thread {
             val db = GWDatabase.getInMemoryInstance(context)
             val localWords = GWDatabase.getInstance(context).wordDao().getAll()
             var mWords = merging.toMutableList();
             localWords.forEach { lWord ->
-                mWords.remove(mWords.find { sWord -> sWord.text == lWord.text })
+                mWords.remove(mWords.find { mWord -> mWord.text.lowercase() == lWord.text.lowercase() })
             }
             val mergedIds = db.wordDao().mergeWordsIntoDB(mWords)
             callback.whenReady(mergedIds)
