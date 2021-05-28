@@ -179,7 +179,6 @@ class WordServiceTest {
         }
         service.getAllWords(cbGetAll)
         cbGetAll.finished.block()
-        Log.d(null, "eg_ ${cbGetAll.resWords}")
         assert(cbGetAll.resWords.count() >= 3)
         service.removeMultiplayerWordPool()
     }
