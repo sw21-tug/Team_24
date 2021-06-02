@@ -20,10 +20,15 @@ class NextRoundScreenActivity : AppCompatActivity() {
 
         val btn_Quit = findViewById<Button>(R.id.btn_Quit)
         btn_Quit.setOnClickListener {
-//            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+        customizeActionBar()
+    }
+
+    private fun customizeActionBar() {
+        supportActionBar?.title = getString(R.string.next_round_screen)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
 }
