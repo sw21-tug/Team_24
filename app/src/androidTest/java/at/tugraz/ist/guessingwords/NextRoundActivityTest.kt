@@ -51,4 +51,12 @@ class NextRoundActivityTest {
 
         onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
     }
+
+    @Test(timeout = 3000)
+    fun backButtonTakesUsToMainActivity(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+        onView(withId(R.id.btn_startGame)).check(matches(isDisplayed()))
+    }
 }
