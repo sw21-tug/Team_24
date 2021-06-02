@@ -6,14 +6,24 @@ import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import at.tugraz.ist.guessingwords.data.service.WordService
+import at.tugraz.ist.guessingwords.networking.WordTransport
 import com.adroitandroid.near.connect.NearConnect
 import com.adroitandroid.near.discovery.NearDiscovery
 import com.adroitandroid.near.model.Host
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 class HostActivity : AppCompatActivity() {
 
     private lateinit var nearDiscovery: NearDiscovery
     private lateinit var nearConnect: NearConnect
+
+    private lateinit var wordService: WordService
+
+    companion object {
+        const val TAG = "HostActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +34,13 @@ class HostActivity : AppCompatActivity() {
         val searchingFilter = "GW-join.*"
         val identifyingFilter = "GW-host.*"
 
+        wordService = WordService(this)
+        // TODO: create new multiplayer word pool
+
         nearDiscovery = NearDiscovery.Builder()
                 .setContext(this)
-                .setDiscoverableTimeoutMillis(60000)
-                .setDiscoveryTimeoutMillis(60000)
+                .setDiscoverableTimeoutMillis(60_000)
+                .setDiscoveryTimeoutMillis(60_000)
                 .setDiscoverablePingIntervalMillis(1000)
                 .setDiscoveryListener(nearDiscoveryListener, Looper.getMainLooper())
                 .setFilter(Regex(searchingFilter))
@@ -39,7 +52,7 @@ class HostActivity : AppCompatActivity() {
                 .setListener(nearConnectListener, Looper.getMainLooper())
                 .build()
 
-        Log.d("HostActivity", "Starting discovery... as $name")
+        Log.d(TAG, "Starting discovery... as $name")
         Toast.makeText(this@HostActivity, "Starting discovery... as $name", Toast.LENGTH_LONG).show()
         nearDiscovery.makeDiscoverable(name, identifyingFilter)
         nearDiscovery.startDiscovery()
@@ -54,22 +67,22 @@ class HostActivity : AppCompatActivity() {
     private val nearDiscoveryListener: NearDiscovery.Listener
         get() = object : NearDiscovery.Listener {
             override fun onPeersUpdate(host: Set<Host>) {
-                Log.d("HostActivity", "Peer Update. Found ${host.size} hosts")
+                Log.d(TAG, "Peer Update. Found ${host.size} hosts")
                 Toast.makeText(this@HostActivity, "Peer Update. Found ${host.size} hosts", Toast.LENGTH_LONG).show()
             }
 
             override fun onDiscoveryTimeout() {
-                Log.d("HostActivity", "No other participants found")
+                Log.d(TAG, "No other participants found")
                 Toast.makeText(this@HostActivity, "No other participants found", Toast.LENGTH_LONG).show()
             }
 
             override fun onDiscoveryFailure(e: Throwable) {
-                Log.d("HostActivity", "Something went wrong while searching for participants")
+                Log.d(TAG, "Something went wrong while searching for participants")
                 Toast.makeText(this@HostActivity, "Something went wrong while searching for participants", Toast.LENGTH_LONG).show()
             }
 
             override fun onDiscoverableTimeout() {
-                Log.d("HostActivity", "You're not discoverable anymore")
+                Log.d(TAG, "You're not discoverable anymore")
                 Toast.makeText(this@HostActivity, "You're not discoverable anymore", Toast.LENGTH_LONG).show()
             }
         }
@@ -77,19 +90,22 @@ class HostActivity : AppCompatActivity() {
     private val nearConnectListener: NearConnect.Listener
         get() = object : NearConnect.Listener {
             override fun onReceive(bytes: ByteArray, sender: Host) {
-                Toast.makeText(this@HostActivity, "Received text: ${String(bytes)}", Toast.LENGTH_LONG).show()
-                Log.d("HostActivity", String(bytes))
+                val msg = String(bytes)
+                Toast.makeText(this@HostActivity, "Received text: $msg", Toast.LENGTH_LONG).show()
+                Log.d(TAG, msg)
+                val transport: WordTransport = Json.decodeFromString(msg)
+                // TODO: wordServe.merge(...)
             }
 
             override fun onSendComplete(jobId: Long) {}
             override fun onSendFailure(e: Throwable?, jobId: Long) {
                 Toast.makeText(this@HostActivity, "onSendFailure", Toast.LENGTH_LONG).show()
-                Log.d("HostActivity", "onSendFailure")
+                Log.d(TAG, "onSendFailure")
             }
             override fun onStartListenFailure(e: Throwable?) {
                 Toast.makeText(this@HostActivity, "onStartListenFailure", Toast.LENGTH_LONG).show()
-                Log.e("HostActivity", "onStartListenFailure")
-                Log.e("HostActivity", e.toString())
+                Log.e(TAG, "onStartListenFailure")
+                Log.e(TAG, e.toString())
             }
         }
 
