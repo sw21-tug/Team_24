@@ -184,6 +184,43 @@ class WordServiceTest {
     }
 
     @Test(timeout = 3000)
+    fun checkIfLocalWordsAreMergedToInMemoryInstance(){
+        val word = Word("test1")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+
+        // In memory Instance create
+        val cbInMemory = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: List<Long>?) {
+                finished.open()
+            }
+        }
+        service.createNewMultiplayerWordPool(cbInMemory)
+        cbInMemory.finished.block()
+
+        // get all Words test
+        val cbGetAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var resWords = listOf<Word>()
+            override fun whenReady(data: List<Word>?) {
+                resWords = data!!
+                finished.open()
+            }
+        }
+        service.getAllWords(cbGetAll)
+        cbGetAll.finished.block()
+        assert(cbGetAll.resWords.count() == 1)
+        assert(cbGetAll.resWords[0].text == "test1")
+    }
+
+    @Test(timeout = 3000)
     fun checkForDuplicatesAfterMerge(){
         val word = Word("test1")
         val cb = object:Callback<Long>{

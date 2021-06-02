@@ -117,4 +117,10 @@ class DatabaseTest {
         val allWords = db.wordDao().getAll()
         assert(allWords.count() == 3)
     }
+
+    @Test
+    fun testMemoryInstances() {
+        assert(GWDatabase.getInstance(getContext()) != GWDatabase.getInMemoryInstance(getContext()))
+        assert(GWDatabase._in_memory_instance != null)
+    }
 }
