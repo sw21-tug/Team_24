@@ -40,6 +40,7 @@ class JoinActivity : AppCompatActivity() {
         WordService(this).getAllWords(object : Callback<List<Word>> {
             override fun whenReady(data: List<Word>?) {
                 if (data != null) {
+                    // TODO: replace name with actual name from multiplayer activity
                     transport = WordTransport(name, data)
                     if (!sentWords && nearConnect.peers.isNotEmpty()) {
                         sendWords(nearConnect.peers)
@@ -82,6 +83,8 @@ class JoinActivity : AppCompatActivity() {
         host.forEach {
                 h -> sendMessage(msg, h)
         }
+        // TODO: write "word pool sent" to screen
+        // TODO: replace *some* useful toasts with status text
     }
 
     private fun sendMessage(msg: String, host: Host) {

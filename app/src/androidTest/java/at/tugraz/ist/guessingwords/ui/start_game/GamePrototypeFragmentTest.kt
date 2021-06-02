@@ -178,6 +178,8 @@ class GamePrototypeFragmentTest {
         onView(ViewMatchers.withId(R.id.btn_nextRound))
             .perform(click())
 
+        // TODO: sleep or wait here for a moment
+
         onView(ViewMatchers.withId(R.id.btn_skipWord)).check(
             ViewAssertions.matches(
                 ViewMatchers.isDisplayed()

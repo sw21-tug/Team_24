@@ -11,7 +11,7 @@ open class WordService(private val context : Context) {
     open fun getAllWords(callback: Callback<List<Word>>) {
         thread {
             var db = GWDatabase.getInstance(context)
-            if(GWDatabase.getInMemoryInstance(context) != null){
+            if (GWDatabase._in_memory_instance != null) {
                 db = GWDatabase.getInMemoryInstance(context)
             }
             val allWords = db.wordDao().getAll()

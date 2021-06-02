@@ -6,6 +6,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
 import at.tugraz.ist.guessingwords.networking.WordTransport
 import com.adroitandroid.near.connect.NearConnect
@@ -35,7 +36,11 @@ class HostActivity : AppCompatActivity() {
         val identifyingFilter = "GW-host.*"
 
         wordService = WordService(this)
-        // TODO: create new multiplayer word pool
+        wordService.createNewMultiplayerWordPool(object : Callback<List<Long>> {
+            override fun whenReady(data: List<Long>?) {
+                // TODO: add own name to list of names
+            }
+        })
 
         nearDiscovery = NearDiscovery.Builder()
                 .setContext(this)
@@ -62,6 +67,11 @@ class HostActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         stopNearServices()
+        // TODO: IMPORTANT!
+        // TODO: add removeMultiplayerWordPool once returning to home screen
+        // TODO: from game prototype AND next round screen AND on back from host
+        // TODO: NOT on ready because we need the word pool in game prototype
+        // wordService.removeMultiplayerWordPool()
     }
 
     private val nearDiscoveryListener: NearDiscovery.Listener
@@ -94,7 +104,11 @@ class HostActivity : AppCompatActivity() {
                 Toast.makeText(this@HostActivity, "Received text: $msg", Toast.LENGTH_LONG).show()
                 Log.d(TAG, msg)
                 val transport: WordTransport = Json.decodeFromString(msg)
-                // TODO: wordServe.merge(...)
+                wordService.mergeIntoDatabase(transport.words, object : Callback<List<Long>> {
+                    override fun whenReady(data: List<Long>?) {
+                        // TODO: add transport.name to list (to see who sent their words)
+                    }
+                })
             }
 
             override fun onSendComplete(jobId: Long) {}
