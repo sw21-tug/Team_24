@@ -24,6 +24,16 @@ class MainActivityTest {
     }
 
     @Test
+    fun multiplayerButton() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(withId(R.id.btn_multiplayer)).check(matches(isClickable()))
+        onView(withId(R.id.btn_multiplayer)).perform(click())
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+        onView(withId(R.id.btn_multiplayer)).check(matches(isClickable()))
+    }
+
+    @Test
     fun customWordsButton() {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
