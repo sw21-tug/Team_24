@@ -52,7 +52,7 @@ class NextRoundActivityTest {
         onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
     }
 
-    @Test(timeout = 3000)
+    @Test
     fun backButtonTakesUsToMainActivity(){
         val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
 
