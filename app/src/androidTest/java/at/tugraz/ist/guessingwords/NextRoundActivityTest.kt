@@ -28,4 +28,11 @@ class NextRoundActivityTest {
         onView(withId(R.id.btn_nextRound)).check(matches(isClickable()))
         onView(withId(R.id.btn_nextRound)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun backButtonNextRoundDisplayed(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    }
 }
