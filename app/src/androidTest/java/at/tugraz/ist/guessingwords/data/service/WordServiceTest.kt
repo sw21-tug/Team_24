@@ -183,7 +183,6 @@ class WordServiceTest {
         service.removeMultiplayerWordPool()
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     @Test(timeout = 3000)
     fun checkForDuplicatesAfterMerge(){
         val word = Word("test1")
@@ -229,10 +228,7 @@ class WordServiceTest {
         service.getAllWords(cbGetAll)
         cbGetAll.finished.block()
         cbGetAll.resWords.forEach { word ->
-            if (cbGetAll.resWords.count{ x -> x.text.lowercase() == word.text.lowercase() } > 1){
-                assert(false)
-            }
+            assert(cbGetAll.resWords.count{ x -> x.text.equals(word.text, ignoreCase = true) } <= 1)
         }
-        assert(true)
     }
 }
