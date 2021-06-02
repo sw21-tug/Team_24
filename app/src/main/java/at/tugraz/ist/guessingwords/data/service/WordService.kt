@@ -10,7 +10,10 @@ open class WordService(private val context : Context) {
 
     open fun getAllWords(callback: Callback<List<Word>>) {
         thread {
-            val db = GWDatabase.getInstance(context)
+            var db = GWDatabase.getInstance(context)
+            if(GWDatabase.getInMemoryInstance(context) != null){
+                db = GWDatabase.getInMemoryInstance(context)
+            }
             val allWords = db.wordDao().getAll()
             callback.whenReady(allWords)
         }
@@ -56,6 +59,7 @@ open class WordService(private val context : Context) {
      */
     open fun createNewMultiplayerWordPool(callback: Callback<List<Long>>) {
         thread {
+            this.removeMultiplayerWordPool()
             val localWords = GWDatabase.getInstance(context).wordDao().getAll()
             val dbTemp = GWDatabase.getInMemoryInstance(context)
 
@@ -70,15 +74,16 @@ open class WordService(private val context : Context) {
      * @param merging
      * @param callback
      */
-    @OptIn(ExperimentalStdlibApi::class)
     open fun mergeIntoDatabase(merging: List<Word>, callback: Callback<List<Long>>) {
         thread {
             val db = GWDatabase.getInMemoryInstance(context)
-            val localWords = GWDatabase.getInstance(context).wordDao().getAll()
+            val localWords = db.wordDao().getAll()
             var mWords = merging.toMutableList();
-            localWords.forEach { lWord ->
-                mWords.remove(mWords.find { mWord -> mWord.text.lowercase() == lWord.text.lowercase() })
-            }
+
+            val localWordTexts = localWords.map { word -> word.text.toLowerCase() }
+            mWords.removeAll { mWord -> localWordTexts.contains(mWord.text.toLowerCase()) }
+
+            mWords.map{ word -> Word(0, word.text)}
             val mergedIds = db.wordDao().mergeWordsIntoDB(mWords)
             callback.whenReady(mergedIds)
         }
