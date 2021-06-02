@@ -45,4 +45,10 @@ class NextRoundActivityTest {
         onView(withId(R.id.btn_startGame)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun smallBackButtonInHeaderIsDisplayed(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    }
 }
