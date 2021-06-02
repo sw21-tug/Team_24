@@ -18,6 +18,12 @@ class NextRoundScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_next_round)
 
+        val btn_Quit = findViewById<Button>(R.id.btn_Quit)
+        btn_Quit.setOnClickListener {
+//            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
