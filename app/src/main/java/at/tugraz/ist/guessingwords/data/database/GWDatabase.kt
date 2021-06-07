@@ -21,23 +21,18 @@ abstract class GWDatabase  : RoomDatabase() {
         var _in_memory_instance: GWDatabase? = null
 
         fun getInstance(context: Context): GWDatabase {
-            if (_in_memory_instance == null){
-                if (_instance == null) {
-                    synchronized(GWDatabase::class) {
-                        _instance = Room.databaseBuilder(
-                            context.applicationContext,
-                            GWDatabase::class.java,
-                            "GWDB"
-                        )
-                            .fallbackToDestructiveMigration()
-                            .build()
-                    }
+            if (_instance == null) {
+                synchronized(GWDatabase::class) {
+                    _instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        GWDatabase::class.java,
+                        "GWDB"
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
-                return _instance!!
             }
-            else {
-                return getInMemoryInstance(context)
-            }
+            return _instance!!
         }
         fun getInMemoryInstance(context: Context): GWDatabase {
             if (_in_memory_instance == null){

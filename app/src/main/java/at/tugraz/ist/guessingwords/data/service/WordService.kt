@@ -10,7 +10,10 @@ open class WordService(private val context : Context) {
 
     open fun getAllWords(callback: Callback<List<Word>>) {
         thread {
-            val db = GWDatabase.getInstance(context)
+            var db = GWDatabase.getInstance(context)
+            if(GWDatabase.getInMemoryInstance(context) != null){
+                db = GWDatabase.getInMemoryInstance(context)
+            }
             val allWords = db.wordDao().getAll()
             callback.whenReady(allWords)
         }
@@ -49,8 +52,14 @@ open class WordService(private val context : Context) {
         }
     }
 
+    /**
+     * Creates an In Memory Instance for merging Word Pools
+     * Populates it with local persistent Words
+     * @param callback
+     */
     open fun createNewMultiplayerWordPool(callback: Callback<List<Long>>) {
         thread {
+            this.removeMultiplayerWordPool()
             val localWords = GWDatabase.getInstance(context).wordDao().getAll()
             val dbTemp = GWDatabase.getInMemoryInstance(context)
 
@@ -59,23 +68,30 @@ open class WordService(private val context : Context) {
         }
     }
 
+    /**
+     * Merges additional Words to the In Memory Instance
+     * Remove the duplicate Words before Merging
+     * @param merging
+     * @param callback
+     */
     open fun mergeIntoDatabase(merging: List<Word>, callback: Callback<List<Long>>) {
         thread {
             val db = GWDatabase.getInMemoryInstance(context)
-            val localWords = GWDatabase.getInstance(context).wordDao().getAll()
-            var sWords = merging.map { x -> x.text }.toMutableList();
-            var sLocalWords = localWords.map { x -> x.text }
-            sWords.forEach { word ->
-                if (sLocalWords.contains(word)){
-                    sWords.removeAt(sWords.indexOf(word))
-                }
-            }
-            val newMerging = sWords.map { x -> Word(x) }
-            val mergedIds = db.wordDao().mergeWordsIntoDB(newMerging)
+            val localWords = db.wordDao().getAll()
+            var mWords = merging.toMutableList();
+
+            val localWordTexts = localWords.map { word -> word.text.toLowerCase() }
+            mWords.removeAll { mWord -> localWordTexts.contains(mWord.text.toLowerCase()) }
+
+            mWords.map{ word -> Word(0, word.text)}
+            val mergedIds = db.wordDao().mergeWordsIntoDB(mWords)
             callback.whenReady(mergedIds)
         }
     }
 
+    /**
+     * Removes the In Memory Instance
+     */
     open fun removeMultiplayerWordPool() {
         GWDatabase._in_memory_instance = null;
     }
