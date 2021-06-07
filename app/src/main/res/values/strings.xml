@@ -34,10 +34,13 @@
     <string name="edittext_multiplayer_value" />
     <string name="host">Host</string>
     <string name="join">Join</string>
-    <string name="ready">Ready</string>
-    <string name="text_join_screen_message">Your Word Pool has been sent to the host</string>
+    <string name="ready">Play</string>
+    <string name="text_join_sent_message">Your Word Pool has been sent to the host</string>
+    <string name="text_join_not_sent_message">Sending Word Pool…</string>
+    <string name="search_host">Searching for host…</string>
     <string name="btn_quit">Quit</string>
     <string name="next_round_screen">Next Round?</string>
+
     <string name="hint_username">Enter your username</string>
 
     <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures

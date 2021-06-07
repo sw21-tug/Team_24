@@ -7,6 +7,8 @@ import androidx.core.view.get
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
+import at.tugraz.ist.guessingwords.data.service.WordService
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -15,9 +17,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var locale: Locale
     private var currentLanguage = "en"
     private var currentLang: String? = null
+
+    lateinit var mainWordService: WordService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mainWordService = WordService(this)
+        mainWordService.removeMultiplayerWordPool()
 
         val btn_startGame = findViewById<Button>(R.id.btn_startGame)
         val btn_multiplayer = findViewById<Button>(R.id.btn_multiplayer)
@@ -44,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+        mainWordService.removeMultiplayerWordPool()
         super.onResume()
 //        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
     }

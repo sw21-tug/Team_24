@@ -29,7 +29,7 @@ class GamePrototypeFragment : Fragment() {
     private lateinit var startGameViewModel: StartGameViewModel
     private lateinit var root: View
 
-    var maxTimeMillis: Long = 90999 // 91 seconds
+    var maxTimeMillis: Long = 5999 // 91 seconds
 
     lateinit var wordService: WordService
 
@@ -59,6 +59,11 @@ class GamePrototypeFragment : Fragment() {
     override fun onDestroyView() {
         timer?.cancel()
         super.onDestroyView()
+    }
+
+    override fun onPause() {
+        timer?.cancel()
+        super.onPause()
     }
 
     override fun onCreateView(

@@ -40,8 +40,11 @@
     <string name="edittext_multiplayer_value" />
     <string name="host">хозяин</string>
     <string name="join">Присоединиться</string>
-    <string name="ready">готовы</string>
-    <string name="text_join_screen_message">Ваш пул слов был отправлен на хост</string>
+    <string name="ready">Играть</string>
+    <string name="text_join_sent_message">Ваш пул слов был отправлен на хост</string>
+    <string name="text_join_not_sent_message">Отправка пула слов…</string>
+    <string name="search_host">Поиск хоста…</string>
+
     <string name="hint_username">Введите имя пользователя</string>
 
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.

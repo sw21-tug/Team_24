@@ -83,8 +83,8 @@ open class WordService(private val context : Context) {
             val localWordTexts = localWords.map { word -> word.text.toLowerCase() }
             mWords.removeAll { mWord -> localWordTexts.contains(mWord.text.toLowerCase()) }
 
-            mWords.map{ word -> Word(0, word.text)}
-            val mergedIds = db.wordDao().mergeWordsIntoDB(mWords)
+            val mergeWords = mWords.map{ word -> Word(word.text)}
+            val mergedIds = db.wordDao().mergeWordsIntoDB(mergeWords)
             callback.whenReady(mergedIds)
         }
     }
