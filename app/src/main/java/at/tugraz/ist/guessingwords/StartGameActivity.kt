@@ -1,5 +1,6 @@
 package at.tugraz.ist.guessingwords
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -21,7 +22,8 @@ class StartGameActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
         return true
