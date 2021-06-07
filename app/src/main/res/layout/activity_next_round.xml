@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/next_round_fragment"
-        android:name="at.tugraz.ist.guessingwords.ui.start_game.NextScreenFragment"
+        android:name="at.tugraz.ist.guessingwords.ui.start_game.NextRoundFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"

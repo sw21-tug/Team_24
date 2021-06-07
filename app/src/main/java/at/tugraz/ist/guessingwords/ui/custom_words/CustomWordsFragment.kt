@@ -18,7 +18,6 @@ import at.tugraz.ist.guessingwords.ui.custom_words.adapters.CustomWordsAdapter
 
 class CustomWordsFragment : Fragment() {
 
-    private lateinit var customWordsViewModel: CustomWordsViewModel
     private lateinit var root: View
 
     lateinit var customWordService: WordService
@@ -29,8 +28,6 @@ class CustomWordsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val customWordsFactory: ViewModelProvider.Factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        customWordsViewModel = ViewModelProvider(this, customWordsFactory).get(CustomWordsViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_custom_words, container, false)
 
         customWordService = WordService(requireActivity())
