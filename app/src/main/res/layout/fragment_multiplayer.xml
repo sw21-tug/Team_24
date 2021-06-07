@@ -11,13 +11,14 @@
         android:layout_width="fill_parent"
         android:hint="@string/hint_username"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="@dimen/marginStart_CW_editText"
+        android:layout_marginLeft="@dimen/marginStart_CW_editText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintBottom_toTopOf="@id/btn_host"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <Button
         android:id="@+id/btn_host"
@@ -27,7 +28,7 @@
         android:text="@string/host"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_multiplayer" />
+        app:layout_constraintTop_toBottomOf="@id/editText_multiplayer" />
 
     <Button
         android:id="@+id/btn_join"
@@ -37,8 +38,7 @@
         android:text="@string/join"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_host"
+        app:layout_constraintTop_toBottomOf="@id/btn_host"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

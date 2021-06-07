@@ -28,10 +28,10 @@ class JoinActivityTest {
     fun joinBackButtontest(){
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
-        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.btn_join)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_join)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withContentDescription(R.string.abc_action_bar_up_description)).perform(ViewActions.click())
+        onView(withId(R.id.btn_multiplayer)).check(matches(isClickable()))
+        onView(withId(R.id.btn_multiplayer)).perform(click())
+        onView(withId(R.id.btn_join)).check(matches(isClickable()))
+        onView(withId(R.id.btn_join)).perform(click())
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
     }
 }

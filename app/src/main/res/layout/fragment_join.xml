@@ -11,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/placeholder"
+        android:textStyle="bold"
+        android:textSize="@dimen/textSize_username_join"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/text_found_peers_join"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,18 +23,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_host"
+        android:textSize="@dimen/textSize_lbl_CW_list"
         app:layout_constraintTop_toBottomOf="@id/text_username_join"
         app:layout_constraintBottom_toTopOf="@id/text_wordsSentMessage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
         android:id="@+id/text_wordsSentMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_join_not_sent_message"
+        android:textSize="@dimen/textSize_lbl_CW_list"
         app:layout_constraintTop_toBottomOf="@id/text_found_peers_join"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,6 +67,12 @@ Egirin Gega</string>
     <string name="actionBar_customize_words">Customize Words</string>
     <string name="addWordErrorMessage">"Please enter a word you would like to save!"</string>
 
+    <string name="lbl_connected_user"><u>Connected User:</u></string>
+
+    <string name="host_title">Host Game</string>
+    <string name="join_title">Join Game</string>
+    <string name="multiplayer_title">Multiplayer Game</string>
+
     <!-- doesn't need to be translated (dev purposes) -->
     <string name="placeholder_word" translatable="false">Word</string>
     <string name="placeholder_timer" translatable="false">Timer</string>

@@ -25,7 +25,6 @@ import kotlinx.serialization.encodeToString
 
 class JoinFragment : Fragment() {
 
-    private lateinit var joinViewModel: JoinViewModel
     private lateinit var root: View
 
     private lateinit var nearDiscovery: NearDiscovery
@@ -45,8 +44,6 @@ class JoinFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val joinFactory: ViewModelProvider.Factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        joinViewModel = ViewModelProvider(this, joinFactory).get(JoinViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_join, container, false)
 
         joinWordService = WordService(requireActivity())
@@ -61,11 +58,10 @@ class JoinFragment : Fragment() {
         val name = "GW-join"+(1..5000).random()
         val searchingFilter = "GW-host.*"
         val identifyingFilter = "GW-join.*"
-//
+
         joinWordService.getAllWords(object : Callback<List<Word>> {
             override fun whenReady(data: List<Word>?) {
                 if (data != null) {
-                    // TODO: replace name with actual name from multiplayer activity - DONE------------------------------
                     transport = WordTransport(userNameJoin, data)
                     if (!sentWords && nearConnect.peers.isNotEmpty()) {
                         sendWords(nearConnect.peers)
@@ -91,7 +87,6 @@ class JoinFragment : Fragment() {
 
 
         Log.d(TAG, "Starting discovery... as $name")
-//        Toast.makeText(requireActivity(), "Starting discovery... as $name", Toast.LENGTH_LONG).show()
         nearDiscovery.makeDiscoverable(name, identifyingFilter)
         nearDiscovery.startDiscovery()
 
@@ -110,8 +105,6 @@ class JoinFragment : Fragment() {
         host.forEach {
                 h -> sendMessage(msg, h)
         }
-        // TODO: write "word pool sent" to screen - done -------------------------------------------
-        // TODO: replace *some* useful toasts with status text --------------- get rid of unnecessary toast messages
         root.findViewById<TextView>(R.id.text_wordsSentMessage).setText(R.string.text_join_sent_message)
     }
 
@@ -125,7 +118,6 @@ class JoinFragment : Fragment() {
         get() = object : NearDiscovery.Listener {
             override fun onPeersUpdate(host: Set<Host>) {
                 Log.d(TAG, "Peer Update. Found ${host.size} hosts")
-//                Toast.makeText(requireActivity(), "Peer Update. Found ${host.size} hosts", Toast.LENGTH_LONG).show()
                 val foundPeersMsg = "Found " + host.size + " hosts"
                 root.findViewById<TextView>(R.id.text_found_peers_join).text = foundPeersMsg
                 if (!sentWords && transport != null && host.isNotEmpty()) {

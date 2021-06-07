@@ -6,15 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".HostActivity">
 
-    <Button
-        android:id="@+id/btn_ready"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/lbl_username"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ready"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lst_joined_user"/>
+        android:text="@string/lbl_connected_user"
+        android:layout_marginLeft="@dimen/marginStart_lbl_CW_list"
+        android:layout_marginRight="@dimen/marginStart_lbl_CW_list"
+        android:textSize="@dimen/textSize_lbl_CW_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lst_joined_user"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
     <ListView
         android:id="@+id/lst_joined_user"
@@ -25,8 +29,20 @@
         app:layout_constraintBottom_toTopOf="@id/btn_ready"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lbl_username"
         android:visibility="visible"
         />
+
+    <Button
+        android:id="@+id/btn_ready"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ready"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lst_joined_user"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

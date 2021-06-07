@@ -16,7 +16,6 @@ import at.tugraz.ist.guessingwords.data.service.WordService
 
 class MultiplayerFragment : Fragment() {
 
-    private lateinit var multiplayerViewModel: MultiplayerViewModel
     private lateinit var root: View
     private lateinit var user_name: TextView
 
@@ -27,8 +26,6 @@ class MultiplayerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val multiplayerFactory: ViewModelProvider.Factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        multiplayerViewModel = ViewModelProvider(this, multiplayerFactory).get(MultiplayerViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_multiplayer, container, false)
 
         mpWordService = WordService(requireContext())

@@ -26,7 +26,6 @@ import kotlinx.serialization.json.Json
 
 class HostFragment : Fragment() {
 
-    private lateinit var hostViewModel: HostViewModel
     private lateinit var root: View
 
     private lateinit var nearDiscovery: NearDiscovery
@@ -40,13 +39,14 @@ class HostFragment : Fragment() {
         const val TAG = "HostActivity"
     }
 
+    //TODO - pls check which Toast-Messages are still useful
+    // Also in JoinFragment
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val hostFactory: ViewModelProvider.Factory = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        hostViewModel = ViewModelProvider(this, hostFactory).get(HostViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_host, container, false)
 
         var userNameHost = requireActivity().intent.getStringExtra("UserNameHost")
@@ -62,7 +62,6 @@ class HostFragment : Fragment() {
         hostWordService = WordService(requireActivity())
         hostWordService.createNewMultiplayerWordPool(object : Callback<List<Long>> {
             override fun whenReady(data: List<Long>?) {
-                // TODO: add own name to list of names ------------------------ prob done
                 lstJoinedUser.add(userNameHost)
                 updateView(lstJoinedUser)
             }
@@ -103,11 +102,6 @@ class HostFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         stopNearServices()
-        // TODO: IMPORTANT!
-        // TODO: add removeMultiplayerWordPool once returning to home screen
-        // TODO: from game prototype AND next round screen AND on back from host
-        // TODO: NOT on ready because we need the word pool in game prototype
-        // wordService.removeMultiplayerWordPool()
     }
 
     private val nearDiscoveryListener: NearDiscovery.Listener
@@ -142,7 +136,6 @@ class HostFragment : Fragment() {
                 val transport: WordTransport = Json.decodeFromString(msg)
                 hostWordService.mergeIntoDatabase(transport.words, object : Callback<List<Long>> {
                     override fun whenReady(data: List<Long>?) {
-                        // TODO: add transport.name to list (to see who sent their words) - done -----------------------------------------------
                         lstJoinedUser.add(transport.name)
                         updateView(lstJoinedUser)
                     }

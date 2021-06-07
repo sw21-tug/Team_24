@@ -72,4 +72,10 @@ Egirin Gega</string>
     <string name="actionBar_customize_words">Настроить слова</string>
     <string name="addWordErrorMessage">"Пожалуйста, введите слово, которое вы хотите сохранить!"</string>
 
+    <string name="lbl_connected_user">Подключенный пользователь:</string>
+
+    <string name="host_title">Хост-игра</string>
+    <string name="join_title">Присоединиться к игре</string>
+    <string name="multiplayer_title">Многопользовательская игра</string>
+
 </resources>
