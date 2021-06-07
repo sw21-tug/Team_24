@@ -28,4 +28,35 @@ class NextRoundActivityTest {
         onView(withId(R.id.btn_nextRound)).check(matches(isClickable()))
         onView(withId(R.id.btn_nextRound)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun quitButtonNextRoundDisplayed(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+
+        onView(withId(R.id.btn_Quit)).check(matches(isClickable()))
+        onView(withId(R.id.btn_Quit)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun quitButtonTakesToMainPage(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+        
+        onView(withId(R.id.btn_Quit)).perform(click())
+        onView(withId(R.id.btn_startGame)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun smallBackButtonInHeaderIsDisplayed(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    }
+
+    @Test
+    fun backButtonTakesUsToMainActivity(){
+        val activityScenario = ActivityScenario.launch(NextRoundScreenActivity::class.java)
+
+        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+        onView(withId(R.id.btn_startGame)).check(matches(isDisplayed()))
+    }
 }

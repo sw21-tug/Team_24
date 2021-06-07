@@ -28,7 +28,9 @@
     <string name="russian">Русский</string>
     <string name="btn_change_lang">Изменить</string>
     <string name="gameplay">Геймплей</string>
+    <string name="btn_quit">Покидать</string>
     <string name="words_counter_list">" Слова"</string>
+    <string name="next_round_screen">Cледующий Pаунд?</string>
 
     <string name="correct_guesses">%1$d Правильные предположения</string>
     <string name="skipped_words">%1$d Пропущенные слова</string>
