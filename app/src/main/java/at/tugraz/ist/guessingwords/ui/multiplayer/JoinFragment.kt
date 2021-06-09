@@ -46,7 +46,7 @@ class JoinFragment : Fragment() {
         joinWordService = WordService(requireActivity())
 
         var userNameJoin = requireActivity().intent.getStringExtra("UserNameJoin")
-        if (userNameJoin!!.isBlank()){
+        if (userNameJoin == null || userNameJoin.isBlank()) {
             userNameJoin = "UserJoin"+(1..5000).random()
         }
         root.findViewById<TextView>(R.id.text_username_join).text = userNameJoin.trim()
