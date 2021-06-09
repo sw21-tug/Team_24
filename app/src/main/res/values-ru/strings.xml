@@ -40,8 +40,11 @@
     <string name="edittext_multiplayer_value" />
     <string name="host">хозяин</string>
     <string name="join">Присоединиться</string>
-    <string name="ready">готовы</string>
-    <string name="text_join_screen_message">Ваш пул слов был отправлен на хост</string>
+    <string name="ready">Играть</string>
+    <string name="text_join_sent_message">Ваш пул слов был отправлен на хост</string>
+    <string name="text_join_not_sent_message">Отправка пула слов…</string>
+    <string name="search_host">Поиск хоста…</string>
+
     <string name="hint_username">Введите имя пользователя</string>
 
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
@@ -68,5 +71,11 @@ Egirin Gega</string>
 
     <string name="actionBar_customize_words">Настроить слова</string>
     <string name="addWordErrorMessage">"Пожалуйста, введите слово, которое вы хотите сохранить!"</string>
+
+    <string name="lbl_connected_user">Подключенный пользователь:</string>
+
+    <string name="host_title">Хост-игра</string>
+    <string name="join_title">Присоединиться к игре</string>
+    <string name="multiplayer_title">Многопользовательская игра</string>
 
 </resources>

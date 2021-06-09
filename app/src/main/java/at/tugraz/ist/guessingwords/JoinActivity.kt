@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
 class JoinActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
@@ -12,7 +13,7 @@ class JoinActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = getString(R.string.gameplay)
+        supportActionBar?.title = getString(R.string.join_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
