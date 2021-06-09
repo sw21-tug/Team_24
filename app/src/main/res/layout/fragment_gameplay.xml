@@ -14,10 +14,11 @@
         android:text="@string/placeholder_timer"
         android:textSize="@dimen/textSize_timer"
         android:paddingBottom="@dimen/paddingTopBottom_towardsWord"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/txt_fieldWordCounter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        />
 
     <TextView
         android:id="@+id/txt_fieldWord"
@@ -25,10 +26,10 @@
         android:layout_height="wrap_content"
         android:text="@string/placeholder_word"
         android:textSize="@dimen/textSize_word"
+        app:layout_constraintTop_toBottomOf="@id/txt_fieldTimer"
         app:layout_constraintBottom_toTopOf="@id/txt_fieldWordCounter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_fieldTimer"
         />
 
     <TextView
@@ -38,10 +39,10 @@
         android:text="@string/placeholder_word_counter"
         android:textSize="@dimen/textSize_word_Counter"
         android:paddingTop="@dimen/paddingTopBottom_towardsWord"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6"/>
 
     <Button
@@ -51,10 +52,10 @@
         android:text="@string/btn_skip_word"
         android:layout_marginRight="@dimen/marginRight_SkipButton"
         android:layout_marginEnd="@dimen/marginRight_SkipButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_correctWord"
         app:layout_constraintTop_toBottomOf="@id/txt_fieldWordCounter"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_correctWord"
         app:layout_constraintVertical_bias="0.85"/>
 
     <Button

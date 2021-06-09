@@ -22,31 +22,30 @@
         android:layout_width="@dimen/_170sdp"
         android:layout_height="wrap_content"
         android:text="@string/btn_start_game"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/btn_customWords"
         android:layout_width="@dimen/_170sdp"
         android:layout_height="wrap_content"
         android:text="@string/btn_custom_words"
+        app:layout_constraintTop_toBottomOf="@id/btn_multiplayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_multiplayer" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/btn_multiplayer"
         android:layout_width="@dimen/_170sdp"
         android:layout_height="wrap_content"
         android:text="@string/btn_multiplayer"
+        app:layout_constraintTop_toBottomOf="@id/btn_startGame"
         app:layout_constraintBottom_toTopOf="@+id/btn_customWords"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_startGame" />
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

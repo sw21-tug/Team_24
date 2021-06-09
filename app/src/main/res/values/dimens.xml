@@ -13,6 +13,11 @@
     <dimen name="marginEnd_btn_delete_li">10dp</dimen>
     <dimen name="marginRight_SkipButton">30dp</dimen>
 
+    <dimen name="marginBottom_Loading_screen">20dp</dimen>
+
+    <dimen name="marginRightLeft_radio_btn">20dp</dimen>
+
+
 <!--    Paddings:-->
     <dimen name="paddingTop_CW_editText">20dp</dimen>
     <dimen name="paddingBottom_lbl_CW_list">5dp</dimen>
@@ -26,9 +31,11 @@
     <dimen name="fixedHeight_SkipCorrectButton">125dp</dimen>
 
 
-<!--    Fixed Widths:-->
+
+    <!--    Fixed Widths:-->
     <dimen name="fixedWidth_SkipCorrectButton">144dp</dimen>
 
+    <dimen name="fixedWidth_nextRound_quitButton">170dp</dimen>
 
 <!--    Text Size:    -->
     <dimen name="textSize_lbl_CW_list">18sp</dimen>
@@ -37,4 +44,6 @@
     <dimen name="textSize_word_Counter">18sp</dimen>
     <dimen name="textSize_word">40sp</dimen>
     <dimen name="textSize_timer">20sp</dimen>
+
+    <dimen name="textSize_Loading_msg">20sp</dimen>
 </resources>
