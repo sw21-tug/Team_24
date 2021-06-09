@@ -50,23 +50,11 @@ class JoinFragment : Fragment() {
             userNameJoin = "UserJoin"+(1..5000).random()
         }
         root.findViewById<TextView>(R.id.text_username_join).text = userNameJoin.trim()
-        Toast.makeText(activity, userNameJoin, Toast.LENGTH_LONG).show()
 
         val name = "GW-join"+(1..5000).random()
         val searchingFilter = "GW-host.*"
         val identifyingFilter = "GW-join.*"
 
-        joinWordService.getAllWords(object : Callback<List<Word>> {
-            override fun whenReady(data: List<Word>?) {
-                if (data != null) {
-                    transport = WordTransport(userNameJoin, data)
-                    if (!sentWords && nearConnect.peers.isNotEmpty()) {
-                        sendWords(nearConnect.peers)
-                    }
-                }
-            }
-        })
-//
         nearDiscovery = NearDiscovery.Builder()
                 .setContext(requireActivity())
                 .setDiscoverableTimeoutMillis(60_000)
@@ -81,6 +69,17 @@ class JoinFragment : Fragment() {
                 .setContext(requireActivity())
                 .setListener(nearConnectListener, Looper.getMainLooper())
                 .build()
+
+        joinWordService.getAllWords(object : Callback<List<Word>> {
+            override fun whenReady(data: List<Word>?) {
+                if (data != null) {
+                    transport = WordTransport(userNameJoin, data)
+                    if (!sentWords && nearConnect.peers.isNotEmpty()) {
+                        sendWords(nearConnect.peers)
+                    }
+                }
+            }
+        })
 
 
         Log.d(TAG, "Starting discovery... as $name")
@@ -107,7 +106,6 @@ class JoinFragment : Fragment() {
 
     private fun sendMessage(msg: String, host: Host) {
         Log.d(TAG, "Sending message: ${msg}")
-//        Toast.makeText(requireActivity(), "Sending message: ${msg}", Toast.LENGTH_LONG).show()
         nearConnect.send(msg.toByteArray(), host)
     }
 
@@ -124,7 +122,7 @@ class JoinFragment : Fragment() {
 
             override fun onDiscoveryTimeout() {
                 Log.d(TAG, "No other participants found")
-//                Toast.makeText(requireActivity(), "No other participants found", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(), "No other participants found", Toast.LENGTH_LONG).show()
             }
 
             override fun onDiscoveryFailure(e: Throwable) {
@@ -141,7 +139,6 @@ class JoinFragment : Fragment() {
     private val nearConnectListener: NearConnect.Listener
         get() = object : NearConnect.Listener {
             override fun onReceive(bytes: ByteArray, sender: Host) {
-//                Toast.makeText(requireActivity(), "Received text: ${String(bytes)}", Toast.LENGTH_LONG).show()
                 Log.d(TAG, String(bytes))
             }
 

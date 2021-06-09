@@ -29,19 +29,16 @@ class MainActivity : AppCompatActivity() {
         val btn_customWords = findViewById<Button>(R.id.btn_customWords)
 
         btn_startGame.setOnClickListener {
-//            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, GamePlayActivity::class.java)
             startActivity(intent)
         }
 
         btn_multiplayer.setOnClickListener {
-            Toast.makeText(this@MainActivity, "You Clicked: Multiplayer!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MultiplayerActivity::class.java)
             startActivity(intent)
         }
 
         btn_customWords.setOnClickListener {
-//            Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, CustomWordsActivity::class.java)
             startActivity(intent)
         }
@@ -51,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         mainWordService.removeMultiplayerWordPool()
         super.onResume()
-//        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
     }
 
     private fun setLocale(localeName: String) {
