@@ -56,3 +56,19 @@ The App stores the custom words and handles the game logic.
 - GW-012: Smooth UI transitions that clearly indicate the application state.
 - GW-018: Play a sound and buzz the phone when a turn ends.
 - GW-021: Add back buttons wherever going back does not work with the Android back button.
+
+----
+
+## Pairing matrix
+
+| Pair                  | Hosam Badr   	     | Egirin Gega     | Adnan Karamehic      | Khalid Nasralla       | Amil Salihi           | Katharina Steinacher | Alexandra Taupe | David Trisic | Felix Wallner |
+| :---                  |    :----:            |    :----:       |    :----:            |    :----:             |    :----:             |    :----:            | :----:          | :----:       | :----:        |
+| Hosam Badr            | X                    | 12:00           | 04:00                | 08:00                 | 04:00                 | 00:00                | 00:00           | 04:00        | 05:00         |
+| Egirin Gega           | 12:00                | X               | 07:00                | 00:00                 | 08:00                 | 06:00                | 04:00           | 04:00        | 01:00         |
+| Adnan Karamehic       | 04:00                | 07:00           | X                    | 09:45                 | 05:00                 | 03:00                | 08:00           | 00:00        | 00:00         |
+| Khalid Nasralla       | 08:00                | 00:00           | 09:45                | X                     | 03:30                 | 00:00                | 06:20           | 04:00        | 01:00         |
+| Amil Salihi           | 04:00                | 08:00           | 05:00                | 03:30                 | X                     | 07:30                | 04:00           | 07:00        | 07:00         |
+| Katharina Steinacher  | 00:00                | 06:00           | 03:00                | 00:00                 | 07:00                 | X                    | 07:00           | 11:00        | 01:00         |
+| Alexandra Taupe       | 00:00                | 04:00           | 08:00                | 06:20                 | 04:00                 | 17:00                | X               | 04:00        | 42:25         |
+| David Trisic          | 14:00                | 04:00           | 00:00                | 04:00                 | 07:00                 | 11:00                | 00:00           | X            | 03:00         |
+| Felix Wallner         | 05:00                | 01:00           | 00:00                | 01:00                 | 07:00                 | 01:00                | 43:25           | 03:00        | X             |
