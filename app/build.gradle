@@ -17,6 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -53,7 +54,9 @@ dependencies {
 
     // Near Library for P2P discovery
     implementation 'com.github.adroitandroid:Near:v2.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     // Kotlin object serialization
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1'
 
