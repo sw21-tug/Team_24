@@ -1,5 +1,8 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
+import android.media.MediaPlayer
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -29,6 +32,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Captor
 import org.mockito.kotlin.*
+import java.lang.Thread.sleep
 
 @RunWith(AndroidJUnit4::class)
 class GamePrototypeFragmentTest {
@@ -331,5 +335,23 @@ class GamePrototypeFragmentTest {
         assert(word1 != word2)
         assert(word1 != word3)
         assert(word2 != word3)
+    }
+
+    @Test
+    fun checkTickingSound() {
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        var text = ""
+        val time: Long = 8000
+        val mediaPlayerMock = mock<MediaPlayer>()
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_display, time / 1000)
+            fragment.maxTimeMillis = time
+            fragment.tenSecondBeep = mediaPlayerMock
+            fragment.initGame()
+        }
+        sleep(1000)
+        verify(mediaPlayerMock, times(1)).start()
+
     }
 }
