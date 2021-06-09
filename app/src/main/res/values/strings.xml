@@ -2,9 +2,12 @@
 
 <!--    Activity Titles:-->
     <string name="actionBar_customize_words">Customize Words</string>
-    <string name="actionBar_app_name">Guessing Words</string>
+    <string name="app_name">Guessing Words</string>
     <string name="actionBar_gameplay">Gameplay</string>
     <string name="actionBar_next_round">Next Round?</string>
+    <string name="actionBar_host">Host Game</string>
+    <string name="actionBar_join">Join Game</string>
+    <string name="actionBar_multiplayer">Multiplayer Game</string>
 
 
 <!--    Custom Words:-->
@@ -42,9 +45,12 @@
 <!--    Multiplayer:-->
     <string name="btn_host">Host</string>
     <string name="btn_join">Join</string>
-    <string name="btn_play">Ready</string>
-    <string name="text_join_screen_message">Your Word Pool has been sent to the host</string>
+    <string name="btn_play">Play</string>
+    <string name="text_join_sent_message">Your Word Pool has been sent to the host</string>
+    <string name="text_join_not_sent_message">Sending Word Pool…</string>
     <string name="hint_username">Enter your username</string>
+    <string name="search_host">Searching for host…</string>
+    <string name="lbl_connected_user"><u>Connected User:</u></string>
 
 
 <!--    Loading Screen:-->
@@ -90,6 +96,7 @@
 
 <!--    General:-->
     <string name="placeholder">…</string>
+    <string name="nav_up">Navigate up</string>
 
 
 <!--     doesn't need to be translated (dev purposes) -->

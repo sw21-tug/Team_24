@@ -2,9 +2,12 @@
 <resources>
     <!--    Activity Titles:-->
     <string name="actionBar_customize_words">Настроить слова</string>
-    <string name="actionBar_app_name">Отгадывание слов</string>
+    <string name="app_name">Отгадывание слов</string>
     <string name="actionBar_gameplay">Геймплей</string>
     <string name="actionBar_next_round">Cледующий Pаунд?</string>
+    <string name="actionBar_host">Хост-игра</string>
+    <string name="actionBar_join">Присоединиться к игре</string>
+    <string name="actionBar_multiplayer">Многопользовательская игра</string>
 
 
     <!--    Custom Words:-->
@@ -44,8 +47,11 @@
     <string name="btn_host">хозяин</string>
     <string name="btn_join">Присоединиться</string>
     <string name="btn_play">готовы</string>
-    <string name="text_join_screen_message">Ваш пул слов был отправлен на хост</string>
+    <string name="text_join_sent_message">Ваш пул слов был отправлен на хост</string>
+    <string name="text_join_not_sent_message">Отправка пула слов…</string>
     <string name="hint_username">Введите имя пользователя</string>
+    <string name="search_host">Поиск хоста…</string>
+    <string name="lbl_connected_user"><u>Подключенный пользователь:</u></string>
 
 
     <!--    Loading Screen:-->
@@ -91,5 +97,7 @@
 
     <!--    General:-->
     <string name="placeholder">…</string>
+    <string name="nav_up">Перейти вверх</string>
+
 
 </resources>

@@ -1,6 +1,9 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
+import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.os.*
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -28,12 +31,16 @@ class GamePlayFragment : Fragment() {
     var timer: CountDownTimer? = null
     var score: Int = 0
     var skipped: Int = 0
+    var beep_flag: Boolean = false
 
     private lateinit var fieldTimer: TextView
     private lateinit var fieldWord: TextView
     private lateinit var fieldWordCounter: TextView
     private lateinit var btn_skip: Button
     private lateinit var btn_correct: Button
+    lateinit var timeIsUpSound: MediaPlayer
+    lateinit var tenSecondBeep: MediaPlayer
+    lateinit var vibrator: Vibrator
 
     private val staticWordList = listOf(
         Word("mobile phone"),
@@ -48,8 +55,15 @@ class GamePlayFragment : Fragment() {
     )
 
     override fun onDestroyView() {
+        timeIsUpSound.stop()
+        tenSecondBeep.stop()
         timer?.cancel()
         super.onDestroyView()
+    }
+
+    override fun onPause() {
+        timer?.cancel()
+        super.onPause()
     }
 
     override fun onCreateView(
@@ -60,6 +74,10 @@ class GamePlayFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_gameplay, container, false)
 
         wordService = WordService(requireContext())
+
+        timeIsUpSound = MediaPlayer.create(context, R.raw.time_up)
+
+        tenSecondBeep = MediaPlayer.create(context, R.raw.beep)
 
         initFields()
         initGame()
@@ -94,10 +112,14 @@ class GamePlayFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {
                 val seconds: Long = millisUntilFinished / 1000
                 displayTimer(seconds)
+                timerSound(seconds)
+                timeUpSound(seconds)
             }
 
             override fun onFinish() {
                 displayTimer(0)
+                beep_flag = false
+                tenSecondBeep.stop()
             }
         }
         wordService.getAllWords(object : Callback<List<Word>> {
@@ -149,5 +171,33 @@ class GamePlayFragment : Fragment() {
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
 
+    }
+
+    fun timeUpSound(seconds: Long) {
+        if (seconds <= 0.2) {
+            timeIsUpSound.start()
+            vibratePhone()
+        }
+    }
+
+
+    fun timerSound(seconds: Long) {
+        if (seconds <= 10 && !beep_flag) {
+            tenSecondBeep.start()
+            beep_flag = true
+        }
+    }
+
+
+    fun Fragment.vibratePhone() {
+        if (context == null) {
+            return
+        }
+        vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(1200, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            vibrator.vibrate(1200)
+        }
     }
 }

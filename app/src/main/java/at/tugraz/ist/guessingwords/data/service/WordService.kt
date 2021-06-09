@@ -10,7 +10,7 @@ open class WordService(private val context : Context) {
     open fun getAllWords(callback: Callback<List<Word>>) {
         thread {
             var db = GWDatabase.getInstance(context)
-            if(GWDatabase._in_memory_instance != null){
+            if (GWDatabase._in_memory_instance != null) {
                 db = GWDatabase.getInMemoryInstance(context)
             }
             val allWords = db.wordDao().getAll()
@@ -82,8 +82,8 @@ open class WordService(private val context : Context) {
             val localWordTexts = localWords.map { word -> word.text.toLowerCase() }
             mWords.removeAll { mWord -> localWordTexts.contains(mWord.text.toLowerCase()) }
 
-            mWords.map{ word -> Word(0, word.text)}
-            val mergedIds = db.wordDao().mergeWordsIntoDB(mWords)
+            val mergeWords = mWords.map{ word -> Word(word.text)}
+            val mergedIds = db.wordDao().mergeWordsIntoDB(mergeWords)
             callback.whenReady(mergedIds)
         }
     }

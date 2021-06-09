@@ -46,4 +46,5 @@
     <dimen name="textSize_timer">20sp</dimen>
 
     <dimen name="textSize_Loading_msg">20sp</dimen>
+    <dimen name="textSize_username_join">28sp</dimen>
 </resources>
