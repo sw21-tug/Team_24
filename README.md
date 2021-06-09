@@ -51,3 +51,8 @@ The App stores the custom words and handles the game logic.
 - GW-015 Fill "About" Activity with appropriate text
 - GW-016 Next Round Screen
 - GW-017 The Multiplayer Userinterface
+- GW-007 Establish a working Peer-to-Peer connection in order to exchange word pools.
+- GW-008: Collect the word pool from all connected devices.
+- GW-012: Smooth UI transitions that clearly indicate the application state.
+- GW-018: Play a sound and buzz the phone when a turn ends.
+- GW-021: Add back buttons wherever going back does not work with the Android back button.
