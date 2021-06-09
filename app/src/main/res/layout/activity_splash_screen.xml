@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/splash_screen"
-        android:contentDescription="@string/splash_screen" />
+        android:contentDescription="@string/contentDescr_splash_screen" />
 
     <TextView
         android:id="@+id/text_loading"

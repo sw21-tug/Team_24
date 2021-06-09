@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    Activity Titles:-->
+    <string name="actionBar_customize_words">Настроить слова</string>
+    <string name="actionBar_app_name">Отгадывание слов</string>
+    <string name="actionBar_gameplay">Геймплей</string>
+    <string name="actionBar_next_round">Cледующий Pаунд?</string>
 
-    <string name="app_name">Отгадывание слов</string>
-    <string name="splash_screen">Брызгозащитный экран</string>
-    <string name="loading">Загрузка ...</string>
+
+    <!--    Custom Words:-->
     <string name="edit_word">Введите слово</string>
     <string name="btn_save">Сохранить</string>
     <string name="btn_cancel">Отмена</string>
     <string name="btn_edit_li">Изменить</string>
     <string name="btn_delete_li">Удалить</string>
     <string name="customWordsTitle"><u>Мои пользовательские слова:</u></string>
-    <string name="placeholder">...</string>
+    <string name="words_counter_list">" Слова"</string>
+    <string name="addWordErrorMessage">"Пожалуйста, введите слово, которое вы хотите сохранить!"</string>
+
+
+    <!--    Main Activity:-->
+    <string name="btn_start_game">Начать игру</string>
+    <string name="btn_custom_words">Нестандартные слова</string>
+    <string name="btn_multiplayer">мультиплеер</string>
+
+
+    <!--    Gameplay:-->
     <string name="time_display">Осталось %1$d секунд</string>
     <string name="time_finish">Готово!</string>
     <string name="correct_words">%1$d правильно</string>
-    <string name="start_game">Начать игру</string>
-    <string name="custom_words">Нестандартные слова</string>
-    <string name="back_AP">Назад</string>
-    <string name="back_CW">Назад</string>
+
     <string name="btn_skip_word">Скип</string>
     <string name="btn_correct">Правильно</string>
-    <string name="back_SG">Назад</string>
-    <string name="lang_dialog_title">Изменить язык</string>
-    <string name="about_link">О сайте</string>
-    <string name="language_link">Язык</string>
-    <string name="english">English</string>
-    <string name="russian">Русский</string>
-    <string name="btn_change_lang">Изменить</string>
-    <string name="gameplay">Геймплей</string>
-    <string name="btn_quit">Покидать</string>
-    <string name="words_counter_list">" Слова"</string>
-    <string name="next_round_screen">Cледующий Pаунд?</string>
 
+    <!--    Next Round:-->
     <string name="correct_guesses">%1$d Правильные предположения</string>
     <string name="skipped_words">%1$d Пропущенные слова</string>
     <string name="next_round">Следующий раунд</string>
+    <string name="btn_quit">Покидать</string>
 
-    <string name="Multiplayer">мультиплеер</string>
-    <string name="edittext_multiplayer_value" />
-    <string name="host">хозяин</string>
-    <string name="join">Присоединиться</string>
-    <string name="ready">готовы</string>
+
+    <!--    Multiplayer:-->
+    <!--    <string name="edittext_multiplayer_value" />-->
+    <string name="btn_host">хозяин</string>
+    <string name="btn_join">Присоединиться</string>
+    <string name="btn_play">готовы</string>
     <string name="text_join_screen_message">Ваш пул слов был отправлен на хост</string>
     <string name="hint_username">Введите имя пользователя</string>
 
+
+    <!--    Loading Screen:-->
+    <string name="loading">Загрузка …</string>
+    <string name="contentDescr_splash_screen">Брызгозащитный экран</string>
+
+
+    <!--    About Page:-->
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
 
 
@@ -66,7 +76,19 @@ David Trišić\n<br />
 Felix Wallner\n<br />
 Egirin Gega</string>
 
-    <string name="actionBar_customize_words">Настроить слова</string>
-    <string name="addWordErrorMessage">"Пожалуйста, введите слово, которое вы хотите сохранить!"</string>
+
+    <!--    HamburgerMenuPage:-->
+    <string name="about_link">О сайте</string>
+    <string name="language_link">Язык</string>
+
+
+    <!--    Change Language-->
+    <string name="lang_dialog_title">Изменить язык</string>
+    <string name="english">English</string>
+    <string name="russian">Русский</string>
+    <string name="btn_change_lang">Изменить</string>
+
+    <!--    General:-->
+    <string name="placeholder">…</string>
 
 </resources>

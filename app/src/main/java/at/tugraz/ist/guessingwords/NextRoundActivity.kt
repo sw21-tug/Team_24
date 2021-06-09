@@ -21,7 +21,7 @@ class NextRoundActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = getString(R.string.next_round_screen)
+        supportActionBar?.title = getString(R.string.actionBar_next_round)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
