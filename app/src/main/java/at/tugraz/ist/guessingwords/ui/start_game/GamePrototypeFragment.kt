@@ -193,12 +193,6 @@ class GamePrototypeFragment : Fragment() {
         }
     }
 
-    fun timeUpSound(seconds: Long) {
-        if (seconds <= 0.2) {
-            timeIsUpSound.start()
-            vibratePhone()
-        }
-    }
 
     fun Fragment.vibratePhone() {
         vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
