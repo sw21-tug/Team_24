@@ -43,4 +43,14 @@ class UserInterfaceActivityTest {
         onView(withContentDescription("Navigate up")).perform(click())
         onView(ViewMatchers.withId(R.id.btn_startGame)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
+
+    @Test
+    fun fromMainActivityToMultiplayerActivityAndBack(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+
+        onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(click())
+        onView(withContentDescription("Navigate up")).perform(click())
+        onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
 }
