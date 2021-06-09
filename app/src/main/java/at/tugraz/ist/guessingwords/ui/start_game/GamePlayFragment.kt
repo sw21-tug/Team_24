@@ -23,7 +23,7 @@ class GamePlayFragment : Fragment() {
 
     private lateinit var root: View
 
-    var maxTimeMillis: Long = 5999 // 91 seconds
+    var maxTimeMillis: Long = 90999 // 91 seconds
 
     lateinit var wordService: WordService
 
@@ -190,6 +190,9 @@ class GamePlayFragment : Fragment() {
 
 
     fun Fragment.vibratePhone() {
+        if (context == null) {
+            return
+        }
         vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {
             vibrator.vibrate(VibrationEffect.createOneShot(1200, VibrationEffect.DEFAULT_AMPLITUDE))
