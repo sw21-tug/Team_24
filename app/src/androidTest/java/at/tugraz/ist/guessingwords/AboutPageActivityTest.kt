@@ -28,6 +28,11 @@ class AboutPageActivityTest {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         Espresso.openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext())
         onView(withText(R.string.about_link)).perform(click())
-        onView(withId(R.id.text_aboutPage)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_aboutPage_general)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_aboutPage_team)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_aboutPage_prod_owner)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_aboutPage_scrum_master)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_aboutPage_devs)).check(matches(isDisplayed()))
+
     }
 }

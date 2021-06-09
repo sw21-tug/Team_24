@@ -6,6 +6,7 @@
     <string name="actionBar_gameplay">Gameplay</string>
     <string name="actionBar_next_round">Next Round?</string>
 
+
 <!--    Custom Words:-->
     <string name="edit_word">Enter a word</string>
     <string name="btn_save">Save</string>
@@ -16,18 +17,20 @@
     <string name="words_counter_list">" Words"</string>
     <string name="addWordErrorMessage">"Please enter a word you would like to save!"</string>
 
+
 <!--    Main Activity:-->
     <string name="btn_start_game">Start Game</string>
     <string name="btn_custom_words">Custom Words</string>
     <string name="btn_multiplayer">Multiplayer</string>
 
+
 <!--    Gameplay:-->
     <string name="time_display">%1$d seconds left</string>
     <string name="time_finish">Finished!</string>
     <string name="correct_words">%1$d correct</string>
-
     <string name="btn_skip_word">Skip</string>
     <string name="btn_correct">Correct</string>
+
 
 <!--    Next Round:-->
     <string name="correct_guesses">%1$d correct guesses</string>
@@ -37,7 +40,6 @@
 
 
 <!--    Multiplayer:-->
-<!--    <string name="edittext_multiplayer_value" />-->
     <string name="btn_host">Host</string>
     <string name="btn_join">Join</string>
     <string name="btn_play">Ready</string>
@@ -51,16 +53,16 @@
 
 
 <!--    About Page:-->
-    <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
+    <string name="aboutPage_general">
+        <br>This App is the submission for the TU Graz lectures Agile Development, Mobile Applications or Software Technology.\n</br>
+        <br>The goal is to develop the App in a Scrum Team.\n\n</br>
+    </string>
 
-        Agile Development, Mobile Applications or Software Technology.\n</br><br>The goal is to develop the App in a Scrum Team.\n\n</br>
+    <string name="aboutPage_team"><u>Our Team</u></string>
+    <string name="aboutPage_product_owner"><b>Product Owner:</b> Irena Ruprecht</string>
+    <string name="aboutPage_scrum_master"><b>Scrum Master:</b> Alexandru Agape</string>
 
-        <br><br><b><u>Our Team</u></b>\n\n</br></br>
-
-        <br><br><b>Product Owner:</b> Irena Ruprecht\n\n</br></br>
-
-        <br><br><b>Scrum Master:</b> Alexandru Agape\n\n</br></br>
-
+    <string name="aboutPage_developers">
         <br><b>Developers:\n</b></br>
         <br>Hosam Badr\n</br>
         <br>Adnan Karamehić\n</br>
@@ -70,7 +72,8 @@
         <br>Alexandra Taupe\n</br>
         <br>David Trišić\n</br>
         <br>Felix Wallner\n</br>
-Egirin Gega</string>
+        <br>Egirin Gega</br>
+    </string>
 
 
 <!--    HamburgerMenuPage:-->
@@ -84,13 +87,9 @@ Egirin Gega</string>
     <string name="russian">Russian</string>
     <string name="btn_change_lang">Change</string>
 
+
 <!--    General:-->
     <string name="placeholder">…</string>
-
-
-<!--    <string name="back_AP">Back</string>-->
-<!--    <string name="back_CW">Back</string>-->
-<!--    <string name="back_SG">Back</string>-->
 
 
 <!--     doesn't need to be translated (dev purposes) -->
