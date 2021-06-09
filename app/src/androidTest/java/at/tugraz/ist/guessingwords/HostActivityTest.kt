@@ -1,14 +1,15 @@
-package at.tugraz.ist.guessingwords.ui.start_game
+package at.tugraz.ist.guessingwords
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import at.tugraz.ist.guessingwords.MainActivity
-import at.tugraz.ist.guessingwords.R
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class HostActivityTest {
 
     @Test
