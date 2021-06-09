@@ -1,14 +1,12 @@
 package at.tugraz.ist.guessingwords
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_startGame.setOnClickListener {
 //            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, StartGameActivity::class.java)
+            val intent = Intent(this, GamePlayActivity::class.java)
             startActivity(intent)
         }
 

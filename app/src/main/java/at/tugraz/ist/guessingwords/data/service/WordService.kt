@@ -1,7 +1,6 @@
 package at.tugraz.ist.guessingwords.data.service
 
 import android.content.Context
-import android.util.Log
 import at.tugraz.ist.guessingwords.data.database.GWDatabase
 import at.tugraz.ist.guessingwords.data.entity.Word
 import kotlin.concurrent.thread

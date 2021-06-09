@@ -1,7 +1,6 @@
 package at.tugraz.ist.guessingwords.data.service
 
 import android.os.ConditionVariable
-import android.util.Log
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -10,7 +9,6 @@ import at.tugraz.ist.guessingwords.data.entity.Word
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.math.log
 
 @RunWith(AndroidJUnit4::class)
 class WordServiceTest {

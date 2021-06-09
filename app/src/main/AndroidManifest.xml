@@ -28,9 +28,9 @@
         </activity>
 
         <activity android:name=".CustomWordsActivity"/>
-        <activity android:name=".StartGameActivity"/>
+        <activity android:name=".GamePlayActivity"/>
         <activity android:name=".AboutPageActivity"/>
-        <activity android:name=".NextRoundScreenActivity"/>
+        <activity android:name=".NextRoundActivity"/>
     </application>
 
 </manifest>

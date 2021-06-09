@@ -1,9 +1,8 @@
 package at.tugraz.ist.guessingwords
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class AboutPageActivity : AppCompatActivity() {
 
