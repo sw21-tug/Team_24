@@ -43,6 +43,8 @@
 
     <string name="hint_username">Enter your username</string>
 
+    <string name="nav_up">Navigate up"</string>
+
     <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
 
         Agile Development, Mobile Applications or Software Technology.\n</br><br>The goal is to develop the App in a Scrum Team.\n\n</br>
