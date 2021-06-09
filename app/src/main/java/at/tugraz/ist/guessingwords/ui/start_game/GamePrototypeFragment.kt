@@ -3,8 +3,8 @@ package at.tugraz.ist.guessingwords.ui.start_game
 import android.content.Context
 import android.content.Intent
 import android.media.CamcorderProfile.get
-import android.os.Bundle
-import android.os.CountDownTimer
+import android.media.MediaPlayer
+import android.os.*
 import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
@@ -37,12 +37,14 @@ class GamePrototypeFragment : Fragment() {
     var timer: CountDownTimer? = null
     var score: Int = 0
     var skipped: Int = 0
+    var beep_flag: Boolean = false
 
     private lateinit var fieldTimer: TextView
     private lateinit var fieldWord: TextView
     private lateinit var fieldWordCounter: TextView
     private lateinit var btn_skip: Button
     private lateinit var btn_correct: Button
+    lateinit var timeIsUpSound: MediaPlayer
 
     private val staticWordList = listOf(
         Word("mobile phone"),
@@ -57,6 +59,7 @@ class GamePrototypeFragment : Fragment() {
     )
 
     override fun onDestroyView() {
+        timeIsUpSound.stop()
         timer?.cancel()
         super.onDestroyView()
     }
@@ -73,6 +76,8 @@ class GamePrototypeFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_game_prototype, container, false)
 
         wordService = WordService(requireContext())
+
+        timeIsUpSound = MediaPlayer.create(context, R.raw.time_up)
 
         initFields()
         initGame()
@@ -107,10 +112,12 @@ class GamePrototypeFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {
                 val seconds: Long = millisUntilFinished / 1000
                 displayTimer(seconds)
+                timeUpSound(seconds)
             }
 
             override fun onFinish() {
                 displayTimer(0)
+                beep_flag = false
             }
         }
         wordService.getAllWords(object : Callback<List<Word>> {
@@ -163,4 +170,12 @@ class GamePrototypeFragment : Fragment() {
         startActivity(intent)
 
     }
+
+    fun timeUpSound(seconds: Long) {
+        if (seconds <= 0.2) {
+            timeIsUpSound.start()
+            vibratePhone()
+        }
+    }
+
 }
