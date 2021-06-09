@@ -11,6 +11,7 @@ import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
@@ -48,8 +49,15 @@ class UserInterfaceActivityTest {
     fun fromMainActivityToMultiplayerActivityAndBack(){
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
+        val input = "test"
         onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
         onView(ViewMatchers.withId(R.id.btn_multiplayer)).perform(click())
+        onView(ViewMatchers.withId(R.id.editText_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        onView(ViewMatchers.withId(R.id.editText_multiplayer)).perform(click())
+        onView(withId(R.id.editText_multiplayer)).perform(typeText(input))
+        onView(ViewMatchers.withId(R.id.btn_host)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        onView(ViewMatchers.withId(R.id.btn_host)).perform(click())
+        onView(withContentDescription("Navigate up")).perform(click())
         onView(withContentDescription("Navigate up")).perform(click())
         onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
