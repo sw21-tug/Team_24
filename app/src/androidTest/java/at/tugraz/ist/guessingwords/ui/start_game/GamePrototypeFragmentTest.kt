@@ -1,5 +1,6 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
+import android.media.MediaPlayer
 import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -29,6 +30,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Captor
 import org.mockito.kotlin.*
+import java.lang.Thread.sleep
 
 @RunWith(AndroidJUnit4::class)
 class GamePrototypeFragmentTest {
@@ -332,4 +334,21 @@ class GamePrototypeFragmentTest {
         assert(word1 != word3)
         assert(word2 != word3)
     }
+
+    @Test
+    fun checkTimeIsUpSound() {
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        var text = ""
+        val mediaPlayerMock = mock<MediaPlayer>()
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_finish)
+            fragment.maxTimeMillis = 100
+            fragment.timeIsUpSound = mediaPlayerMock
+            fragment.initGame()
+        }
+        sleep(1000)
+        verify(mediaPlayerMock, times(1)).start()
+    }
+
 }
