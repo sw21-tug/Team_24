@@ -20,6 +20,7 @@ class CustomWordsFragment : Fragment() {
 
     lateinit var customWordService: WordService
     private var customWords: MutableList<Word> = mutableListOf()
+    private var lastPosition: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +80,16 @@ class CustomWordsFragment : Fragment() {
         lv_custom_words.setOnItemLongClickListener {parent, view, position, id ->
             val btn_edit_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_edit_CW)
             val btn_delete_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_delete_CW)
+
+            if (lastPosition != -1){
+                val btn_edit_CW_old = lv_custom_words.getChildAt(lastPosition - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_edit_CW)
+                val btn_delete_CW_old = lv_custom_words.getChildAt(lastPosition - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_delete_CW)
+
+                btn_edit_CW_old.visibility = View.GONE
+                btn_delete_CW_old.visibility = View.GONE
+            }
+
+            lastPosition = position
 
             btn_edit_CW.visibility = View.VISIBLE
             btn_delete_CW.visibility = View.VISIBLE

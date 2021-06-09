@@ -58,6 +58,6 @@ class MainActivityTest {
         onView(withId(R.id.lang_russian)).check(matches(isClickable()))
         onView(withId(R.id.lang_russian)).perform(click())
         onView(withId(R.id.btn_language_change)).perform(click())
-        onView(withId(R.id.btn_customWords)).check(matches(withText("Нестандартные слова")))
+        onView(withId(R.id.btn_customWords)).check(matches(withText("Пользовательские слова")))
     }
 }

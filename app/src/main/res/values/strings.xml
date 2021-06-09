@@ -1,60 +1,74 @@
 <resources>
+
+<!--    Activity Titles:-->
+    <string name="actionBar_customize_words">Customize Words</string>
     <string name="app_name">Guessing Words</string>
-    <string name="splash_screen">Splash Screen</string>
-    <string name="loading">Loading ...</string>
+    <string name="actionBar_gameplay">Gameplay</string>
+    <string name="actionBar_next_round">Next Round?</string>
+    <string name="actionBar_host">Host Game</string>
+    <string name="actionBar_join">Join Game</string>
+    <string name="actionBar_multiplayer">Multiplayer Game</string>
+
+
+<!--    Custom Words:-->
     <string name="edit_word">Enter a word</string>
     <string name="btn_save">Save</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_edit_li">Edit</string>
     <string name="btn_delete_li">Delete</string>
     <string name="customWordsTitle"><u>My Custom Words:</u></string>
-    <string name="placeholder">...</string>
+    <string name="words_counter_list">" Words"</string>
+    <string name="addWordErrorMessage">"Please enter a word you would like to save!"</string>
+
+
+<!--    Main Activity:-->
+    <string name="btn_start_game">Start Game</string>
+    <string name="btn_custom_words">Custom Words</string>
+    <string name="btn_multiplayer">Multiplayer</string>
+
+
+<!--    Gameplay:-->
     <string name="time_display">%1$d seconds left</string>
     <string name="time_finish">Finished!</string>
     <string name="correct_words">%1$d correct</string>
-    <string name="start_game">Start Game</string>
-    <string name="custom_words">Custom Words</string>
-    <string name="back_AP">Back</string>
-    <string name="back_CW">Back</string>
     <string name="btn_skip_word">Skip</string>
     <string name="btn_correct">Correct</string>
+
+
+<!--    Next Round:-->
     <string name="correct_guesses">%1$d correct guesses</string>
     <string name="skipped_words">%1$d skipped words</string>
     <string name="next_round">NEXT ROUND</string>
-    <string name="back_SG">Back</string>
-    <string name="lang_dialog_title">Change Language</string>
-    <string name="about_link">About</string>
-    <string name="language_link">Language</string>
-    <string name="english">English</string>
-    <string name="russian">Russian</string>
-    <string name="btn_change_lang">Change</string>
-    <string name="gameplay">Gameplay</string>
-    <string name="words_counter_list">" Words"</string>
-    <string name="Multiplayer">Multiplayer</string>
-    <string name="edittext_multiplayer_value" />
-    <string name="host">Host</string>
-    <string name="join">Join</string>
-    <string name="ready">Play</string>
+    <string name="btn_quit">Quit</string>
+
+
+<!--    Multiplayer:-->
+    <string name="btn_host">Host</string>
+    <string name="btn_join">Join</string>
+    <string name="btn_play">Play</string>
     <string name="text_join_sent_message">Your Word Pool has been sent to the host</string>
     <string name="text_join_not_sent_message">Sending Word Pool…</string>
-    <string name="search_host">Searching for host…</string>
-    <string name="btn_quit">Quit</string>
-    <string name="next_round_screen">Next Round?</string>
-
     <string name="hint_username">Enter your username</string>
+    <string name="search_host">Searching for host…</string>
+    <string name="lbl_connected_user"><u>Connected User:</u></string>
 
-    <string name="nav_up">Navigate up"</string>
 
-    <string name="text_aboutPageText"><br>This App is the submission for the TU Graz lectures
+<!--    Loading Screen:-->
+    <string name="loading">Loading …</string>
+    <string name="contentDescr_splash_screen">Splash Screen</string>
 
-        Agile Development, Mobile Applications or Software Technology.\n</br><br>The goal is to develop the App in a Scrum Team.\n\n</br>
 
-        <br><br><b><u>Our Team</u></b>\n\n</br></br>
+<!--    About Page:-->
+    <string name="aboutPage_general">
+        <br>This App is the submission for the TU Graz lectures Agile Development, Mobile Applications or Software Technology.\n</br>
+        <br>The goal is to develop the App in a Scrum Team.\n\n</br>
+    </string>
 
-        <br><br><b>Product Owner:</b> Irena Ruprecht\n\n</br></br>
+    <string name="aboutPage_team"><u>Our Team</u></string>
+    <string name="aboutPage_product_owner"><b>Product Owner:</b> Irena Ruprecht</string>
+    <string name="aboutPage_scrum_master"><b>Scrum Master:</b> Alexandru Agape</string>
 
-        <br><br><b>Scrum Master:</b> Alexandru Agape\n\n</br></br>
-
+    <string name="aboutPage_developers">
         <br><b>Developers:\n</b></br>
         <br>Hosam Badr\n</br>
         <br>Adnan Karamehić\n</br>
@@ -64,18 +78,28 @@
         <br>Alexandra Taupe\n</br>
         <br>David Trišić\n</br>
         <br>Felix Wallner\n</br>
-Egirin Gega</string>
+        <br>Egirin Gega</br>
+    </string>
 
-    <string name="actionBar_customize_words">Customize Words</string>
-    <string name="addWordErrorMessage">"Please enter a word you would like to save!"</string>
 
-    <string name="lbl_connected_user"><u>Connected User:</u></string>
+<!--    HamburgerMenuPage:-->
+    <string name="about_link">About</string>
+    <string name="language_link">Language</string>
 
-    <string name="host_title">Host Game</string>
-    <string name="join_title">Join Game</string>
-    <string name="multiplayer_title">Multiplayer Game</string>
 
-    <!-- doesn't need to be translated (dev purposes) -->
+<!--    Change Language-->
+    <string name="lang_dialog_title">Change Language</string>
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+    <string name="btn_change_lang">Change</string>
+
+
+<!--    General:-->
+    <string name="placeholder">…</string>
+    <string name="nav_up">Navigate up</string>
+
+
+<!--     doesn't need to be translated (dev purposes) -->
     <string name="placeholder_word" translatable="false">Word</string>
     <string name="placeholder_timer" translatable="false">Timer</string>
     <string name="placeholder_word_counter" translatable="false">Word Counter</string>

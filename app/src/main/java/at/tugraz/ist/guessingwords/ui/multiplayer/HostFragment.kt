@@ -38,9 +38,6 @@ class HostFragment : Fragment() {
         const val TAG = "HostActivity"
     }
 
-    //TODO - pls check which Toast-Messages are still useful
-    // Also in JoinFragment
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,10 +46,9 @@ class HostFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_host, container, false)
 
         var userNameHost = requireActivity().intent.getStringExtra("UserNameHost")
-        if (userNameHost!!.isBlank()){
+        if (userNameHost == null || userNameHost.isBlank()){
             userNameHost = "UserHost"+(1..5000).random()
         }
-        Toast.makeText(activity, userNameHost, Toast.LENGTH_LONG).show()
 
         val name = "GW-host"+(1..5000).random()
         val searchingFilter = "GW-join.*"
@@ -82,7 +78,6 @@ class HostFragment : Fragment() {
             .build()
 
         Log.d(TAG, "Starting discovery... as $name")
-        Toast.makeText(requireActivity(), "Starting discovery... as $name", Toast.LENGTH_LONG).show()
         nearDiscovery.makeDiscoverable(name, identifyingFilter)
         nearDiscovery.startDiscovery()
         nearConnect.startReceiving()
@@ -107,7 +102,6 @@ class HostFragment : Fragment() {
         get() = object : NearDiscovery.Listener {
             override fun onPeersUpdate(host: Set<Host>) {
                 Log.d(TAG, "Peer Update. Found ${host.size} hosts")
-                Toast.makeText(requireActivity(), "Peer Update. Found ${host.size} hosts", Toast.LENGTH_LONG).show()
             }
 
             override fun onDiscoveryTimeout() {
@@ -130,7 +124,6 @@ class HostFragment : Fragment() {
         get() = object : NearConnect.Listener {
             override fun onReceive(bytes: ByteArray, sender: Host) {
                 val msg = String(bytes)
-                Toast.makeText(requireActivity(), "Received text: $msg", Toast.LENGTH_LONG).show()
                 Log.d(TAG, msg)
                 val transport: WordTransport = Json.decodeFromString(msg)
                 hostWordService.mergeIntoDatabase(transport.words, object : Callback<List<Long>> {

@@ -13,7 +13,7 @@ class JoinActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = getString(R.string.join_title)
+        supportActionBar?.title = getString(R.string.actionBar_join)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

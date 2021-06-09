@@ -15,7 +15,7 @@ class MultiplayerActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = getString(R.string.multiplayer_title)
+        supportActionBar?.title = getString(R.string.actionBar_multiplayer)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

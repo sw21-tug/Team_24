@@ -13,7 +13,7 @@ class HostActivity : AppCompatActivity() {
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = getString(R.string.host_title)
+        supportActionBar?.title = getString(R.string.actionBar_host)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
