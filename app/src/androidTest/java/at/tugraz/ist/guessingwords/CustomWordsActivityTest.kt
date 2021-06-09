@@ -1,6 +1,5 @@
 package at.tugraz.ist.guessingwords
 
-import android.widget.ListView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.room.Room
@@ -8,7 +7,6 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -16,14 +14,13 @@ import androidx.test.platform.app.InstrumentationRegistry
 import at.tugraz.ist.guessingwords.data.database.GWDatabase
 import at.tugraz.ist.guessingwords.data.service.WordService
 import at.tugraz.ist.guessingwords.ui.custom_words.CustomWordsFragment
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
-import org.junit.Before
-import org.w3c.dom.Text
 
 @RunWith(AndroidJUnit4::class)
 class CustomWordsActivityTest {

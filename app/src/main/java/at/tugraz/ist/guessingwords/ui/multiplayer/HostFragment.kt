@@ -11,9 +11,8 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import at.tugraz.ist.guessingwords.GamePlayActivity
 import at.tugraz.ist.guessingwords.R
-import at.tugraz.ist.guessingwords.StartGameActivity
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
 import at.tugraz.ist.guessingwords.networking.WordTransport
@@ -92,7 +91,7 @@ class HostFragment : Fragment() {
         var btn_ready = root.findViewById<Button>(R.id.btn_ready)
 
         btn_ready.setOnClickListener {
-            val intent = Intent(context, StartGameActivity::class.java)
+            val intent = Intent(context, GamePlayActivity::class.java)
             startActivity(intent)
         }
 

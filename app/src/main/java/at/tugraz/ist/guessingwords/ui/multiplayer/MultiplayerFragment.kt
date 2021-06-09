@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import at.tugraz.ist.guessingwords.HostActivity
 import at.tugraz.ist.guessingwords.JoinActivity
 import at.tugraz.ist.guessingwords.R

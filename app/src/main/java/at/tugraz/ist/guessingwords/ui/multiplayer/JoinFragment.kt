@@ -6,22 +6,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import at.tugraz.ist.guessingwords.R
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
 import at.tugraz.ist.guessingwords.networking.WordTransport
-import at.tugraz.ist.guessingwords.ui.multiplayer.adapters.HostAdapter
 import com.adroitandroid.near.connect.NearConnect
 import com.adroitandroid.near.discovery.NearDiscovery
 import com.adroitandroid.near.model.Host
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class JoinFragment : Fragment() {
 

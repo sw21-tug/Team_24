@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import at.tugraz.ist.guessingwords.R
-import at.tugraz.ist.guessingwords.data.entity.Word
 
 class HostAdapter(val context: Context, val joinedUser: List<String>) : BaseAdapter() {
 

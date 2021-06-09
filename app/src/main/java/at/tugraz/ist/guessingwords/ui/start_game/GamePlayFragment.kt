@@ -1,32 +1,23 @@
 package at.tugraz.ist.guessingwords.ui.start_game
 
-import android.content.Context
 import android.content.Intent
-import android.media.CamcorderProfile.get
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import at.tugraz.ist.guessingwords.AboutPageActivity
-import at.tugraz.ist.guessingwords.NextRoundScreenActivity
+import at.tugraz.ist.guessingwords.NextRoundActivity
 import at.tugraz.ist.guessingwords.R
-import at.tugraz.ist.guessingwords.StartGameActivity
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
 import at.tugraz.ist.guessingwords.logic.Game
-import org.w3c.dom.Text
 
-class GamePrototypeFragment : Fragment() {
+class GamePlayFragment : Fragment() {
 
-    private lateinit var startGameViewModel: StartGameViewModel
     private lateinit var root: View
 
     var maxTimeMillis: Long = 5999 // 91 seconds
@@ -71,11 +62,7 @@ class GamePrototypeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val startGameFactory: ViewModelProvider.Factory =
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        startGameViewModel =
-            ViewModelProvider(this, startGameFactory).get(StartGameViewModel::class.java)
-        root = inflater.inflate(R.layout.fragment_game_prototype, container, false)
+        root = inflater.inflate(R.layout.fragment_gameplay, container, false)
 
         wordService = WordService(requireContext())
 
@@ -161,7 +148,7 @@ class GamePrototypeFragment : Fragment() {
 
     fun nextRoundScreen() {
 
-        val intent = Intent(context, NextRoundScreenActivity::class.java)
+        val intent = Intent(context, NextRoundActivity::class.java)
         intent.putExtra("Score", score)
         intent.putExtra("Skipped", skipped)
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
