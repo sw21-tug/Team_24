@@ -40,10 +40,7 @@ class UserInterfaceActivityTest {
 
         onView(ViewMatchers.withId(R.id.btn_startGame)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
         onView(ViewMatchers.withId(R.id.btn_startGame)).perform(click())
-        //TODO: find out if it clicks on Action bar or Android back button
-        Espresso.pressBack()
+        onView(withContentDescription("Navigate up")).perform(click())
         onView(ViewMatchers.withId(R.id.btn_startGame)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
-
-    
 }
