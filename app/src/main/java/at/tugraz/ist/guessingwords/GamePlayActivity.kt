@@ -1,9 +1,9 @@
 package at.tugraz.ist.guessingwords
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 
 class GamePlayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import at.tugraz.ist.guessingwords.R
 import at.tugraz.ist.guessingwords.GamePlayActivity
+import at.tugraz.ist.guessingwords.R
 
 class NextRoundFragment : Fragment() {
 
@@ -24,7 +24,7 @@ class NextRoundFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_next_round_screen, container, false)
+        root = inflater.inflate(R.layout.fragment_next_round, container, false)
 
         fieldCorrectGuesses = root.findViewById(R.id.text_correctGuesses)
         fieldSkippedWords = root.findViewById(R.id.text_skippedWords)

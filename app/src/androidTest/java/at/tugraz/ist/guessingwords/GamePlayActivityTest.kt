@@ -1,4 +1,4 @@
-package at.tugraz.ist.guessingwords.ui.start_game
+package at.tugraz.ist.guessingwords
 
 import android.view.View
 import android.widget.TextView
@@ -12,10 +12,10 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import at.tugraz.ist.guessingwords.R
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
+import at.tugraz.ist.guessingwords.ui.start_game.GamePlayFragment
 import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.*
 
 @RunWith(AndroidJUnit4::class)
-class GamePrototypeFragmentTest {
+class GamePlayActivityTest {
 
     lateinit var textSaver: ViewAction
 

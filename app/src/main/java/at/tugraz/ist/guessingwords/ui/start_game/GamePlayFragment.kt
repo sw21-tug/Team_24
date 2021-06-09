@@ -20,7 +20,7 @@ class GamePlayFragment : Fragment() {
 
     private lateinit var root: View
 
-    var maxTimeMillis: Long = 3999 // 91 seconds
+    var maxTimeMillis: Long = 90999 // 91 seconds
 
     lateinit var wordService: WordService
 
