@@ -3,8 +3,8 @@ package at.tugraz.ist.guessingwords.ui.start_game
 import android.content.Context
 import android.content.Intent
 import android.media.CamcorderProfile.get
-import android.os.Bundle
-import android.os.CountDownTimer
+import android.media.MediaPlayer
+import android.os.*
 import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +29,7 @@ class GamePrototypeFragment : Fragment() {
     private lateinit var startGameViewModel: StartGameViewModel
     private lateinit var root: View
 
-    var maxTimeMillis: Long = 90999 // 91 seconds
+    var maxTimeMillis: Long = 12111 // 91 seconds
 
     lateinit var wordService: WordService
 
@@ -37,14 +37,17 @@ class GamePrototypeFragment : Fragment() {
     var timer: CountDownTimer? = null
     var score: Int = 0
     var skipped: Int = 0
+    var beep_flag: Boolean = false
 
     private lateinit var fieldTimer: TextView
     private lateinit var fieldWord: TextView
     private lateinit var fieldWordCounter: TextView
     private lateinit var btn_skip: Button
     private lateinit var btn_correct: Button
+    lateinit var tenSecondBeep: MediaPlayer
+    lateinit var vibrator: Vibrator
 
-    private val staticWordList = listOf(
+            private val staticWordList = listOf(
         Word("mobile phone"),
         Word("bicycle"),
         Word("toaster"),
@@ -57,6 +60,7 @@ class GamePrototypeFragment : Fragment() {
     )
 
     override fun onDestroyView() {
+        tenSecondBeep.stop()
         timer?.cancel()
         super.onDestroyView()
     }
@@ -73,6 +77,8 @@ class GamePrototypeFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_game_prototype, container, false)
 
         wordService = WordService(requireContext())
+
+        tenSecondBeep = MediaPlayer.create(context, R.raw.beep)
 
         initFields()
         initGame()
@@ -107,10 +113,13 @@ class GamePrototypeFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {
                 val seconds: Long = millisUntilFinished / 1000
                 displayTimer(seconds)
+                timerSound(seconds)
             }
 
             override fun onFinish() {
                 displayTimer(0)
+                beep_flag = false
+                tenSecondBeep.stop()
             }
         }
         wordService.getAllWords(object : Callback<List<Word>> {
@@ -163,4 +172,13 @@ class GamePrototypeFragment : Fragment() {
         startActivity(intent)
 
     }
+
+    fun timerSound(seconds: Long) {
+        if (seconds <= 10 && !beep_flag) {
+            tenSecondBeep.start()
+            beep_flag = true
+        }
+    }
+
 }
+
