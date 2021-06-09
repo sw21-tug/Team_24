@@ -1,16 +1,13 @@
 package at.tugraz.ist.guessingwords
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
 
-class StartGameActivity : AppCompatActivity() {
+class JoinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start_game)
-
+        setContentView(R.layout.activity_join)
         customizeActionBar()
     }
 
@@ -22,8 +19,7 @@ class StartGameActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                finish()
             }
         }
         return true

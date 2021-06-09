@@ -354,4 +354,21 @@ class GamePrototypeFragmentTest {
         verify(mediaPlayerMock, times(1)).start()
 
     }
+
+    @Test
+    fun checkTimeIsUpSound() {
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        var text = ""
+        val mediaPlayerMock = mock<MediaPlayer>()
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_finish)
+            fragment.maxTimeMillis = 100
+            fragment.timeIsUpSound = mediaPlayerMock
+            fragment.initGame()
+        }
+        sleep(1000)
+        verify(mediaPlayerMock, times(1)).start()
+    }
+
 }

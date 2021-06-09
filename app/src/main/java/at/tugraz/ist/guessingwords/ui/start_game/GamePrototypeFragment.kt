@@ -45,6 +45,8 @@ class GamePrototypeFragment : Fragment() {
     private lateinit var btn_skip: Button
     private lateinit var btn_correct: Button
     lateinit var timeIsUpSound: MediaPlayer
+    lateinit var tenSecondBeep: MediaPlayer
+    lateinit var vibrator: Vibrator
 
     private val staticWordList = listOf(
         Word("mobile phone"),
@@ -60,6 +62,7 @@ class GamePrototypeFragment : Fragment() {
 
     override fun onDestroyView() {
         timeIsUpSound.stop()
+        tenSecondBeep.stop()
         timer?.cancel()
         super.onDestroyView()
     }
@@ -78,6 +81,8 @@ class GamePrototypeFragment : Fragment() {
         wordService = WordService(requireContext())
 
         timeIsUpSound = MediaPlayer.create(context, R.raw.time_up)
+
+        tenSecondBeep = MediaPlayer.create(context, R.raw.beep)
 
         initFields()
         initGame()
@@ -112,12 +117,14 @@ class GamePrototypeFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {
                 val seconds: Long = millisUntilFinished / 1000
                 displayTimer(seconds)
+                timerSound(seconds)
                 timeUpSound(seconds)
             }
 
             override fun onFinish() {
                 displayTimer(0)
                 beep_flag = false
+                tenSecondBeep.stop()
             }
         }
         wordService.getAllWords(object : Callback<List<Word>> {
@@ -178,4 +185,29 @@ class GamePrototypeFragment : Fragment() {
         }
     }
 
+
+    fun timerSound(seconds: Long) {
+        if (seconds <= 10 && !beep_flag) {
+            tenSecondBeep.start()
+            beep_flag = true
+        }
+    }
+
+    fun timeUpSound(seconds: Long) {
+        if (seconds <= 0.2) {
+            timeIsUpSound.start()
+            vibratePhone()
+        }
+    }
+
+    fun Fragment.vibratePhone() {
+        vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vibrator.cancel()
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(1200, VibrationEffect.DEFAULT_AMPLITUDE))
+            vibrator.hasAmplitudeControl()
+        } else {
+            vibrator.vibrate(1200)
+        }
+    }
 }

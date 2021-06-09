@@ -20,11 +20,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btn_startGame = findViewById<Button>(R.id.btn_startGame)
+        val btn_multiplayer = findViewById<Button>(R.id.btn_multiplayer)
         val btn_customWords = findViewById<Button>(R.id.btn_customWords)
 
         btn_startGame.setOnClickListener {
 //            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, StartGameActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_multiplayer.setOnClickListener {
+            Toast.makeText(this@MainActivity, "You Clicked: Multiplayer!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MultiplayerActivity::class.java)
             startActivity(intent)
         }
 

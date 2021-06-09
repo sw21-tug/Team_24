@@ -28,11 +28,25 @@
     <string name="russian">Русский</string>
     <string name="btn_change_lang">Изменить</string>
     <string name="gameplay">Геймплей</string>
+    <string name="btn_quit">Покидать</string>
     <string name="words_counter_list">" Слова"</string>
+    <string name="next_round_screen">Cледующий Pаунд?</string>
+
     <string name="correct_guesses">%1$d Правильные предположения</string>
     <string name="skipped_words">%1$d Пропущенные слова</string>
     <string name="next_round">Следующий раунд</string>
+
+    <string name="Multiplayer">мультиплеер</string>
+    <string name="edittext_multiplayer_value" />
+    <string name="host">хозяин</string>
+    <string name="join">Присоединиться</string>
+    <string name="ready">готовы</string>
+    <string name="text_join_screen_message">Ваш пул слов был отправлен на хост</string>
+    <string name="hint_username">Введите имя пользователя</string>
+
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
+
+
 Гибкая разработка, мобильные приложения или программные технологии.\nЦель - разработать приложение в Scrum-команде.\n\n<br /><br />
 
         <b><u>Наша команда</u></b>\n\n<br /><br />
