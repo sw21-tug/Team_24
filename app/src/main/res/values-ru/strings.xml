@@ -47,6 +47,8 @@
 
     <string name="hint_username">Введите имя пользователя</string>
 
+    <string name="nav_up">Перейти вверх</string>
+
     <string name="text_aboutPageText">Это приложение представляет собой материалы для лекций Технического университета Граца.
 
 

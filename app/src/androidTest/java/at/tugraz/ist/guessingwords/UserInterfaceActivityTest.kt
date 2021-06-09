@@ -41,7 +41,7 @@ class UserInterfaceActivityTest {
 
         onView(ViewMatchers.withId(R.id.btn_startGame)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
         onView(ViewMatchers.withId(R.id.btn_startGame)).perform(click())
-        onView(withContentDescription("Navigate up")).perform(click())
+        onView(ViewMatchers.withContentDescription(R.string.nav_up)).perform(click())
         onView(ViewMatchers.withId(R.id.btn_startGame)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -57,8 +57,8 @@ class UserInterfaceActivityTest {
         onView(withId(R.id.editText_multiplayer)).perform(typeText(input))
         onView(ViewMatchers.withId(R.id.btn_host)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
         onView(ViewMatchers.withId(R.id.btn_host)).perform(click())
-        onView(withContentDescription("Navigate up")).perform(click())
-        onView(withContentDescription("Navigate up")).perform(click())
+        onView(ViewMatchers.withContentDescription(R.string.nav_up)).perform(click())
+        onView(ViewMatchers.withContentDescription( R.string.nav_up)).perform(click())
         onView(ViewMatchers.withId(R.id.btn_multiplayer)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }
