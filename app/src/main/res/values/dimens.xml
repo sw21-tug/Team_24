@@ -37,4 +37,5 @@
     <dimen name="textSize_word_Counter">18sp</dimen>
     <dimen name="textSize_word">40sp</dimen>
     <dimen name="textSize_timer">20sp</dimen>
+    <dimen name="textSize_username_join">28sp</dimen>
 </resources>

@@ -61,6 +61,11 @@ class GamePlayFragment : Fragment() {
         super.onDestroyView()
     }
 
+    override fun onPause() {
+        timer?.cancel()
+        super.onPause()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -185,6 +190,9 @@ class GamePlayFragment : Fragment() {
 
 
     fun Fragment.vibratePhone() {
+        if (context == null) {
+            return
+        }
         vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {
             vibrator.vibrate(VibrationEffect.createOneShot(1200, VibrationEffect.DEFAULT_AMPLITUDE))

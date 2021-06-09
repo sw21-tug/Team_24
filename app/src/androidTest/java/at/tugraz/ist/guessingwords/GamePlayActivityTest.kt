@@ -173,6 +173,8 @@ class GamePlayActivityTest {
         verify(wordServiceMock).getAllWords(argCapt.capture())
         argCapt.firstValue.whenReady(null)
 
+        sleep(1000)
+
         onView(ViewMatchers.withId(R.id.btn_nextRound))
             .perform(click())
 
@@ -334,7 +336,7 @@ class GamePlayActivityTest {
     @Test
     fun checkTickingSound() {
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var text = ""
         val time: Long = 8000
         val mediaPlayerMock = mock<MediaPlayer>()
@@ -342,6 +344,7 @@ class GamePlayActivityTest {
             text = fragment.getString(R.string.time_display, time / 1000)
             fragment.maxTimeMillis = time
             fragment.tenSecondBeep = mediaPlayerMock
+            fragment.beep_flag = false
             fragment.initGame()
         }
         sleep(1000)
@@ -352,7 +355,7 @@ class GamePlayActivityTest {
     @Test
     fun checkTimeIsUpSound() {
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var text = ""
         val mediaPlayerMock = mock<MediaPlayer>()
         scenario.onFragment { fragment ->
