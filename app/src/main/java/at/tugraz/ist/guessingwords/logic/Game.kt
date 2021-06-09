@@ -1,7 +1,6 @@
 package at.tugraz.ist.guessingwords.logic
 
 import at.tugraz.ist.guessingwords.data.entity.Word
-import java.lang.IllegalArgumentException
 
 class Game(val wordPool: List<Word>)
 {
