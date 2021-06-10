@@ -12,16 +12,16 @@
 
         <RadioButton
             android:id="@+id/lang_english"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="@dimen/marginRightLeft_radio_btn"
+            android:layout_marginRight="@dimen/marginRightLeft_radio_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/english" />
 
         <RadioButton
             android:id="@+id/lang_russian"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="@dimen/marginRightLeft_radio_btn"
+            android:layout_marginRight="@dimen/marginRightLeft_radio_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/russian" />

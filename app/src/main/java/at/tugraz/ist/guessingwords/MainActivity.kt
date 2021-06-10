@@ -1,35 +1,44 @@
 package at.tugraz.ist.guessingwords
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import at.tugraz.ist.guessingwords.data.service.WordService
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var locale: Locale
     private var currentLanguage = "en"
     private var currentLang: String? = null
+
+    lateinit var mainWordService: WordService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mainWordService = WordService(this)
+        mainWordService.removeMultiplayerWordPool()
+
         val btn_startGame = findViewById<Button>(R.id.btn_startGame)
+        val btn_multiplayer = findViewById<Button>(R.id.btn_multiplayer)
         val btn_customWords = findViewById<Button>(R.id.btn_customWords)
 
         btn_startGame.setOnClickListener {
-//            Toast.makeText(MainActivity, "You Clicked: Start Game!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, StartGameActivity::class.java)
+            val intent = Intent(this, GamePlayActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_multiplayer.setOnClickListener {
+            val intent = Intent(this, MultiplayerActivity::class.java)
             startActivity(intent)
         }
 
         btn_customWords.setOnClickListener {
-//            Toast.makeText(this@MainActivity, "You Clicked: Custom Words!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, CustomWordsActivity::class.java)
             startActivity(intent)
         }
@@ -37,8 +46,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+        mainWordService.removeMultiplayerWordPool()
         super.onResume()
-//        Toast.makeText(this@MainActivity, "Resumed from other Activity", Toast.LENGTH_SHORT).show()
     }
 
     private fun setLocale(localeName: String) {

@@ -125,7 +125,145 @@ class WordServiceTest {
         service.getWordById(cb.uid, cbGet)
         cbGet.finished.block()
         assert(cbGet.retWord != null)
-        assert(cbGet.retWord == word)
+        assert(cbGet.retWord!!.text == word.text)
         assert(cbGet.retWord!!.uid == cb.uid)
+    }
+    @Test(timeout = 3000)
+    fun checkIfNewMultiplayerWordPoolWorksAndCheckForWordsEntered() {
+
+        val word = Word("test1")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+
+        // In memory Instance create
+        val cbInMemory = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            var resWordIds = listOf<Long>()
+            override fun whenReady(data: List<Long>?) {
+                resWordIds = data!!
+                finished.open()
+            }
+        }
+        service.createNewMultiplayerWordPool(cbInMemory)
+        cbInMemory.finished.block()
+        //Merge Some words
+
+        val cbMerge = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            var resWordIds = listOf<Long>()
+            override fun whenReady(data: List<Long>?) {
+                resWordIds = data!!
+                finished.open()
+            }
+        }
+        val wordList = listOf(Word("test1"), Word("test2"), Word("test3"))
+        service.mergeIntoDatabase(wordList, cbMerge)
+        cbMerge.finished.block()
+
+        // get all Words test
+        val cbGetAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var resWords = listOf<Word>()
+            override fun whenReady(data: List<Word>?) {
+                resWords = data!!
+                finished.open()
+            }
+        }
+        service.getAllWords(cbGetAll)
+        cbGetAll.finished.block()
+        assert(cbGetAll.resWords.count() >= 3)
+        service.removeMultiplayerWordPool()
+    }
+
+    @Test(timeout = 3000)
+    fun checkIfLocalWordsAreMergedToInMemoryInstance(){
+        val word = Word("test1")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+
+        // In memory Instance create
+        val cbInMemory = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: List<Long>?) {
+                finished.open()
+            }
+        }
+        service.createNewMultiplayerWordPool(cbInMemory)
+        cbInMemory.finished.block()
+
+        // get all Words test
+        val cbGetAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var resWords = listOf<Word>()
+            override fun whenReady(data: List<Word>?) {
+                resWords = data!!
+                finished.open()
+            }
+        }
+        service.getAllWords(cbGetAll)
+        cbGetAll.finished.block()
+        assert(cbGetAll.resWords.count() == 1)
+        assert(cbGetAll.resWords[0].text == "test1")
+    }
+
+    @Test(timeout = 3000)
+    fun checkForDuplicatesAfterMerge(){
+        val word = Word("test1")
+        val cb = object:Callback<Long>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: Long?) {
+                finished.open()
+            }
+        }
+        service.insertOrUpdateExistingWord(word, cb)
+        cb.finished.block()
+
+        // In memory Instance create
+        val cbInMemory = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: List<Long>?) {
+                finished.open()
+            }
+        }
+        service.createNewMultiplayerWordPool(cbInMemory)
+        cbInMemory.finished.block()
+        //Merge Some words
+
+        val cbMerge = object:Callback<List<Long>>{
+            val finished = ConditionVariable()
+            override fun whenReady(data: List<Long>?) {
+                finished.open()
+            }
+        }
+        val wordList = listOf(Word("test2"), Word("test1"), Word("test3"))
+        service.mergeIntoDatabase(wordList, cbMerge)
+        cbMerge.finished.block()
+
+        // get all Words test
+        val cbGetAll = object:Callback<List<Word>>{
+            val finished = ConditionVariable()
+            var resWords = listOf<Word>()
+            override fun whenReady(data: List<Word>?) {
+                resWords = data!!
+                finished.open()
+            }
+        }
+        service.getAllWords(cbGetAll)
+        cbGetAll.finished.block()
+        cbGetAll.resWords.forEach { word ->
+            assert(cbGetAll.resWords.count{ x -> x.text.equals(word.text, ignoreCase = true) } <= 1)
+        }
     }
 }

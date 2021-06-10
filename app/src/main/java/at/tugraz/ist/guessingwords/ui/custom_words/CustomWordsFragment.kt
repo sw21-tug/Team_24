@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import at.tugraz.ist.guessingwords.R
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
@@ -17,27 +16,28 @@ import at.tugraz.ist.guessingwords.ui.custom_words.adapters.CustomWordsAdapter
 
 class CustomWordsFragment : Fragment() {
 
-    private lateinit var customWordsViewModel: CustomWordsViewModel
     private lateinit var root: View
 
     lateinit var customWordService: WordService
     private var customWords: MutableList<Word> = mutableListOf()
+    private var lastPosition: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val customWordsFactory: ViewModelProvider.Factory = ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application)
-        customWordsViewModel = ViewModelProvider(this, customWordsFactory).get(CustomWordsViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_custom_words, container, false)
 
-        customWordService = WordService(activity!!)
+        customWordService = WordService(requireActivity())
         initSetUp()
         initSaveCustomWordButton()
+        initEditOrDeleteWord()
 
         return root
     }
+
+
 
     private fun initSaveCustomWordButton(){
         val btn_save = root.findViewById<Button>(R.id.btn_save_word)
@@ -73,16 +73,96 @@ class CustomWordsFragment : Fragment() {
         })
     }
 
+    private fun initEditOrDeleteWord()  {
+        val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
+
+
+        lv_custom_words.setOnItemLongClickListener {parent, view, position, id ->
+            val btn_edit_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_edit_CW)
+            val btn_delete_CW = lv_custom_words.getChildAt(position - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_delete_CW)
+
+            if (lastPosition != -1){
+                val btn_edit_CW_old = lv_custom_words.getChildAt(lastPosition - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_edit_CW)
+                val btn_delete_CW_old = lv_custom_words.getChildAt(lastPosition - lv_custom_words.firstVisiblePosition).findViewById<Button>(R.id.btn_delete_CW)
+
+                btn_edit_CW_old.visibility = View.GONE
+                btn_delete_CW_old.visibility = View.GONE
+            }
+
+            lastPosition = position
+
+            btn_edit_CW.visibility = View.VISIBLE
+            btn_delete_CW.visibility = View.VISIBLE
+
+            btn_edit_CW.setOnClickListener(){
+                val word = lv_custom_words.adapter.getItem(position) as Word
+                root.findViewById<EditText>(R.id.editText_customWords).setText(word.text)
+
+                val saveBtnUpdate = root.findViewById<Button>(R.id.btn_save_word)
+                val cancelBtnUpdate = root.findViewById<Button>(R.id.btn_cancel_word)
+                cancelBtnUpdate.visibility = View.VISIBLE
+
+                btn_edit_CW.visibility = View.GONE
+                btn_delete_CW.visibility = View.GONE
+
+                saveBtnUpdate.setOnClickListener(){
+
+                    val updatedInput = root.findViewById<EditText>(R.id.editText_customWords).text.toString()
+                    if (checkIfUserInputIsValid(updatedInput)) {
+                        val updatedWord = Word(word.uid, updatedInput)
+                        customWordService.insertOrUpdateExistingWord(updatedWord, object: Callback<Long>{
+                            override fun whenReady(data: Long?) {
+                                val index = customWords.indexOf(word)
+                                customWords[index] = updatedWord
+                                updateView(customWords)
+                            }
+                        })
+                    }
+
+                    closeKeyBoard()
+                    cancelBtnUpdate.visibility = View.GONE
+                    initSaveCustomWordButton()
+                }
+
+                cancelBtnUpdate.setOnClickListener(){
+                    root.findViewById<EditText>(R.id.editText_customWords).setText("")
+                    closeKeyBoard()
+                    cancelBtnUpdate.visibility = View.GONE
+                    initSaveCustomWordButton()
+                }
+            }
+
+            btn_delete_CW.setOnClickListener() {
+                val word = lv_custom_words.adapter.getItem(position) as Word
+
+                customWordService.deleteWord(word, object : Callback<Boolean> {
+                    override fun whenReady(data: Boolean?) {
+                        customWords.remove(word)
+                        updateView(customWords)
+
+                    }
+                })
+                (lv_custom_words.adapter as CustomWordsAdapter).notifyDataSetChanged()
+            }
+
+            true
+        }
+    }
+
     fun updateView (customWords: MutableList<Word>) {
-        activity!!.runOnUiThread {
+        requireActivity().runOnUiThread {
             displayCustomWordsList(customWords)
         }
     }
 
     private fun displayCustomWordsList(customWords: MutableList<Word>) {
         val lv_custom_words = root.findViewById<ListView>(R.id.lst_custom_words)
-
-        lv_custom_words.adapter = CustomWordsAdapter(context!!, customWords)
+        if (customWords.isNotEmpty()) {
+            lv_custom_words.visibility = View.VISIBLE
+            lv_custom_words.adapter = CustomWordsAdapter(requireContext(), customWords)
+        } else {
+            lv_custom_words.visibility = View.GONE
+        }
 
         val countWords = customWords.size.toString() + getString(R.string.words_counter_list)
         root.findViewById<TextView>(R.id.tv_count_words).setText(countWords)
@@ -93,7 +173,7 @@ class CustomWordsFragment : Fragment() {
 
         if (string.isBlank()) {
             valid = false
-            Toast.makeText(activity, "Please enter a word you would like to save!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.addWordErrorMessage, Toast.LENGTH_SHORT).show()
         }
         root.findViewById<EditText>(R.id.editText_customWords).setText("")
         return valid
@@ -108,7 +188,7 @@ class CustomWordsFragment : Fragment() {
     }
 
     private fun closeKeyBoard() {
-        val view = activity!!.currentFocus
+        val view = requireActivity().currentFocus
         if (view != null) {
             val iMm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             iMm.hideSoftInputFromWindow(view.windowToken, 0)

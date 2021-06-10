@@ -46,7 +46,8 @@ class DatabaseTest {
         db.wordDao().insertWord(word)
 
         val allWords = db.wordDao().getAll()
-        assertTrue(allWords.contains(word))
+        assertTrue(allWords.map { w -> w.text }.contains(word.text))
+        assert(allWords[0].uid != 0L)
     }
 
     @Test
@@ -103,7 +104,23 @@ class DatabaseTest {
 
         val newWord = db.wordDao().getWordById(ruid)
 
-        assert(word == newWord)
+        assert(ruid != 0L)
+        assert(word.text == newWord.text)
         assert(ruid == newWord.uid)
+    }
+
+
+    @Test
+    fun testMergingWordsIntoDBDao(){
+        val wordList = listOf(Word("test1"), Word("test2"), Word("test3"))
+        db.wordDao().mergeWordsIntoDB(wordList)
+        val allWords = db.wordDao().getAll()
+        assert(allWords.count() == 3)
+    }
+
+    @Test
+    fun testMemoryInstances() {
+        assert(GWDatabase.getInstance(getContext()) != GWDatabase.getInMemoryInstance(getContext()))
+        assert(GWDatabase._in_memory_instance != null)
     }
 }

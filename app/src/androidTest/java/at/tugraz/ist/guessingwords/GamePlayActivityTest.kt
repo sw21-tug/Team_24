@@ -1,36 +1,35 @@
-package at.tugraz.ist.guessingwords.ui.start_game
+package at.tugraz.ist.guessingwords
 
+import android.media.MediaPlayer
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import at.tugraz.ist.guessingwords.R
 import at.tugraz.ist.guessingwords.data.entity.Word
 import at.tugraz.ist.guessingwords.data.service.Callback
 import at.tugraz.ist.guessingwords.data.service.WordService
-import at.tugraz.ist.guessingwords.logic.Game
-import at.tugraz.ist.guessingwords.ui.custom_words.CustomWordsFragment
+import at.tugraz.ist.guessingwords.ui.start_game.GamePlayFragment
 import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Captor
 import org.mockito.kotlin.*
+import java.lang.Thread.sleep
 
 @RunWith(AndroidJUnit4::class)
-class GamePrototypeFragmentTest {
+class GamePlayActivityTest {
 
     lateinit var textSaver: ViewAction
 
@@ -73,7 +72,7 @@ class GamePrototypeFragmentTest {
         val wordServiceMock = mock<WordService>()
         var text = ""
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
 
         scenario.onFragment { fragment ->
             text = fragment.getString(R.string.loading)
@@ -92,7 +91,7 @@ class GamePrototypeFragmentTest {
     {
         val wordServiceMock = mock<WordService>()
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
 
         scenario.onFragment { fragment ->
             fragment.wordService = wordServiceMock
@@ -109,7 +108,7 @@ class GamePrototypeFragmentTest {
         val wordServiceMock = mock<WordService>()
         val argCapt: KArgumentCaptor<Callback<List<Word>>> = argumentCaptor()
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
 
         scenario.onFragment { fragment ->
             fragment.wordService = wordServiceMock
@@ -129,12 +128,12 @@ class GamePrototypeFragmentTest {
     }
 
     @Test
-    fun expectFinishedMessageAfterTimerReachesZero()
+    fun expectNextRoundActivityAfterTimerReachesZero()
     {
         val wordServiceMock = mock<WordService>()
         val argCapt: KArgumentCaptor<Callback<List<Word>>> = argumentCaptor()
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var text = ""
 
         scenario.onFragment { fragment ->
@@ -149,15 +148,53 @@ class GamePrototypeFragmentTest {
         verify(wordServiceMock).getAllWords(argCapt.capture())
         argCapt.firstValue.whenReady(null)
 
-        onView(ViewMatchers.withId(R.id.txt_fieldTimer))
-                .check(ViewAssertions.matches(ViewMatchers.withText(text)))
+        onView(ViewMatchers.withId(R.id.btn_nextRound))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun expectToReturnToGameAfterNextRound()
+    {
+        val wordServiceMock = mock<WordService>()
+        val argCapt: KArgumentCaptor<Callback<List<Word>>> = argumentCaptor()
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
+        var text = ""
+
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_finish)
+            fragment.wordService = wordServiceMock
+            fragment.maxTimeMillis = 0
+            // run initGame again (first time was on launchFragment)
+            // this time with the mocked service so whenReady can be called to start the timer
+            fragment.initGame()
+        }
+
+        verify(wordServiceMock).getAllWords(argCapt.capture())
+        argCapt.firstValue.whenReady(null)
+
+        sleep(1000)
+
+        onView(ViewMatchers.withId(R.id.btn_nextRound))
+            .perform(click())
+
+        onView(ViewMatchers.withId(R.id.btn_skipWord)).check(
+            ViewAssertions.matches(
+                ViewMatchers.isDisplayed()
+            )
+        )
+        onView(ViewMatchers.withId(R.id.btn_correctWord)).check(
+            ViewAssertions.matches(
+                ViewMatchers.isDisplayed()
+            )
+        )
     }
 
     @Test
     fun expectTimerToTakeOnMaxTimeValue()
     {
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var text = ""
         val time: Long = 36000
 
@@ -179,7 +216,7 @@ class GamePrototypeFragmentTest {
     fun expectTimerTextToChangeAfterAtMostOnceSecond()
     {
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var textInit = ""
         var textFin = ""
         val time: Long = 36000
@@ -206,7 +243,7 @@ class GamePrototypeFragmentTest {
     fun expectToSeeZeroCorrectGuessingAtStart()
     {
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var text = ""
 
         scenario.onFragment { fragment ->
@@ -221,7 +258,7 @@ class GamePrototypeFragmentTest {
     fun expectToSeeNumberOfCorrectGuessesIncreasingAfterClickingTheCorrectButton()
     {
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
         var text = ""
 
         scenario.onFragment { fragment ->
@@ -239,7 +276,7 @@ class GamePrototypeFragmentTest {
     fun expectToNotSeeNumberOfCorrectGuessesIncreasingAfterClickingTheSkipButton()
     {
         val fragmentArgs = bundleOf()
-        launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
 
         // save current text in wordCounter
         onView(ViewMatchers.withId(R.id.txt_fieldWordCounter))
@@ -259,7 +296,7 @@ class GamePrototypeFragmentTest {
         val wordServiceMock = mock<WordService>()
         val argCapt: KArgumentCaptor<Callback<List<Word>>> = argumentCaptor()
         val fragmentArgs = bundleOf()
-        val scenario = launchFragmentInContainer<GamePrototypeFragment>(fragmentArgs)
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
 
         scenario.onFragment { fragment ->
             fragment.wordService = wordServiceMock
@@ -295,4 +332,40 @@ class GamePrototypeFragmentTest {
         assert(word1 != word3)
         assert(word2 != word3)
     }
+
+    @Test
+    fun checkTickingSound() {
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
+        var text = ""
+        val time: Long = 8000
+        val mediaPlayerMock = mock<MediaPlayer>()
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_display, time / 1000)
+            fragment.maxTimeMillis = time
+            fragment.tenSecondBeep = mediaPlayerMock
+            fragment.beep_flag = false
+            fragment.initGame()
+        }
+        sleep(1000)
+        verify(mediaPlayerMock, times(1)).start()
+
+    }
+
+    @Test
+    fun checkTimeIsUpSound() {
+        val fragmentArgs = bundleOf()
+        val scenario = launchFragmentInContainer<GamePlayFragment>(fragmentArgs)
+        var text = ""
+        val mediaPlayerMock = mock<MediaPlayer>()
+        scenario.onFragment { fragment ->
+            text = fragment.getString(R.string.time_finish)
+            fragment.maxTimeMillis = 100
+            fragment.timeIsUpSound = mediaPlayerMock
+            fragment.initGame()
+        }
+        sleep(1000)
+        verify(mediaPlayerMock, times(1)).start()
+    }
+
 }

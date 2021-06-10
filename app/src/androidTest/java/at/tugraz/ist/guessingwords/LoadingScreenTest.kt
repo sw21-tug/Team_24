@@ -16,6 +16,6 @@ class LoadingScreenTest {
     @Test
     fun testLoadingScreen() {
         ActivityScenario.launch(SplashScreenActivity::class.java)
-        onView(withId(R.id.text_loading)).check(matches(withText("Loading ...")))
+        onView(withId(R.id.text_loading)).check(matches(withText("Loading …")))
     }
 }

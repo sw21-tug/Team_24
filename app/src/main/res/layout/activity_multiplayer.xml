@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartGameActivity">
-
+    tools:context=".MultiplayerActivity">
 
     <fragment
-        android:id="@+id/start_game_fragment"
-        android:name="at.tugraz.ist.guessingwords.ui.start_game.GamePrototypeFragment"
+        android:id="@+id/multiplayer_fragment"
+        android:name="at.tugraz.ist.guessingwords.ui.multiplayer.MultiplayerFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"

@@ -1,20 +1,21 @@
 package at.tugraz.ist.guessingwords
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
-class StartGameActivity : AppCompatActivity() {
+class MultiplayerActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start_game)
+        setContentView(R.layout.activity_multiplayer)
 
         customizeActionBar()
     }
 
     private fun customizeActionBar() {
-        supportActionBar?.title = getString(R.string.gameplay)
+        supportActionBar?.title = getString(R.string.actionBar_multiplayer)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
